@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src/",
+    "paths": {
+      "@fonts/*": ["../public/fonts/*"],
+      "@bckg/*": ["../public/bckg/*"],
+      "@icons/*": ["../public/icons/*"],
+      "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
+      "@context/*": ["context/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
+}
