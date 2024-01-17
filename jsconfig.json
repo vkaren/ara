@@ -6,9 +6,11 @@
       "@bckg/*": ["../public/bckg/*"],
       "@icons/*": ["../public/icons/*"],
       "@components/*": ["components/*"],
+      "@containers/*": ["containers/*"],
       "@pages/*": ["pages/*"],
       "@context/*": ["context/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@config": ["../config"]
     }
   }
 }
