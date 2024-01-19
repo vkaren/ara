@@ -1,0 +1,18 @@
+/*      Post content      */
+.post__content {
+  margin: 1rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/*     Content - Replying to user*/
+.content_replying-to {
+  color: var(--purple);
+  font-weight: 600;
+}
+
+/*      Dark mode       */
+.post__content.dark-mode .content_replying-to {
+  color: var(--light-purple);
+}

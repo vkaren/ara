@@ -1,0 +1,33 @@
+/*      Post container      */
+.post-container {
+  position: relative;
+  width: 75%;
+  max-width: 60rem;
+  min-width: 30rem;
+  padding: 2rem;
+  border-radius: 5px;
+  border: 1px solid var(--purple);
+  color: var(--light-black);
+  background: var(--white);
+}
+
+.post-container.reply {
+  width: 85%;
+  min-width: 28rem;
+}
+
+.post-container.link {
+  cursor: pointer;
+}
+.post-container.link:hover {
+  background: var(--very-light-gray);
+}
+
+/*      Dark mode       */
+.post-container.dark-mode {
+  color: var(--white);
+  background: var(--black);
+}
+.post-container.dark-mode:hover {
+  background: var(--light-black);
+}

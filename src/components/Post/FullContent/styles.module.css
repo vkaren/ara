@@ -1,0 +1,28 @@
+/*      Content - Show more/less      */
+.content__complete,
+.content__show-less,
+.content__show-more.show {
+  display: none;
+}
+.content__show-more,
+.content__complete.show,
+.content__show-less.show {
+  display: inline;
+}
+
+.content__show-more,
+.content__show-less {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.show__span {
+  margin: 0 1rem;
+  text-decoration: underline;
+  color: var(--purple);
+}
+
+/*      Dark mode       */
+.post__content.dark-mode .show__span {
+  color: var(--light-purple);
+}

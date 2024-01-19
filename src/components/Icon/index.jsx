@@ -7,6 +7,9 @@ import CommentIcon from "@icons/icon-comnt.svg";
 import ReplyIcon from "@icons/icon-reply.svg";
 import LikeIcon from "@icons/icon-like.svg";
 import InsertedImageIcon from "@icons/icon-image.svg";
+import CancelIcon from "@icons/icon-cancel.svg";
+import FeaturesIcon from "@icons/icon-dots.svg";
+import DeleteIcon from "@icons/icon-delete.svg";
 
 const iconTypes = {
   home: HomeIcon,
@@ -18,6 +21,9 @@ const iconTypes = {
   reply: ReplyIcon,
   like: LikeIcon,
   insertedImage: InsertedImageIcon,
+  cancel: CancelIcon,
+  features: FeaturesIcon,
+  delete: DeleteIcon,
 };
 
 const IconComponent = ({ name, ...props }) => {

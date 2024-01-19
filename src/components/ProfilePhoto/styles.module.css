@@ -1,0 +1,36 @@
+/*      Profile photo container       */
+.profile-photo {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  grid-row: 2/3;
+  border-radius: 50%;
+  border: 1px solid var(--purple);
+  background: var(--white);
+  overflow: hidden;
+}
+
+/*      Profile photo style on profile page       */
+.profile-photo.profile-page {
+  position: absolute;
+  top: -85px;
+  left: -10rem;
+  width: 10rem;
+  height: 10rem;
+}
+
+/*      Default profile photo       */
+.profile-photo__default {
+  fill: var(--dark-blue);
+}
+
+/*      Dark mode       */
+.profile-photo.dark-mode {
+  background: var(--light-black);
+}
+.profile-photo.dark-mode .profile-photo__default {
+  fill: var(--very-light-gray);
+}
