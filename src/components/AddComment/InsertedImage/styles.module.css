@@ -1,0 +1,22 @@
+/* Add comment container - Inserted image file */
+.adc_inserted-image {
+  margin-right: 1rem;
+  justify-self: end;
+  grid-column: 2/3;
+  cursor: pointer;
+}
+
+.adc_inserted-image input[type="file"] {
+  display: none;
+}
+
+.adc_inserted-image svg {
+  width: 2rem;
+  height: 2rem;
+  fill: var(--purple);
+}
+
+/*      Dark mode       */
+.add-comment__section.dark-mode .adc_inserted-image svg {
+  fill: var(--light-purple);
+}

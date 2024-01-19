@@ -1,0 +1,24 @@
+/* Add comment container */
+.add-comment__section {
+  display: grid;
+  grid-template-columns: 3rem calc(75% - 4rem) auto;
+  align-items: center;
+  justify-content: space-between;
+  width: 85%;
+  max-width: 70rem;
+  min-width: 30rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  border: 1px solid var(--purple);
+  background: var(--white);
+}
+
+.add-comment__section.reply {
+  width: 100%;
+}
+
+/*      Dark mode       */
+.add-comment__section.dark-mode {
+  background: var(--black);
+}
