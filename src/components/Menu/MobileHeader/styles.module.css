@@ -1,0 +1,18 @@
+/*      Header        */
+.menu-header__mobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  padding: 1rem 3rem;
+  border-bottom: 1px solid var(--light-gray);
+  background: var(--white);
+  z-index: 10;
+}
+
+/*      Dark mode styles       */
+.menu-header__mobile.dark-mode {
+  background: var(--black);
+}
