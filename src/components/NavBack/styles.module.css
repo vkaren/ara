@@ -1,0 +1,47 @@
+/*    Post nav    */
+.post-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(100% - 23rem);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--light-gray);
+  background: var(--white);
+  z-index: 100;
+}
+
+/*    Post nav - Back button   */
+.post-nav__back {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.back__icon {
+  width: 2rem;
+  height: 2rem;
+  fill: var(--dark-blue);
+  transform: rotate(180deg);
+}
+
+/*      Dark mode       */
+.post-nav.dark-mode {
+  background: var(--black);
+}
+
+.post-nav.dark-mode .back__icon {
+  fill: var(--white);
+}
+
+@media (max-width: 650px) {
+  .post-nav,
+  .post-nav.dark-mode {
+    position: absolute;
+    top: 54px;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    border-bottom: none;
+    background: transparent;
+    z-index: 0;
+  }
+}

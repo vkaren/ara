@@ -10,6 +10,7 @@ import InsertedImageIcon from "@icons/icon-image.svg";
 import CancelIcon from "@icons/icon-cancel.svg";
 import FeaturesIcon from "@icons/icon-dots.svg";
 import DeleteIcon from "@icons/icon-delete.svg";
+import ArrowIcon from "@icons/icon-arrow.svg";
 
 const iconTypes = {
   home: HomeIcon,
@@ -24,6 +25,7 @@ const iconTypes = {
   cancel: CancelIcon,
   features: FeaturesIcon,
   delete: DeleteIcon,
+  back: ArrowIcon,
 };
 
 const IconComponent = ({ name, ...props }) => {
