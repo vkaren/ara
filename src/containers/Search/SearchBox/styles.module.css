@@ -1,0 +1,72 @@
+/*      Search box        */
+.search-box {
+  width: 65%;
+  max-width: 55rem;
+  min-width: 25rem;
+  padding: 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--purple);
+  background: var(--white);
+}
+
+/*      Search input      */
+.search-box__input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: none;
+  background: var(--very-light-purple);
+}
+
+/*      Searched users container      */
+.searched-container {
+  width: 65%;
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.searched-user__link {
+  text-decoration: none;
+}
+
+/*      Searched user      */
+.searched-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  list-style: none;
+  border-bottom: 1px solid var(--very-light-purple);
+  color: var(--black);
+  cursor: pointer;
+}
+
+.searched-user:hover {
+  background: var(--very-light-gray);
+}
+
+/*      Searched user - Nickname     */
+.searched-user__nickname {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/*      Searched user - Username     */
+.searched-user__username {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+/*    Dark mode     */
+.search-box.dark-mode {
+  background: var(--black);
+}
+
+.searched-container.dark-mode .searched-user {
+  border-color: var(--purple);
+  color: var(--white);
+}
+
+.searched-container.dark-mode .searched-user:hover {
+  background: var(--light-black);
+}

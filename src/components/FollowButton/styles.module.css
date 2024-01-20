@@ -1,0 +1,33 @@
+/*    Follow button     */
+.user_follow-btn {
+  padding: 0.3rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 5px;
+  background: var(--purple);
+  color: var(--white);
+}
+
+/*    Follow button - On following    */
+.user_follow-btn.following {
+  font-weight: 600;
+  border: 1px solid var(--purple);
+  background: var(--white);
+  color: var(--purple);
+}
+
+.user_follow-btn.following:hover {
+  opacity: 1;
+  background: var(--very-light-purple);
+}
+
+/*    Dark mode     */
+.user_follow-btn.following.dark-mode {
+  background: var(--gray);
+  color: var(--white);
+}
+
+.user_follow-btn.following.dark-mode:hover {
+  opacity: 1;
+  background: var(--light-black);
+}
