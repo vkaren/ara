@@ -21,7 +21,7 @@ const NavBack = ({ prevRoute }) => {
       className={`${styles["post-nav"]} ${darkTheme && styles["dark-mode"]}`}
     >
       <button onClick={onClickBack} className={styles["post-nav__back"]}>
-        <IconComponent name="back" className={styles["back__icon"]} />
+        <IconComponent name="arrow" className={styles["back__icon"]} />
       </button>
     </nav>
   );

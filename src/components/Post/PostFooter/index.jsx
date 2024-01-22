@@ -115,17 +115,9 @@ const PostFooter = ({
       }`}
     >
       {isHomeOrProfilePage ? (
-        <FooterOption
-          type={"comment"}
-          text={repliesQuantity}
-          classNameIcon={styles["comment_icon"]}
-        />
+        <FooterOption type={"comment"} text={repliesQuantity} />
       ) : (
-        <FooterOption
-          type={"reply"}
-          text={"Reply"}
-          classNameIcon={styles["reply_icon"]}
-        />
+        <FooterOption type={"reply"} text={"Reply"} />
       )}
 
       <FooterOption type={"like"} text={likesQuantity} haveLike={haveLike} />
