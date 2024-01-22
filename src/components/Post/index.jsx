@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "@context/themeContext";
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
@@ -22,7 +22,7 @@ const Post = ({
   // const isHomeOrProfilePage =
   //   router.asPath.includes("home") || router.asPath.includes("profile");
   const { darkTheme } = useContext(ThemeContext);
-  // const [isReplying, setIsReplying] = useState(false);
+  const [isReplying, setIsReplying] = useState(false);
 
   // const onClickPost = () => {
   //   if (isHomeOrProfilePage) {
@@ -49,7 +49,9 @@ const Post = ({
         //   !!isAReply && styles["reply"]
         // }
         // `}
-        className={styles["post-container"]}
+        className={`${styles["post-container"]} ${
+          !!isAReply && styles["reply"]
+        }`}
         role="button"
         // onClick={onClickPost}
       >
@@ -88,14 +90,14 @@ const Post = ({
         />
       </article>
 
-      {/* {isReplying && (
+      {isReplying && (
         <ReplyBox
           replyingToPost={!!isAReply ? isAReply.replyingToPost : id}
           replyingToUser={author.id}
           darkTheme={darkTheme}
-          onCancelReply={onCancelReply}
+          // onCancelReply={onCancelReply}
         />
-      )} */}
+      )}
     </>
   );
 };
