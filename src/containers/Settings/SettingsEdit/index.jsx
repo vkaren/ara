@@ -45,7 +45,7 @@ const SettingsEdit = () => {
     },
     {
       title: "Password",
-      props: { name: "password", type: "password", minlength: "5" },
+      props: { name: "password", type: "password", minLength: "5" },
     },
   ];
 

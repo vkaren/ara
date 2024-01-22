@@ -5,17 +5,24 @@ const Form = ({
   submitMsg = {},
   onSubmit,
   styles,
+  children,
 }) => {
   return (
     <form ref={form} className={styles[`${type}-section__form`]}>
       {inputs.map((input) => {
         return (
-          <label htmlFor={input.props.name} className={styles["form__field"]}>
+          <label
+            key={input.props.name}
+            htmlFor={input.props.name}
+            className={styles["form__field"]}
+          >
             <span className={styles["field__title"]}>{input.title}</span>
             <input
-              className={`${styles["field__input"]} ${
-                input.props.type === "file" && styles["file"]
-              }`}
+              className={`
+              ${styles["field__input"]} 
+              ${submitMsg.error && styles["error"]} 
+              ${input.props.type === "file" && styles["file"]}
+              `}
               id={input.props.name}
               {...input.props}
             />
@@ -26,7 +33,7 @@ const Form = ({
       })}
 
       <button onClick={onSubmit} className={styles["form__submit"]}>
-        Save
+        {type === "edit" ? "Save" : "Continue"}
       </button>
 
       <span
@@ -36,6 +43,8 @@ const Form = ({
       >
         {submitMsg.msg}
       </span>
+
+      {children}
     </form>
   );
 };

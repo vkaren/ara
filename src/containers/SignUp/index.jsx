@@ -1,14 +1,41 @@
 import { createRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Form from "@components/Form";
 import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
 import styles from "@containers/SignLayout/styles.module.css";
 
 const SignUp = () => {
   const [signUpMsg, setSignUpMsg] = useState({ error: false, msg: "" });
-
   const form = createRef();
+  const formInputs = [
+    {
+      title: "Nickname",
+      props: {
+        name: "nickname",
+        type: "text",
+        required: true,
+      },
+    },
+    {
+      title: "Username",
+      props: {
+        name: "username",
+        type: "text",
+        required: true,
+      },
+    },
+    {
+      title: "Password",
+      props: {
+        name: "password",
+        type: "password",
+        minLength: "5",
+        required: true,
+      },
+    },
+  ];
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -100,63 +127,18 @@ const SignUp = () => {
 
       <h1 className={styles["page-title"]}>Sign up</h1>
 
-      <form ref={form} className={styles["sign-form"]}>
-        <label htmlFor="nickname" className={styles["sign-form__field"]}>
-          <span className={styles["field__title"]}>Nickname</span>
-          <input
-            className={`${styles["field__input"]} ${
-              signUpMsg.error && styles["error"]
-            }`}
-            id="nickname"
-            name="nickname"
-            type="text"
-            required
-          />
-        </label>
-
-        <label htmlFor="username" className={styles["sign-form__field"]}>
-          <span className={styles["field__title"]}>Username</span>
-          <input
-            className={`${styles["field__input"]} ${
-              signUpMsg.error && styles["error"]
-            }`}
-            id="username"
-            name="username"
-            type="text"
-            required
-          />
-        </label>
-
-        <label htmlFor="password" className={styles["sign-form__field"]}>
-          <span className={styles["field__title"]}>Password</span>
-          <input
-            className={`${styles["field__input"]} ${
-              signUpMsg.error && styles["error"]
-            }`}
-            id="password"
-            name="password"
-            type="password"
-            minLength="5"
-            required
-          />
-        </label>
-
-        <button onClick={onSubmit} className={styles["sign-form__submit"]}>
-          Continue
-        </button>
-
-        <span
-          className={`${styles["sign-form__msg"]} ${
-            signUpMsg.error && styles["error"]
-          }`}
-        >
-          {signUpMsg.msg}
-        </span>
-
-        <Link className={styles["sign-form__link"]} href={"/login"}>
+      <Form
+        type="sign"
+        form={form}
+        inputs={formInputs}
+        submitMsg={signUpMsg}
+        onSubmit={onSubmit}
+        styles={styles}
+      >
+        <Link className={styles["form__link"]} href={"/login"}>
           Do you already have an account?
         </Link>
-      </form>
+      </Form>
     </>
   );
 };

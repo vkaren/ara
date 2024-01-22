@@ -1,6 +1,7 @@
 import { createRef, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Form from "@components/Form";
 import api from "@utils/api";
 import { setItem } from "@utils/localstorage";
 import iconTitle from "@icons/icon-title.png";
@@ -9,6 +10,25 @@ import styles from "@containers/SignLayout/styles.module.css";
 const Login = () => {
   const [loginMsg, setLoginMsg] = useState({ error: false, msg: "" });
   const form = createRef();
+  const formInputs = [
+    {
+      title: "Username",
+      props: {
+        name: "username",
+        type: "text",
+        required: true,
+      },
+    },
+    {
+      title: "Password",
+      props: {
+        name: "password",
+        type: "password",
+        minLength: "5",
+        required: true,
+      },
+    },
+  ];
   const router = useRouter();
 
   const onSubmit = async (e) => {
@@ -74,42 +94,14 @@ const Login = () => {
 
       <h1 className={styles["page-title"]}>Welcome back!</h1>
 
-      <form ref={form} className={styles["sign-form"]}>
-        <label htmlFor="username" className={styles["sign-form__field"]}>
-          <span className={styles["field__title"]}>Username</span>
-          <input
-            className={`${styles["field__input"]} ${
-              loginMsg.error && styles["error"]
-            }`}
-            id="username"
-            name="username"
-            type="text"
-            required
-          />
-        </label>
-
-        <label htmlFor="password" className={styles["sign-form__field"]}>
-          <span className={styles["field__title"]}>Password</span>
-          <input
-            className={`${styles["field__input"]} ${
-              loginMsg.error && styles["error"]
-            }`}
-            id="password"
-            name="password"
-            type="password"
-            minLength="5"
-            required
-          />
-        </label>
-
-        <button onClick={onSubmit} className={styles["sign-form__submit"]}>
-          Continue
-        </button>
-
-        <span className={`${styles["sign-form__msg"]} ${styles["error"]}`}>
-          {loginMsg.msg}
-        </span>
-      </form>
+      <Form
+        type="sign"
+        form={form}
+        inputs={formInputs}
+        submitMsg={loginMsg}
+        onSubmit={onSubmit}
+        styles={styles}
+      />
     </>
   );
 };
