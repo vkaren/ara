@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import { setItem, getItem } from "@utils/localstorage";
+import { createContext, useEffect, useState } from "react";
+import { setItem, getItem } from "@utils/cookies";
 
 const ThemeContext = createContext({});
 

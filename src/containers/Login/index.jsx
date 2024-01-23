@@ -1,13 +1,15 @@
-import { createRef, useState } from "react";
+import { createRef, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { UserContext } from "@context/userContext";
 import Form from "@components/Form";
 import api from "@utils/api";
-import { setItem } from "@utils/localstorage";
 import iconTitle from "@icons/icon-title.png";
 import styles from "@containers/SignLayout/styles.module.css";
 
 const Login = () => {
+  const router = useRouter();
+  const { saveLoginResponse } = useContext(UserContext);
   const [loginMsg, setLoginMsg] = useState({ error: false, msg: "" });
   const form = createRef();
   const formInputs = [
@@ -29,7 +31,6 @@ const Login = () => {
       },
     },
   ];
-  const router = useRouter();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -76,8 +77,7 @@ const Login = () => {
       } else {
         setLoginMsg({ error: false, msg: "" });
 
-        setItem("token", response.token);
-        setItem("user_id", response.user_id);
+        saveLoginResponse(response);
 
         router.push("/home");
       }

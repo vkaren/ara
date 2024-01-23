@@ -12,6 +12,7 @@ import FeaturesIcon from "@icons/icon-dots.svg";
 import DeleteIcon from "@icons/icon-delete.svg";
 import ArrowIcon from "@icons/icon-arrow.svg";
 import UploadIcon from "@icons/icon-upload.svg";
+import LogoutIcon from "@icons/icon-logout.svg";
 
 const iconTypes = {
   home: HomeIcon,
@@ -28,6 +29,7 @@ const iconTypes = {
   delete: DeleteIcon,
   arrow: ArrowIcon,
   upload: UploadIcon,
+  logout: LogoutIcon,
 };
 
 const IconComponent = ({ name, ...props }) => {

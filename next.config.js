@@ -1,3 +1,5 @@
+const config = require("./config");
+
 module.exports = {
   webpack(config) {
     config.module.rules.push({
@@ -6,5 +8,15 @@ module.exports = {
     });
 
     return config;
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: config.api.split("https://")[1],
+        port: "",
+        pathname: "/files/**",
+      },
+    ],
   },
 };
