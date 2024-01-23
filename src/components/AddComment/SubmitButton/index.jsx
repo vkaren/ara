@@ -1,12 +1,8 @@
 import styles from "./styles.module.css";
 
-const SubmitButton = ({ isAReply }) => {
-  const onClickSendBtn = (e) => {
-    // onSendPostOrReply({ e, isAReply });
-  };
-
+const SubmitButton = ({ isAReply, onSubmit }) => {
   return (
-    <button onClick={onClickSendBtn} className={styles["adc_send-btn"]}>
+    <button onClick={onSubmit} className={styles["adc_send-btn"]}>
       {isAReply ? "REPLY" : "POST"}
     </button>
   );

@@ -1,5 +1,5 @@
 import config from "@config";
-import { getItem } from "@utils/localstorage";
+import { getItem } from "@utils/cookies";
 
 const api = async ({
   method,
@@ -15,7 +15,7 @@ const api = async ({
       credentials: "include",
       headers: {
         ...headers,
-        "X-Authorization": `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
 
