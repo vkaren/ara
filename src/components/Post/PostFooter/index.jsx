@@ -1,112 +1,115 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "@context/userContext";
+import { ListeningSocketContext } from "@context/listeningSocketContext";
 import FooterOption from "../FooterOption";
+import api from "@utils/api";
 import styles from "./styles.module.css";
 
 const PostFooter = ({
   id,
   likes = [],
   replies = [],
-  onClickReply,
   isAReply,
-  isHomeOrProfilePage = true,
+  isHomeOrProfilePage,
+  onClickReply,
   darkTheme,
 }) => {
-  // const {
-  //   newReply,
-  //   newLike,
-  //   newDislike,
-  //   setNewReply,
-  //   setNewLike,
-  //   setNewDislike,
-  //   onLikePostOrReply,
-  // } = useContext(AppContext);
-  const [repliesQuantity, setRepliesQuantity] = useState(replies.length);
-  const [likesQuantity, setLikesQuantity] = useState(likes.length);
+  const { userId } = useContext(UserContext);
+  const { socketData } = useContext(ListeningSocketContext);
+  const [numberReplies, setNumberReplies] = useState(replies.length);
+  const [numberLikes, setNumberLikes] = useState(likes.length);
   const [haveLike, setHaveLike] = useState(false);
 
-  // useEffect(() => {
-  //   if (userLikes) {
-  //     setHaveLike(userLikedPost());
-  //   }
-  // }, [userLikes]);
+  useEffect(() => {
+    (async () => {
+      if (userId) {
+        setHaveLike(await hasUserLiked());
+      }
+    })();
+  }, [userId]);
 
-  // useEffect(() => {
-  //   if (!isAReply && newReply?.replying_to_post === id) {
-  //     setRepliesQuantity(repliesQuantity + 1);
-  //     setNewReply(null);
-  //   }
-  // }, [newReply]);
+  useEffect(() => {
+    const { newReply, newLike, newDislike } = socketData;
 
-  // useEffect(() => {
-  //   if (newLike) {
-  //     updateLikeQuantity(newLike, "like");
-  //     setNewLike(null);
-  //   }
-  // }, [newLike]);
+    if (newReply) {
+      updateNumberReplies(newReply);
+    } else if (newLike) {
+      updateNumberLikes(newLike, "like");
+    } else if (newDislike) {
+      updateNumberLikes(newDislike, "dislike");
+    }
+  }, [socketData]);
 
-  // useEffect(() => {
-  //   if (newDislike) {
-  //     updateLikeQuantity(newDislike, "dislike");
-  //     setNewDislike(null);
-  //   }
-  // }, [newDislike]);
+  const getLikedPostFromUser = async () => {
+    return await api({ method: "GET", route: `like/${userId}` });
+  };
 
-  // const updateLikeQuantity = (newLikeInfo, type) => {
-  //   if (newLikeInfo && newLikeInfo.user_id !== userId) {
-  //     if (
-  //       (isAReply &&
-  //         newLikeInfo.type === "reply" &&
-  //         newLikeInfo.message_id === id) ||
-  //       (!isAReply &&
-  //         newLikeInfo.type === "post" &&
-  //         newLikeInfo.message_id === id)
-  //     ) {
-  //       if (type === "dislike") {
-  //         setLikesQuantity(likesQuantity - 1);
-  //       } else {
-  //         setLikesQuantity(likesQuantity + 1);
-  //       }
-  //     }
-  //   }
-  // };
+  const hasUserLiked = async () => {
+    const likedPostsFromUser = await getLikedPostFromUser();
 
-  // const userLikedPost = () => {
-  //   const likedPostsFromUser = [...userLikes];
+    return likedPostsFromUser.some((like) => {
+      if (isAReply) {
+        return like.reply_id === id;
+      } else {
+        return like.post_id === id;
+      }
+    });
+  };
 
-  //   return likedPostsFromUser.some((like) => {
-  //     if (isAReply) {
-  //       return like.reply_id === id;
-  //     } else {
-  //       return like.post_id === id;
-  //     }
-  //   });
-  // };
+  const updateNumberReplies = (newReply) => {
+    if (!isAReply && newReply.replying_to_post === id) {
+      setNumberReplies(numberReplies + 1);
+    }
+  };
 
-  // const onClickLikeBtn = async (e) => {
-  //   e.stopPropagation();
+  const updateNumberLikes = (data, type) => {
+    if (data.user_id !== userId) {
+      if (
+        (isAReply && data.type === "reply" && data.message_id === id) ||
+        (!isAReply && data.type === "post" && data.message_id === id)
+      ) {
+        if (type === "dislike") {
+          setNumberLikes(numberLikes - 1);
+        } else {
+          setNumberLikes(numberLikes + 1);
+        }
+      }
+    }
+  };
 
-  //   const data = {
-  //     message_id: id,
-  //   };
+  const onClickLikeBtn = async (e) => {
+    e.stopPropagation();
 
-  //   if (isAReply) {
-  //     data.type = "reply";
-  //   } else {
-  //     data.type = "post";
-  //   }
+    let newNumberLikes = numberLikes;
 
-  //   const userLikesPost = !haveLike;
+    const request = {
+      route: "like",
+      body: {
+        user_id: userId,
+        message_id: id,
+      },
+      type: "application/json",
+    };
 
-  //   if (userLikesPost) {
-  //     await onLikePostOrReply({ data, type: "like" });
-  //     setLikesQuantity(likesQuantity + 1);
-  //   } else {
-  //     await onLikePostOrReply({ data, type: "dislike" });
-  //     setLikesQuantity(likesQuantity - 1);
-  //   }
+    if (!!isAReply) {
+      request.body.type = "reply";
+    } else {
+      request.body.type = "post";
+    }
 
-  //   setHaveLike(userLikesPost);
-  // };
+    if (haveLike) {
+      newNumberLikes -= 1;
+      request.method = "DELETE";
+    } else {
+      newNumberLikes += 1;
+      request.method = "POST";
+    }
+
+    await api(request);
+
+    setNumberLikes(newNumberLikes);
+    setHaveLike(!haveLike);
+  };
 
   return (
     <footer
@@ -115,12 +118,17 @@ const PostFooter = ({
       }`}
     >
       {isHomeOrProfilePage ? (
-        <FooterOption type={"comment"} text={repliesQuantity} />
+        <FooterOption type={"comment"} text={numberReplies} />
       ) : (
-        <FooterOption type={"reply"} text={"Reply"} />
+        <FooterOption type={"reply"} text={"Reply"} onClick={onClickReply} />
       )}
 
-      <FooterOption type={"like"} text={likesQuantity} haveLike={haveLike} />
+      <FooterOption
+        type={"like"}
+        text={numberLikes}
+        haveLike={haveLike}
+        onClick={onClickLikeBtn}
+      />
     </footer>
   );
 };

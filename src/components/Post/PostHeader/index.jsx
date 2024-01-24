@@ -1,38 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
+import getDateFormat from "@utils/getDateFormat";
+import { UserContext } from "@context/userContext";
 import ProfilePhoto from "@components/ProfilePhoto";
 import HeaderFeatures from "../HeaderFeatures";
 import styles from "./styles.module.css";
 
-const PostHeader = ({
-  id,
-  author,
-  createdAt,
-  isAReply,
-  onDeletePost,
-  darkTheme,
-}) => {
-  const [showFeatures, setShowFeatures] = useState(false);
-  // const dateFormat = getDateFormat(createdAt);
-  const dateFormat = createdAt;
-  const userId = 1;
+const PostHeader = ({ id, author, createdAt, isAReply, darkTheme }) => {
+  const { userId } = useContext(UserContext);
+  const dateFormat = getDateFormat(createdAt);
 
-  // const onClickShowFeatures = (e) => {
-  //   e.stopPropagation();
-  //   setShowFeatures(!showFeatures);
-  // };
-
-  // const onClickDeleteBtn = async () => {
-  //   if (isAReply) {
-  //     await isAReply.onDeleteReply(id);
-  //   } else {
-  //     await onDeletePost(id);
-  //   }
-  // };
-
-  // const onClickLink = (e) => {
-  //   e.stopPropagation();
-  // };
+  const onClickLink = (e) => {
+    e.stopPropagation();
+  };
 
   return (
     <header
@@ -46,7 +26,7 @@ const PostHeader = ({
 
       <Link
         className={styles["header__link"]}
-        // onClick={onClickLink}
+        onClick={onClickLink}
         href={`/profile/${author.id}`}
       >
         <span className={styles["header__username"]}>@{author.username}</span>
@@ -54,7 +34,9 @@ const PostHeader = ({
 
       <span className={styles["header__time"]}>{dateFormat}</span>
 
-      {author.id === userId && <HeaderFeatures showFeatures={showFeatures} />}
+      {author.id === userId && (
+        <HeaderFeatures id={id} authorId={author.id} isAReply={isAReply} />
+      )}
     </header>
   );
 };

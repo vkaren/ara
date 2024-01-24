@@ -17,6 +17,7 @@
 }
 
 .post-container.link {
+  text-decoration: none;
   cursor: pointer;
 }
 .post-container.link:hover {

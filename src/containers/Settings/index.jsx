@@ -3,14 +3,14 @@ import { ThemeContext } from "@context/themeContext";
 import EditOption from "./EditOption";
 import DarkModeOption from "./DarkModeOption";
 import DeleteOption from "./DeleteOption";
-import DeleteAccountModal from "./DeleteAccountModal";
+import DeleteModal from "@components/DeleteModal";
 import styles from "./styles.module.css";
 
 const Settings = () => {
   const { darkTheme, toggleDarkTheme } = useContext(ThemeContext);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
-  // const onDelete = () => setIsDeletingAccount(true);
+  const toggleDeleteModal = () => setIsDeletingAccount(!isDeletingAccount);
 
   return (
     <>
@@ -30,16 +30,15 @@ const Settings = () => {
             styles={styles}
           />
 
-          <DeleteOption
-            //  onDelete={onDelete}
-            styles={styles}
-          />
+          <DeleteOption onDelete={toggleDeleteModal} styles={styles} />
         </ul>
       </section>
 
       {isDeletingAccount && (
-        <DeleteAccountModal
-          // onCancelDeleteAccount={onCancelDeleteAccount}
+        <DeleteModal
+          type="account"
+          // onDelete={onDeleteAccount}
+          onCancelDelete={toggleDeleteModal}
           darkTheme={darkTheme}
         />
       )}

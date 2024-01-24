@@ -21,9 +21,9 @@ const AddComment = ({ isAReply }) => {
     const canAddComment = validateForm(formData);
 
     if (canAddComment) {
-      await sendComment(formData);
-
       form.current.reset();
+
+      await sendComment(formData);
     }
   };
 
@@ -68,7 +68,7 @@ const AddComment = ({ isAReply }) => {
         isAReply && styles["reply"]
       } ${darkTheme && styles["dark-mode"]}`}
     >
-      <ProfilePhoto photoUrl={userData.profile_photo} />
+      <ProfilePhoto photoUrl={userData?.profile_photo} />
 
       <Textarea isAReply={isAReply} />
 

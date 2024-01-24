@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
+import { useRouter } from "next/router";
 import { ThemeContext } from "@context/themeContext";
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
 import PostInsertedImage from "./PostInsertedImage";
 import PostFooter from "./PostFooter";
-// import ReplyBox from "./ReplyBox";
+import ReplyBox from "./ReplyBox";
 import styles from "./styles.module.css";
 
 const Post = ({
@@ -18,42 +19,34 @@ const Post = ({
   isAReply,
   onDeletePost,
 }) => {
-  // const router = useRouter();
-  // const isHomeOrProfilePage =
-  //   router.asPath.includes("home") || router.asPath.includes("profile");
+  const router = useRouter();
+  const isHomeOrProfilePage =
+    router.asPath.includes("home") || router.asPath.includes("profile");
+
   const { darkTheme } = useContext(ThemeContext);
   const [isReplying, setIsReplying] = useState(false);
 
-  // const onClickPost = () => {
-  //   if (isHomeOrProfilePage) {
-  //     router.push(`/post/${id}`);
-  //   }
-  // };
+  const onClickPost = () => {
+    if (isHomeOrProfilePage) {
+      router.push(`/post/${id}`);
+    }
+  };
 
-  // const onClickReply = () => {
-  //   setIsReplying(true);
-  // };
-
-  // const onCancelReply = () => {
-  //   setIsReplying(false);
-  // };
+  const toggleReplyModal = () => {
+    setIsReplying(!isReplying);
+  };
 
   return (
     <>
       <article
-        // id={`${!!isAReply ? "reply" : "post"}-${id}`}
-        // className={`${styles["post-container"]}
         //  ${
         //   darkTheme && styles["dark-mode"]
-        // } ${isHomeOrProfilePage && styles["link"]} ${
-        //   !!isAReply && styles["reply"]
-        // }
-        // `}
+        id={`${!!isAReply ? "reply" : "post"}-${id}`}
         className={`${styles["post-container"]} ${
           !!isAReply && styles["reply"]
-        }`}
+        } ${isHomeOrProfilePage && styles["link"]}`}
         role="button"
-        // onClick={onClickPost}
+        onClick={onClickPost}
       >
         <PostHeader
           id={id}
@@ -68,14 +61,14 @@ const Post = ({
           id={id}
           content={content}
           replyingToUser={isAReply?.replyingToUser}
-          // isHomeOrProfilePage={isHomeOrProfilePage}
+          isHomeOrProfilePage={isHomeOrProfilePage}
           darkTheme={darkTheme}
         />
 
         {insertedImage && (
           <PostInsertedImage
             insertedImage={insertedImage}
-            // isHomeOrProfilePage={isHomeOrProfilePage}
+            isHomeOrProfilePage={isHomeOrProfilePage}
           />
         )}
 
@@ -84,8 +77,8 @@ const Post = ({
           likes={likes}
           replies={replies}
           isAReply={isAReply}
-          // onClickReply={onClickReply}
-          // isHomeOrProfilePage={isHomeOrProfilePage}
+          onClickReply={toggleReplyModal}
+          isHomeOrProfilePage={isHomeOrProfilePage}
           darkTheme={darkTheme}
         />
       </article>
@@ -95,7 +88,7 @@ const Post = ({
           replyingToPost={!!isAReply ? isAReply.replyingToPost : id}
           replyingToUser={author.id}
           darkTheme={darkTheme}
-          // onCancelReply={onCancelReply}
+          onCancelReply={toggleReplyModal}
         />
       )}
     </>

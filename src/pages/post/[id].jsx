@@ -1,44 +1,79 @@
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "@context/appContext";
+import { ListeningSocketContext } from "@context/listeningSocketContext";
+import api from "@utils/api";
 import AppLayout from "@containers/AppLayout";
 import NavBack from "@components/NavBack";
 import Post from "@components/Post";
 import Replies from "@components/Replies";
 
-const postTest = {
-  id: 1,
-  author: { nickname: "karen", username: "karen" },
-  createdAt: "1 min",
-  content: "Hola",
-  replies: [
-    {
-      id: 2,
-      author: { nickname: "mango", username: "mango" },
-      createdAt: "1 min",
-      content: "Hello",
-      replying_to_post: 1,
-      replying_to_user: "karen",
-    },
-  ],
-};
+export async function getServerSideProps({ req, res, query }) {
+  const props = {
+    post: {},
+  };
 
-const PostPage = () => {
+  const post = await api({
+    method: "GET",
+    route: `post/${query.id}`,
+    ssr: {
+      req,
+      res,
+    },
+  });
+
+  if (!post.error && post.message !== "Internal server error") {
+    props.post = post;
+  } else {
+    return {
+      notFound: true,
+    };
+  }
+
+  return { props };
+}
+
+const PostPage = ({ post }) => {
+  const { socketData } = useContext(ListeningSocketContext);
+  const { replyDeleted } = useContext(AppContext);
+  const [replies, setReplies] = useState(post.replies);
+
+  useEffect(() => addNewReply(), [socketData]);
+
+  useEffect(() => removeReply(), [replyDeleted]);
+
+  const addNewReply = () => {
+    const { newReply } = socketData;
+
+    if (newReply) {
+      setReplies([...replies, newReply]);
+    }
+  };
+
+  const removeReply = () => {
+    if (replyDeleted) {
+      const replyToDeleteId = replies.findIndex(
+        (reply) => reply.id === replyDeleted
+      );
+      const newReplies = [...replies];
+      newReplies.splice(replyToDeleteId, 1);
+
+      setReplies(newReplies);
+    }
+  };
   return (
     <AppLayout>
       <NavBack />
 
       <Post
-        id={postTest.id}
-        author={postTest.author}
-        content={postTest.content}
-        createdAt={postTest.createdAt}
-        insertedImage={postTest.inserted_image}
-        likes={postTest.likes}
-        replies={postTest.replies}
-        // onDeletePost={onDeletePost}
+        id={post.id}
+        author={post.author}
+        content={post.content}
+        createdAt={post.createdAt}
+        insertedImage={post.inserted_image}
+        likes={post.likes}
+        replies={replies}
       />
-      <Replies
-        replies={postTest.replies}
-        // onDeleteReply={onDeleteReply}
-      />
+      <Replies replies={replies} />
     </AppLayout>
   );
 };

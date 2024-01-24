@@ -7,7 +7,8 @@ const api = async ({
   body,
   route,
   headers = {},
-  token = getItem("token"),
+  ssr = {},
+  token = getItem("token", ssr),
 }) => {
   try {
     const requestOptions = {

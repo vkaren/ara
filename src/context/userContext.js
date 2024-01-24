@@ -11,9 +11,7 @@ function UserProvider({ children }) {
     router.asPath === "/login" || router.asPath === "/";
 
   const [userId, setUserId] = useState(null);
-  const [userData, setUserData] = useState({});
-  // const [userLikes, setUserLikes] = useState([]);
-  // const [userFollowing, setUserFollowing] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     if (!isLoginOrSignUpPage) {

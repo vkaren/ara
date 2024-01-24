@@ -1,5 +1,5 @@
 /* Delete account overlay */
-.delete-account_overlay {
+.delete_overlay {
   position: fixed;
   z-index: 100;
   top: 0;
@@ -10,7 +10,7 @@
 }
 
 /* Delete account section */
-.delete-account_section {
+.delete_section {
   position: fixed;
   top: 0;
   left: 0;
@@ -27,23 +27,23 @@
   color: var(--dark-blue);
   background: var(--white);
 }
-.delete-account_section h2 {
+.delete_section h2 {
   font-size: 1.8rem;
   font-weight: 600;
 }
-.delete-account_section p {
+.delete_section p {
   margin: 1.5rem 0;
   font-size: 1.5rem;
 }
 
 /* Delete account options container */
-.delete-account_options {
+.delete_options {
   display: flex;
   justify-content: space-between;
 }
 
 /* Delete account options */
-.delete-account_options button {
+.delete_options button {
   padding: 1rem 2rem;
   font-size: 1.2rem;
   font-weight: 700;
@@ -51,15 +51,15 @@
   border-radius: 5px;
   color: var(--white);
 }
-.delete-account_cancel-btn {
+.delete_cancel-btn {
   background: var(--purple);
 }
-.delete-account_accept-btn {
+.delete_accept-btn {
   background: var(--red);
 }
 
 /*      Dark mode       */
-.delete-account_section.dark-mode {
+.delete_section.dark-mode {
   color: var(--white);
   background: var(--light-black);
 }
