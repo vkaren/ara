@@ -12,13 +12,13 @@ export default function MyApp({ Component, pageProps }) {
           <Component {...pageProps} />
         </UserProvider>
       ) : (
-        <UserProvider>
-          <AppProvider>
+        <AppProvider>
+          <UserProvider>
             <ListeningSocketProvider>
               <Component {...pageProps} />
             </ListeningSocketProvider>
-          </AppProvider>
-        </UserProvider>
+          </UserProvider>
+        </AppProvider>
       )}
     </ThemeProvider>
   );

@@ -1,14 +1,18 @@
+import { useContext } from "react";
+import { AppContext } from "@context/appContext";
 import IconComponent from "@components/Icon";
 import Link from "next/link";
 import styles from "./styles.module.css";
 
-const Option = ({ type, notify }) => {
+const Option = ({ type }) => {
+  const { haveNotifications } = useContext(AppContext);
+
   return (
     <li className={styles["option"]}>
       <Link
         className={`${styles["option__link"]}  ${
           type === "notifications" && styles["option__notif"]
-        }  ${notify && styles["notify"]}`}
+        }  ${haveNotifications && styles["notify"]}`}
         href={`/${type}`}
       >
         <IconComponent name={type} />

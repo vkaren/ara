@@ -3,17 +3,7 @@ import { ThemeContext } from "@context/themeContext";
 import NotifInfo from "./NotifInfo";
 import styles from "./styles.module.css";
 
-const notifTest = {
-  notif_from: {
-    id: 1,
-    username: "karen",
-  },
-  post_id: 1,
-  type: "like",
-  seen: false,
-};
-
-const Notifications = ({ notifications = [notifTest] }) => {
+const Notifications = ({ notifications = [] }) => {
   const { darkTheme } = useContext(ThemeContext);
 
   return (

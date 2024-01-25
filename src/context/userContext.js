@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { setItem, getItem, removeItem } from "@utils/cookies";
 import api from "@utils/api";
+import { AppContext } from "./appContext";
 
 const UserContext = createContext({});
 
@@ -10,6 +11,7 @@ function UserProvider({ children }) {
   const isLoginOrSignUpPage =
     router.asPath === "/login" || router.asPath === "/";
 
+  const { notifyUser } = useContext(AppContext);
   const [userId, setUserId] = useState(null);
   const [userData, setUserData] = useState(null);
 
@@ -22,6 +24,12 @@ function UserProvider({ children }) {
       }
     }
   }, [userId, isLoginOrSignUpPage]);
+
+  useEffect(() => {
+    if (userData && haveNewNotifications()) {
+      notifyUser();
+    }
+  }, [userData]);
 
   const saveLoginResponse = ({ user_id, token }) => {
     setItem("user_id", user_id);
@@ -56,6 +64,10 @@ function UserProvider({ children }) {
       method: "GET",
       route: `follow/following/${userId}`,
     });
+  };
+
+  const haveNewNotifications = () => {
+    return userData.notifications.some((notif) => !notif.seen);
   };
 
   return (

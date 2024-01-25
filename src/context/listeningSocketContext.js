@@ -1,6 +1,8 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import config from "@config";
+import { AppContext } from "./appContext";
+import { UserContext } from "./userContext";
 
 const ListeningSocketContext = createContext({});
 
@@ -13,6 +15,8 @@ function ListeningSocketProvider({ children }) {
     newDislike: null,
     newNotif: null,
   });
+  const { notifyUser } = useContext(AppContext);
+  const { userId } = useContext(UserContext);
 
   useEffect(() => {
     setSocket(io.connect(config.api));
@@ -54,6 +58,7 @@ function ListeningSocketProvider({ children }) {
         break;
       case "notif":
         newSocketData.newNotif = data;
+        newSocketData.newNotif.notificationFor === userId && notifyUser();
         break;
       default:
         return;
