@@ -1,14 +1,11 @@
+import api from "@utils/api";
 import AppLayout from "@containers/AppLayout";
 import Search from "@containers/Search";
 
-const SearchPage = ({ userFollowing, peopleToFollow }) => {
+const SearchPage = () => {
   return (
     <AppLayout>
-      <Search
-      // searchedUsers={searchedUsers}
-      // peopleToFollow={peopleToFollow}
-      // onSearchUser={onSearchUser}
-      />
+      <Search />
     </AppLayout>
   );
 };

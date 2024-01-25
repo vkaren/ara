@@ -1,13 +1,7 @@
 import User from "../User";
 import styles from "./styles.module.css";
 
-const userTest = {
-  id: 1,
-  nickname: "karen",
-  username: "karen",
-};
-
-const PeopleToFollow = ({ peopleToFollow = [userTest], darkTheme }) => {
+const PeopleToFollow = ({ peopleToFollow = [], darkTheme }) => {
   return (
     peopleToFollow.length > 0 && (
       <section

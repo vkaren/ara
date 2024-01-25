@@ -51,6 +51,13 @@ function UserProvider({ children }) {
     setUserData(user);
   };
 
+  const getUserFollowingList = async () => {
+    return await api({
+      method: "GET",
+      route: `follow/following/${userId}`,
+    });
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -58,6 +65,7 @@ function UserProvider({ children }) {
         userData,
         saveLoginResponse,
         removeUserInfo,
+        getUserFollowingList,
       }}
     >
       {children}

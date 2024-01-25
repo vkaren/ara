@@ -1,13 +1,41 @@
+import { useState } from "react";
+import api from "@utils/api";
 import User from "../User";
 import styles from "./styles.module.css";
 
-const userTest = {
-  id: 1,
-  nickname: "karen",
-  username: "karen",
-};
+const SearchBox = ({ darkTheme }) => {
+  const [searchedUsers, setSearchedUsers] = useState([]);
 
-const SearchBox = ({ searchedUsers = [userTest], onSearchUser, darkTheme }) => {
+  const onSearchUser = () => {
+    let timer;
+
+    return (e) => {
+      if (timer) {
+        clearTimeout(timer);
+      }
+
+      timer = setTimeout(async () => {
+        const filterBy = e.target.value;
+        const regex = /\w+/gi;
+
+        if (regex.test(filterBy)) {
+          await getUserListBy(filterBy);
+        }
+      }, 500);
+    };
+  };
+
+  const getUserListBy = async (filterBy) => {
+    const userList = await api({
+      method: "GET",
+      route: `user/?filter=${filterBy}`,
+    });
+
+    if (Array.isArray(userList)) {
+      setSearchedUsers(userList);
+    }
+  };
+
   return (
     <>
       <section
@@ -16,7 +44,7 @@ const SearchBox = ({ searchedUsers = [userTest], onSearchUser, darkTheme }) => {
         }`}
       >
         <input
-          // onChange={onSearchUser()}
+          onChange={onSearchUser()}
           className={styles["search-box__input"]}
           type="search"
           placeholder="Search..."
@@ -31,6 +59,7 @@ const SearchBox = ({ searchedUsers = [userTest], onSearchUser, darkTheme }) => {
       >
         {searchedUsers.map((user) => (
           <User
+            key={user.id}
             id={user.id}
             nickname={user.nickname}
             username={user.username}
