@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { UserContext } from "@context/userContext";
 import ProfilePhoto from "@components/ProfilePhoto";
 import FollowButton from "@components/FollowButton";
 import styles from "./styles.module.css";
@@ -11,7 +12,16 @@ const UserInfo = ({
   followers = [],
   bio,
 }) => {
-  const [followersQuantity, setFollowersQuantity] = useState(followers.length);
+  const { userId } = useContext(UserContext);
+  const [numberFollowers, setNumberFollowers] = useState(followers.length);
+
+  const updateNumberFollowers = (type) => {
+    if (type === "follow") {
+      setNumberFollowers(numberFollowers + 1);
+    } else {
+      setNumberFollowers(numberFollowers - 1);
+    }
+  };
 
   return (
     <div className={styles["header__user-info"]}>
@@ -25,19 +35,15 @@ const UserInfo = ({
 
         <div className={styles["user-info__follow"]}>
           <span className={styles["user-info__followers"]}>
-            {`${followersQuantity} follower${
-              followersQuantity === 1 ? "" : "s"
-            }`}
+            {`${numberFollowers} follower${numberFollowers === 1 ? "" : "s"}`}
           </span>
 
-          {
-            //userId !== id &&
-
+          {userId !== id && (
             <FollowButton
-              followTo={id}
-              updateFollowers={setFollowersQuantity}
+              userIdToFollow={id}
+              updateNumberFollowers={updateNumberFollowers}
             />
-          }
+          )}
         </div>
       </div>
 

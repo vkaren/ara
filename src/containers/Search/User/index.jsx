@@ -13,24 +13,6 @@ const User = ({
   className,
   darkTheme,
 }) => {
-  const { userId, getUserFollowingList } = useContext(UserContext);
-  const [isFollowingUser, setIsFollowingUser] = useState(null);
-
-  useEffect(() => {
-    checkIsFollowingUser();
-  }, [userId]);
-
-  const checkIsFollowingUser = async () => {
-    if (className === "people-tf") {
-      setIsFollowingUser(false);
-    } else {
-      const userFollowingList = await getUserFollowingList();
-      setIsFollowingUser(
-        userFollowingList.some((user) => user.follow_to === id)
-      );
-    }
-  };
-
   return (
     <Link
       className={`${styles[`${className}__link`]} ${
@@ -46,7 +28,10 @@ const User = ({
         <span className={`${styles[`${className}__username`]}`}>
           @{username}
         </span>
-        <FollowButton userIdToFollow={id} isFollowingUser={isFollowingUser} />
+        <FollowButton
+          userIdToFollow={id}
+          type={className === "people-tf" ? "peopleToFollow" : null}
+        />
       </article>
     </Link>
   );

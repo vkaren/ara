@@ -4,21 +4,38 @@ import { UserContext } from "@context/userContext";
 import api from "@utils/api";
 import styles from "./styles.module.css";
 
-const FollowButton = ({ userIdToFollow, isFollowingUser }) => {
+const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   const { darkTheme } = useContext(ThemeContext);
-  const { userId } = useContext(UserContext);
+  const { userId, hasFollowedUser } = useContext(UserContext);
   const [isFollowing, setIsFollowing] = useState();
 
-  useEffect(() => setIsFollowing(isFollowingUser), [isFollowingUser]);
+  useEffect(() => {
+    checkIsFollowingUser();
+  }, [userId]);
+
+  const checkIsFollowingUser = async () => {
+    if (type === "peopleToFollow") {
+      setIsFollowing(false);
+    } else if (userId) {
+      setIsFollowing(await hasFollowedUser(userIdToFollow));
+    }
+  };
 
   const onClickFollowBtn = async (e) => {
     e.preventDefault();
     e.stopPropagation();
+    let type = "";
 
     if (isFollowing) {
-      await followOrUnfollowUser("unfollow");
+      type = "unfollow";
     } else {
-      await followOrUnfollowUser("follow");
+      type = "follow";
+    }
+
+    await followOrUnfollowUser(type);
+
+    if (updateNumberFollowers) {
+      updateNumberFollowers(type);
     }
 
     setIsFollowing(!isFollowing);

@@ -1,22 +1,34 @@
 import AppLayout from "@containers/AppLayout";
 import Profile from "@containers/Profile";
 import NavBack from "@components/NavBack";
+import api from "@utils/api";
 
-const postTest = {
-  id: 1,
-  author: { nickname: "karen", username: "karen" },
-  createdAt: "1 min",
-  content: "Hola",
-};
+export async function getServerSideProps({ req, res, query }) {
+  const props = {
+    profile: {},
+  };
 
-const profileTest = {
-  id: 1,
-  nickname: "karen",
-  username: "karen",
-  posts: [postTest],
-};
+  const profile = await api({
+    method: "GET",
+    route: `user/${query.id}`,
+    ssr: {
+      req,
+      res,
+    },
+  });
 
-const ProfilePage = ({ userFollowing, profile = profileTest }) => {
+  if (!profile.error && profile.message !== "Internal server error") {
+    props.profile = profile;
+  } else {
+    return {
+      notFound: true,
+    };
+  }
+
+  return { props };
+}
+
+const ProfilePage = ({ profile }) => {
   return (
     <AppLayout>
       <NavBack />

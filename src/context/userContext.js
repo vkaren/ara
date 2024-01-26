@@ -26,8 +26,10 @@ function UserProvider({ children }) {
   }, [userId, isLoginOrSignUpPage]);
 
   useEffect(() => {
-    if (userData && haveNewNotifications()) {
-      notifyUser();
+    if (userData) {
+      if (haveNewNotifications()) {
+        notifyUser();
+      }
     }
   }, [userData]);
 
@@ -70,6 +72,11 @@ function UserProvider({ children }) {
     return userData.notifications.some((notif) => !notif.seen);
   };
 
+  const hasFollowedUser = async (id) => {
+    const userFollowingList = await getUserFollowingList();
+
+    return userFollowingList.some((user) => user.follow_to === id);
+  };
   return (
     <UserContext.Provider
       value={{
@@ -78,6 +85,7 @@ function UserProvider({ children }) {
         saveLoginResponse,
         removeUserInfo,
         getUserFollowingList,
+        hasFollowedUser,
       }}
     >
       {children}
