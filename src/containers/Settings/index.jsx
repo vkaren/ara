@@ -1,5 +1,8 @@
 import { useContext, useState } from "react";
+import { useRouter } from "next/router";
 import { ThemeContext } from "@context/themeContext";
+import { UserContext } from "@context/userContext";
+import api from "@utils/api";
 import EditOption from "./EditOption";
 import DarkModeOption from "./DarkModeOption";
 import DeleteOption from "./DeleteOption";
@@ -7,10 +10,24 @@ import DeleteModal from "@components/DeleteModal";
 import styles from "./styles.module.css";
 
 const Settings = () => {
+  const router = useRouter();
   const { darkTheme, toggleDarkTheme } = useContext(ThemeContext);
+  const { userId, removeUserInfo } = useContext(UserContext);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
 
   const toggleDeleteModal = () => setIsDeletingAccount(!isDeletingAccount);
+
+  const onDeleteAccount = async () => {
+    const { userDeleted } = await api({
+      method: "DELETE",
+      route: `user/${userId}`,
+    });
+
+    if (userDeleted) {
+      removeUserInfo();
+      router.push("/");
+    }
+  };
 
   return (
     <>
@@ -37,7 +54,7 @@ const Settings = () => {
       {isDeletingAccount && (
         <DeleteModal
           type="account"
-          // onDelete={onDeleteAccount}
+          onDelete={onDeleteAccount}
           onCancelDelete={toggleDeleteModal}
           darkTheme={darkTheme}
         />

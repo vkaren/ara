@@ -1,12 +1,40 @@
+import api from "@utils/api";
+import { getItem } from "@utils/cookies";
 import AppLayout from "@containers/AppLayout";
 import SettingsEdit from "@containers/Settings/SettingsEdit";
 import NavBack from "@components/NavBack";
 
-const SettingsEditPage = () => {
+export async function getServerSideProps({ req, res, query }) {
+  const props = {
+    userInfo: {},
+  };
+  const userId = getItem("user_id", { req, res });
+
+  const userInfo = await api({
+    method: "GET",
+    route: `user/${userId}`,
+    ssr: {
+      req,
+      res,
+    },
+  });
+
+  if (!userInfo.error && userInfo.message !== "Internal server error") {
+    props.userInfo = userInfo;
+  } else {
+    return {
+      notFound: true,
+    };
+  }
+
+  return { props };
+}
+
+const SettingsEditPage = ({ userInfo }) => {
   return (
     <AppLayout>
       <NavBack />
-      <SettingsEdit />
+      <SettingsEdit userInfo={userInfo} />
     </AppLayout>
   );
 };

@@ -2,6 +2,7 @@ const Form = ({
   form,
   inputs = [],
   type,
+  fileUploaded,
   submitMsg = {},
   onSubmit,
   styles,
@@ -27,7 +28,10 @@ const Form = ({
               {...input.props}
             />
 
-            {input.anotherComponent && input.anotherComponent(null)}
+            {input.anotherComponent &&
+              input.anotherComponent(
+                input.props.type === "file" ? fileUploaded : null
+              )}
           </label>
         );
       })}
