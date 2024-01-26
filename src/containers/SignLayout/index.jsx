@@ -12,7 +12,7 @@ const SignLayout = ({ children }) => {
         <title>Ara</title>
       </Head>
       <main
-        id={darkTheme && "dark-mode"}
+        id={darkTheme ? "dark-mode" : null}
         className={`${styles["sign-layout"]} `}
       >
         <aside className={styles["sign-layout__left"]}></aside>
