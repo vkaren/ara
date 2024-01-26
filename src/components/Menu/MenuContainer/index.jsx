@@ -3,14 +3,10 @@ import LogoutButton from "../LogoutButton";
 import Option from "../Option";
 import styles from "./styles.module.css";
 
-const MenuContainer = ({ darkTheme, options, isOnMobile }) => {
+const MenuContainer = ({ options, isOnMobile }) => {
   return (
-    <aside
-      className={`${styles["menu-container"]} ${
-        darkTheme && styles["dark-mode"]
-      }`}
-    >
-      {!isOnMobile && <LogoImage darkTheme={darkTheme} />}
+    <aside className={`${styles["menu-container"]} bckgBlack clrWhite`}>
+      {!isOnMobile && <LogoImage />}
 
       <ul className={styles["menu-container__options"]}>
         {options.map((opt) => (
@@ -18,7 +14,7 @@ const MenuContainer = ({ darkTheme, options, isOnMobile }) => {
         ))}
       </ul>
 
-      {!isOnMobile && <LogoutButton darkTheme={darkTheme} />}
+      {!isOnMobile && <LogoutButton />}
     </aside>
   );
 };

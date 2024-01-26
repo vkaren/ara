@@ -1,17 +1,18 @@
 import User from "../User";
 import styles from "./styles.module.css";
 
-const PeopleToFollow = ({ peopleToFollow = [], darkTheme }) => {
+const PeopleToFollow = ({ peopleToFollow = [] }) => {
   return (
     peopleToFollow.length > 0 && (
-      <section
-        className={`${styles["people-tf__section"]} ${
-          darkTheme && styles["dark-mode"]
-        }`}
-      >
-        <h2 className={styles["people-tf__title"]}>People to follow</h2>
+      <section className={`${styles["people-tf__section"]}`}>
+        <h2 className={`${styles["people-tf__title"]} clrWhite`}>
+          People to follow
+        </h2>
 
-        <div className={styles["people-tf__container"]}>
+        <div
+          id="scroll"
+          className={`${styles["people-tf__container"]} scrollPurpleLgtBlck`}
+        >
           {peopleToFollow.map((user) => (
             <User
               key={`user-to-follow-${user.id}`}
@@ -19,9 +20,8 @@ const PeopleToFollow = ({ peopleToFollow = [], darkTheme }) => {
               nickname={user.nickname}
               username={user.username}
               profilePhoto={user.profile_photo}
-              darkTheme={darkTheme}
               styles={styles}
-              className={"people-tf"}
+              type={"people-tf"}
             />
           ))}
         </div>

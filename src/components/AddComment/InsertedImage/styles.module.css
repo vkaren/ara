@@ -15,8 +15,3 @@
   height: 2rem;
   fill: var(--purple);
 }
-
-/*      Dark mode       */
-.add-comment__section.dark-mode .adc_inserted-image svg {
-  fill: var(--light-purple);
-}

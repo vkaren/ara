@@ -23,12 +23,3 @@
 .post-container.link:hover {
   background: var(--very-light-gray);
 }
-
-/*      Dark mode       */
-.post-container.dark-mode {
-  color: var(--white);
-  background: var(--black);
-}
-.post-container.dark-mode:hover {
-  background: var(--light-black);
-}

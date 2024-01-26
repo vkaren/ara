@@ -42,14 +42,6 @@
   z-index: 100;
 }
 
-/*      Dark mode        */
-.reply-modal.dark-mode .reply-modal__cancel {
-  background: var(--light-purple);
-}
-.reply-modal.dark-mode .reply-modal__cancel .cancel_icon {
-  fill: var(--black);
-}
-
 @media (max-width: 650px) {
   .reply-modal {
     left: 0;

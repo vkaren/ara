@@ -1,5 +1,4 @@
-import { createRef, useContext } from "react";
-import { ThemeContext } from "@context/themeContext";
+import { createRef, useContext, useEffect, useState } from "react";
 import { UserContext } from "@context/userContext";
 import api from "@utils/api";
 import ProfilePhoto from "@components/ProfilePhoto";
@@ -9,9 +8,22 @@ import SubmitButton from "./SubmitButton";
 import styles from "./styles.module.css";
 
 const AddComment = ({ isAReply }) => {
-  const { darkTheme } = useContext(ThemeContext);
-  const { userId, userData } = useContext(UserContext);
+  const { userId, getUserData } = useContext(UserContext);
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const form = createRef();
+
+  useEffect(() => {
+    if (userId) {
+      getProfilePhoto();
+    }
+  }, [userId]);
+
+  const getProfilePhoto = async () => {
+    const userData = await getUserData();
+    const profilePh = userData.profile_photo;
+
+    setProfilePhoto(profilePh);
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +36,10 @@ const AddComment = ({ isAReply }) => {
       form.current.reset();
 
       await sendComment(formData);
+
+      if (isAReply) {
+        isAReply.closeModal();
+      }
     }
   };
 
@@ -66,9 +82,10 @@ const AddComment = ({ isAReply }) => {
       ref={form}
       className={`${styles["add-comment__section"]} ${
         isAReply && styles["reply"]
-      } ${darkTheme && styles["dark-mode"]}`}
+      } bckgBlack
+      `}
     >
-      <ProfilePhoto photoUrl={userData?.profile_photo} />
+      <ProfilePhoto photoUrl={profilePhoto} />
 
       <Textarea isAReply={isAReply} />
 

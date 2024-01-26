@@ -19,9 +19,3 @@
 .notifs-section__list {
   margin: 4rem 0;
 }
-
-/*    Dark mode     */
-.notifs-section.dark-mode {
-  color: var(--white);
-  background: var(--black);
-}

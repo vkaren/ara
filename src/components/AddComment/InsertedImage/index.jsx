@@ -11,7 +11,7 @@ const InsertedImage = () => {
         accept=".png,.jpg"
       />
 
-      <IconComponent name={"insertedImage"} />
+      <IconComponent name={"insertedImage"} className="fillLgtPurple" />
     </label>
   );
 };

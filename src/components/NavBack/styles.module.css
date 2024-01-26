@@ -24,20 +24,10 @@
   transform: rotate(180deg);
 }
 
-/*      Dark mode       */
-.post-nav.dark-mode {
-  background: var(--black);
-}
-
-.post-nav.dark-mode .back__icon {
-  fill: var(--white);
-}
-
 @media (max-width: 650px) {
-  .post-nav,
-  .post-nav.dark-mode {
+  .post-nav {
     position: absolute;
-    top: 54px;
+    top: 50px;
     width: 100%;
     padding: 1.5rem 2rem;
     border-bottom: none;

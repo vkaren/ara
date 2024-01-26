@@ -49,9 +49,3 @@
   font-size: 1.4rem;
   font-weight: 400;
 }
-
-/*      Dark mode       */
-.user-profile__header.dark-mode .header__user-info {
-  color: var(--white);
-  background: var(--black);
-}

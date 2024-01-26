@@ -12,7 +12,6 @@ const PostFooter = ({
   isAReply,
   isHomeOrProfilePage,
   onClickReply,
-  darkTheme,
 }) => {
   const { userId } = useContext(UserContext);
   const { socketData } = useContext(ListeningSocketContext);
@@ -112,11 +111,7 @@ const PostFooter = ({
   };
 
   return (
-    <footer
-      className={`${styles["post__footer"]} ${
-        darkTheme && styles["dark-mode"]
-      }`}
-    >
+    <footer className={`${styles["post__footer"]}`}>
       {isHomeOrProfilePage ? (
         <FooterOption type={"comment"} text={numberReplies} />
       ) : (

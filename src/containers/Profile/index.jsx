@@ -1,5 +1,3 @@
-import { useContext, useState } from "react";
-import { ThemeContext } from "@context/themeContext";
 import UserInfo from "./UserInfo";
 import Post from "@components/Post";
 import styles from "./styles.module.css";
@@ -13,15 +11,9 @@ const Profile = ({
   bio,
   posts = [],
 }) => {
-  const { darkTheme } = useContext(ThemeContext);
-
   return (
     <>
-      <header
-        className={`${styles["user-profile__header"]} ${
-          darkTheme && styles["dark-mode"]
-        }`}
-      >
+      <header className={`${styles["user-profile__header"]}`}>
         <div className={styles["header__bckg"]}></div>
 
         <UserInfo

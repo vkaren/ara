@@ -91,3 +91,83 @@ img {
   width: 100%;
   height: 100%;
 }
+/*       Dark mode       */
+/*     Background      */
+#dark-mode.bckgBlack,
+#dark-mode .bckgBlack {
+  background: var(--black);
+}
+#dark-mode .bckgLgtBlack {
+  background: var(--light-black);
+}
+#dark-mode .bckgGray {
+  background: var(--gray);
+}
+#dark-mode .bckgLgtPurple {
+  background: var(--light-purple);
+}
+/*     Color     */
+#dark-mode .clrWhite {
+  color: var(--white);
+}
+#dark-mode .clrLgtPurple {
+  color: var(--light-purple);
+}
+#dark-mode .clrVryLgtPurple {
+  color: var(--very-light-purple);
+}
+#dark-mode .clrLgtRed {
+  color: var(--light-red);
+}
+#dark-mode .clrLgtGreen {
+  color: var(--light-green);
+}
+/*     Border      */
+#dark-mode .borderGray {
+  border-color: var(--gray);
+}
+#dark-mode.borderPurple {
+  border-color: var(--purple);
+}
+/*     Fill      */
+#dark-mode .fillLgtPurple {
+  fill: var(--light-purple);
+}
+#dark-mode .fillWhite {
+  fill: var(--white);
+}
+#dark-mode .fillLgtRed {
+  fill: var(--light-red);
+}
+#dark-mode .fillBlack {
+  fill: var(--black);
+}
+#dark-mode .fillVryLgtGray {
+  fill: var(--very-light-gray);
+}
+/*     Stroke      */
+#dark-mode .strLgtPurple {
+  stroke: var(--light-purple);
+  stroke-width: 1px;
+}
+/*     Scrollbar      */
+#dark-mode.scrollPurpleLgtBlck {
+  scrollbar-color: var(--purple) var(--light-black);
+}
+/*     Outline      */
+#dark-mode .outlineLgtPurple {
+  outline: 1px solid var(--light-purple);
+}
+
+/*    Hover     */
+#dark-mode #hover.hoverBlack:hover {
+  background: var(--light-black);
+}
+
+/*    Webkit-scrollbar      */
+#dark-mode #scroll::-webkit-scrollbar {
+  background: var(--light-black);
+}
+#dark-mode #scroll::-webkit-scrollbar-thumb {
+  background: var(--purple);
+}

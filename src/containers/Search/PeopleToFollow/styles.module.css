@@ -75,25 +75,3 @@
   font-size: 1.2rem;
   font-weight: 400;
 }
-
-/*    Dark mode     */
-.people-tf__section.dark-mode .people-tf__title {
-  color: var(--white);
-}
-.people-tf__section.dark-mode .people-tf__container {
-  scrollbar-color: var(--purple) var(--light-black);
-}
-.people-tf__section.dark-mode .people-tf__container::-webkit-scrollbar-thumb {
-  background: var(--purple);
-}
-.people-tf__section.dark-mode .people-tf__container::-webkit-scrollbar {
-  background: var(--light-black);
-}
-.people-tf__link.dark-mode .people-tf {
-  color: var(--white);
-  background: var(--black);
-}
-
-.people-tf__link.dark-mode:hover .people-tf {
-  background: var(--light-black);
-}

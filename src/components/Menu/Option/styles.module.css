@@ -39,14 +39,6 @@
   border: 1px solid var(--white);
 }
 
-/*      Dark mode styles       */
-.menu-container.dark-mode .option__title {
-  color: var(--white);
-}
-.menu-container.dark-mode .option svg {
-  fill: var(--white);
-}
-
 @media (max-width: 650px) {
   .option__link {
     margin: 0;

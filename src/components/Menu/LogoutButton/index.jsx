@@ -4,7 +4,7 @@ import { UserContext } from "@context/userContext";
 import IconComponent from "@components/Icon";
 import styles from "./styles.module.css";
 
-const LogoutButton = ({ darkTheme }) => {
+const LogoutButton = () => {
   const router = useRouter();
   const { removeUserInfo } = useContext(UserContext);
 
@@ -15,9 +15,9 @@ const LogoutButton = ({ darkTheme }) => {
   return (
     <button
       onClick={onLogOut}
-      className={`${styles["logout-btn"]} ${darkTheme && styles["dark-mode"]}`}
+      className={`${styles["logout-btn"]} fillLgtPurple`}
     >
-      <span className={styles["logout__title"]}>Log out</span>
+      <span className={`${styles["logout__title"]} clrLgtPurple`}>Log out</span>
 
       <IconComponent name={"logout"} />
     </button>

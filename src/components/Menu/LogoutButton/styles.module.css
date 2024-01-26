@@ -24,14 +24,6 @@
   fill: var(--purple);
 }
 
-/*      Dark mode styles       */
-.logout-btn.dark-mode .logout__title {
-  color: var(--light-purple);
-}
-.logout-btn.dark-mode svg {
-  fill: var(--light-purple);
-}
-
 @media (max-width: 650px) {
   .logout-btn {
     align-self: center;

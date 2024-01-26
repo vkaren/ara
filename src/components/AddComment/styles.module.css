@@ -17,8 +17,3 @@
 .add-comment__section.reply {
   width: 100%;
 }
-
-/*      Dark mode       */
-.add-comment__section.dark-mode {
-  background: var(--black);
-}

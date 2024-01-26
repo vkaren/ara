@@ -36,19 +36,3 @@
   fill: var(--purple);
   stroke-width: 0px;
 }
-
-/*      Dark mode       */
-.post__footer.dark-mode .footer__option {
-  color: var(--light-purple);
-}
-
-.post__footer.dark-mode .footer__option .like_icon {
-  stroke: var(--light-purple);
-  fill: var(--black);
-}
-
-.post__footer.dark-mode .footer__option .comment_icon,
-.post__footer.dark-mode .footer__option .reply_icon,
-.post__footer.dark-mode .footer__option .like_icon.post_liked {
-  fill: var(--light-purple);
-}

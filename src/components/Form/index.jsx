@@ -17,12 +17,15 @@ const Form = ({
             htmlFor={input.props.name}
             className={styles["form__field"]}
           >
-            <span className={styles["field__title"]}>{input.title}</span>
+            <span className={`${styles["field__title"]} clrVryLgtPurple`}>
+              {input.title}
+            </span>
             <input
               className={`
               ${styles["field__input"]} 
               ${submitMsg.error && styles["error"]} 
               ${input.props.type === "file" && styles["file"]}
+              bckgLgtPurple
               `}
               id={input.props.name}
               {...input.props}
@@ -42,8 +45,8 @@ const Form = ({
 
       <span
         className={`${styles["form__msg"]} ${
-          submitMsg.error && styles["error"]
-        }`}
+          submitMsg.error && `${styles["error"]} clrLgtRed`
+        } clrLgtGreen`}
       >
         {submitMsg.msg}
       </span>

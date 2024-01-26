@@ -1,5 +1,4 @@
 import { useContext, useRef, useState } from "react";
-import { ThemeContext } from "@context/themeContext";
 import { UserContext } from "@context/userContext";
 import api from "@utils/api";
 import Form from "@components/Form";
@@ -7,7 +6,6 @@ import FileUploaded from "../FileUploaded";
 import styles from "./styles.module.css";
 
 const SettingsEdit = ({ userInfo }) => {
-  const { darkTheme } = useContext(ThemeContext);
   const { userId } = useContext(UserContext);
   const [fileUploaded, setFileUploaded] = useState("");
   const [editMsg, setEditMsg] = useState({ error: false, msg: "" });
@@ -138,11 +136,7 @@ const SettingsEdit = ({ userInfo }) => {
   };
 
   return (
-    <section
-      className={`${styles["edit-section"]} ${
-        darkTheme && styles["dark-mode"]
-      }`}
-    >
+    <section className={`${styles["edit-section"]} bckgBlack clrWhite`}>
       <h2 className={styles["edit-section__title"]}>Settings</h2>
 
       <h3 className={styles["edit-section__title-2"]}>Edit Profile</h3>

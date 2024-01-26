@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "@context/themeContext";
 import { UserContext } from "@context/userContext";
 import api from "@utils/api";
 import SearchBox from "./SearchBox";
 import PeopleToFollow from "./PeopleToFollow";
 
 const Search = () => {
-  const { darkTheme } = useContext(ThemeContext);
   const { userId, getUserFollowingList } = useContext(UserContext);
   const [peopleToFollow, setPeopleToFollow] = useState([]);
 
@@ -37,8 +35,8 @@ const Search = () => {
 
   return (
     <>
-      <SearchBox darkTheme={darkTheme} />
-      <PeopleToFollow peopleToFollow={peopleToFollow} darkTheme={darkTheme} />
+      <SearchBox />
+      <PeopleToFollow peopleToFollow={peopleToFollow} />
     </>
   );
 };

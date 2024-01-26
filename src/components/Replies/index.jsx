@@ -1,17 +1,9 @@
-import { useContext } from "react";
-import { ThemeContext } from "@context/themeContext";
 import Post from "@components/Post";
 import styles from "./styles.module.css";
 
 const Replies = ({ replies = [], onDeleteReply }) => {
-  const { darkTheme } = useContext(ThemeContext);
-
   return (
-    <section
-      className={`${styles["replies-container"]} ${
-        darkTheme && styles["dark-mode"]
-      }`}
-    >
+    <section className={`${styles["replies-container"]} borderGray`}>
       {replies.map((reply) => (
         <Post
           key={`reply-${reply.id}`}

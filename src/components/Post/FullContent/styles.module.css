@@ -21,8 +21,3 @@
   text-decoration: underline;
   color: var(--purple);
 }
-
-/*      Dark mode       */
-.post__content.dark-mode .show__span {
-  color: var(--light-purple);
-}

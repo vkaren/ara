@@ -1,11 +1,9 @@
 import { useState, useContext, useEffect } from "react";
-import { ThemeContext } from "@context/themeContext";
 import { UserContext } from "@context/userContext";
 import api from "@utils/api";
 import styles from "./styles.module.css";
 
 const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
-  const { darkTheme } = useContext(ThemeContext);
   const { userId, hasFollowedUser } = useContext(UserContext);
   const [isFollowing, setIsFollowing] = useState();
 
@@ -14,7 +12,7 @@ const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   }, [userId]);
 
   const checkIsFollowingUser = async () => {
-    if (type === "peopleToFollow") {
+    if (type === "people-tf") {
       setIsFollowing(false);
     } else if (userId) {
       setIsFollowing(await hasFollowedUser(userIdToFollow));
@@ -63,9 +61,10 @@ const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   return (
     <button
       onClick={onClickFollowBtn}
+      id="hover"
       className={`${styles["user_follow-btn"]} ${
-        isFollowing && styles["following"]
-      } ${darkTheme && styles["dark-mode"]}`}
+        isFollowing && `${styles["following"]} bckgGray clrWhite hoverBlack`
+      }`}
     >
       {isFollowing ? "Following" : "Follow"}
     </button>

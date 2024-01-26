@@ -11,8 +11,3 @@
   color: var(--purple);
   font-weight: 600;
 }
-
-/*      Dark mode       */
-.post__content.dark-mode .content_replying-to {
-  color: var(--light-purple);
-}

@@ -3,7 +3,7 @@ import api from "@utils/api";
 import User from "../User";
 import styles from "./styles.module.css";
 
-const SearchBox = ({ darkTheme }) => {
+const SearchBox = () => {
   const [searchedUsers, setSearchedUsers] = useState([]);
 
   const onSearchUser = () => {
@@ -38,11 +38,7 @@ const SearchBox = ({ darkTheme }) => {
 
   return (
     <>
-      <section
-        className={`${styles["search-box"]} ${
-          darkTheme && styles["dark-mode"]
-        }`}
-      >
+      <section className={`${styles["search-box"]} bckgBlack clrWhite`}>
         <input
           onChange={onSearchUser()}
           className={styles["search-box__input"]}
@@ -52,11 +48,7 @@ const SearchBox = ({ darkTheme }) => {
         />
       </section>
 
-      <ul
-        className={`${styles["searched-container"]} ${
-          darkTheme && styles["dark-mode"]
-        }`}
-      >
+      <ul className={`${styles["searched-container"]}`}>
         {searchedUsers.map((user) => (
           <User
             key={user.id}
@@ -65,7 +57,7 @@ const SearchBox = ({ darkTheme }) => {
             username={user.username}
             profilePhoto={user.profile_photo}
             styles={styles}
-            className={"searched-user"}
+            type={"searched-user"}
           />
         ))}
       </ul>

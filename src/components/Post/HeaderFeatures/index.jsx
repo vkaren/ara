@@ -69,7 +69,6 @@ const HeaderFeatures = ({ id, authorId, isAReply }) => {
           type="post"
           onDelete={onDeletePost}
           onCancelDelete={toggleDeleteModal}
-          // darkTheme={darkTheme}
         />
       )}
     </>

@@ -12,16 +12,3 @@
   fill: var(--purple);
   z-index: 5;
 }
-
-/*    Dark mode     */
-.post__header.dark-mode .features_container {
-  background: var(--black);
-}
-
-.post__header.dark-mode .feature__option.delete {
-  color: var(--light-red);
-}
-
-.post__header.dark-mode .feature__option.delete .option_icon {
-  fill: var(--light-red);
-}

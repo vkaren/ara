@@ -57,9 +57,3 @@
 .delete_accept-btn {
   background: var(--red);
 }
-
-/*      Dark mode       */
-.delete_section.dark-mode {
-  color: var(--white);
-  background: var(--light-black);
-}

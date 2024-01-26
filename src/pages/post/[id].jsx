@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "@context/appContext";
 import { ListeningSocketContext } from "@context/listeningSocketContext";
 import api from "@utils/api";
+import getPreviousRoute from "@utils/getPreviousRoute";
 import AppLayout from "@containers/AppLayout";
 import NavBack from "@components/NavBack";
 import Post from "@components/Post";
@@ -10,6 +11,7 @@ import Replies from "@components/Replies";
 export async function getServerSideProps({ req, res, query }) {
   const props = {
     post: {},
+    previousRoute: getPreviousRoute(req),
   };
 
   const post = await api({
@@ -32,7 +34,7 @@ export async function getServerSideProps({ req, res, query }) {
   return { props };
 }
 
-const PostPage = ({ post }) => {
+const PostPage = ({ post, previousRoute }) => {
   const { socketData } = useContext(ListeningSocketContext);
   const { replyDeleted } = useContext(AppContext);
   const [replies, setReplies] = useState(post.replies);
@@ -62,7 +64,7 @@ const PostPage = ({ post }) => {
   };
   return (
     <AppLayout>
-      <NavBack />
+      <NavBack prevRoute={previousRoute} />
 
       <Post
         id={post.id}

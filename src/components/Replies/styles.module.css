@@ -9,8 +9,3 @@
   min-width: 30rem;
   border-left: 3px solid var(--light-gray);
 }
-
-/*      Dark mode       */
-.replies-container.dark-mode {
-  border-color: var(--gray);
-}

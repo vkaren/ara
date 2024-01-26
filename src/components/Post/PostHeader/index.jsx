@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Link from "next/link";
 import getDateFormat from "@utils/getDateFormat";
 import { UserContext } from "@context/userContext";
@@ -6,7 +6,7 @@ import ProfilePhoto from "@components/ProfilePhoto";
 import HeaderFeatures from "../HeaderFeatures";
 import styles from "./styles.module.css";
 
-const PostHeader = ({ id, author, createdAt, isAReply, darkTheme }) => {
+const PostHeader = ({ id, author, createdAt, isAReply }) => {
   const { userId } = useContext(UserContext);
   const dateFormat = getDateFormat(createdAt);
 
@@ -15,11 +15,7 @@ const PostHeader = ({ id, author, createdAt, isAReply, darkTheme }) => {
   };
 
   return (
-    <header
-      className={`${styles["post__header"]} ${
-        darkTheme && styles["dark-mode"]
-      }`}
-    >
+    <header className={`${styles["post__header"]}`}>
       <ProfilePhoto photoUrl={author.profile_photo} />
 
       <span className={styles["header__nickname"]}>{author.nickname}</span>

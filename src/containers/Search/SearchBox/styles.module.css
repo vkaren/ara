@@ -56,17 +56,3 @@
   font-size: 1.25rem;
   font-weight: 500;
 }
-
-/*    Dark mode     */
-.search-box.dark-mode {
-  background: var(--black);
-}
-
-.searched-container.dark-mode .searched-user {
-  border-color: var(--purple);
-  color: var(--white);
-}
-
-.searched-container.dark-mode .searched-user:hover {
-  background: var(--light-black);
-}

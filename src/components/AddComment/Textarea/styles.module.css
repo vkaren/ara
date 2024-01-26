@@ -12,8 +12,3 @@
   background: var(--very-light-purple);
   grid-column: 1/4;
 }
-
-/*      Dark mode       */
-.add-comment__section.dark-mode .adc_textarea {
-  outline: 1px solid var(--light-purple);
-}

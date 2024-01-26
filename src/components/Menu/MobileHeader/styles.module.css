@@ -11,8 +11,3 @@
   background: var(--white);
   z-index: 10;
 }
-
-/*      Dark mode styles       */
-.menu-header__mobile.dark-mode {
-  background: var(--black);
-}

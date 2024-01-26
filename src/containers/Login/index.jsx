@@ -72,7 +72,7 @@ const Login = () => {
         route: "auth/login",
       });
 
-      if (response.error) {
+      if (response.error || response.message === "Internal server error") {
         setLoginMsg({ error: true, msg: response.message });
       } else {
         setLoginMsg({ error: false, msg: "" });

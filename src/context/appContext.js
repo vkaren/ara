@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { getItem } from "@utils/cookies";
 import api from "@utils/api";
 

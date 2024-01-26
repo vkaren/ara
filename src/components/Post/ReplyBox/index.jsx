@@ -2,25 +2,30 @@ import AddComment from "@components/AddComment";
 import IconComponent from "@components/Icon";
 import styles from "./styles.module.css";
 
-const ReplyBox = ({
-  replyingToPost,
-  replyingToUser,
-  onCancelReply,
-  darkTheme,
-}) => (
+const ReplyBox = ({ replyingToPost, replyingToUser, closeModal }) => (
   <>
-    <section
-      className={`${styles["reply-modal"]} ${darkTheme && styles["dark-mode"]}`}
-    >
-      <button onClick={onCancelReply} className={styles["reply-modal__cancel"]}>
-        <IconComponent name="cancel" className={styles["cancel_icon"]} />
+    <section className={`${styles["reply-modal"]} `}>
+      <button
+        onClick={closeModal}
+        className={`${styles["reply-modal__cancel"]} bckgLgtPurple`}
+      >
+        <IconComponent
+          name="cancel"
+          className={`${styles["cancel_icon"]} fillBlack`}
+        />
       </button>
 
-      <AddComment isAReply={{ replyingToPost, replyingToUser }} />
+      <AddComment
+        isAReply={{
+          replyingToPost,
+          replyingToUser,
+          closeModal,
+        }}
+      />
     </section>
 
     <div
-      onClick={onCancelReply}
+      onClick={closeModal}
       className={styles["modal-overlay"]}
       role="button"
     ></div>

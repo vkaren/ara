@@ -2,10 +2,12 @@ import AppLayout from "@containers/AppLayout";
 import Profile from "@containers/Profile";
 import NavBack from "@components/NavBack";
 import api from "@utils/api";
+import getPreviousRoute from "@utils/getPreviousRoute";
 
 export async function getServerSideProps({ req, res, query }) {
   const props = {
     profile: {},
+    previousRoute: getPreviousRoute(req),
   };
 
   const profile = await api({
@@ -28,10 +30,10 @@ export async function getServerSideProps({ req, res, query }) {
   return { props };
 }
 
-const ProfilePage = ({ profile }) => {
+const ProfilePage = ({ profile, previousRoute }) => {
   return (
     <AppLayout>
-      <NavBack />
+      <NavBack prevRoute={previousRoute} />
 
       {profile && (
         <Profile

@@ -1,13 +1,9 @@
 import styles from "./styles.module.css";
 
-const DeleteModal = ({ type, onDelete, onCancelDelete, darkTheme }) => {
+const DeleteModal = ({ type, onDelete, onCancelDelete }) => {
   return (
     <>
-      <section
-        className={`${styles["delete_section"]} ${
-          darkTheme && styles["dark-mode"]
-        }`}
-      >
+      <section className={`${styles["delete_section"]} bckgLgtBlack clrWhite`}>
         <h2>Delete {type}</h2>
         <p>Are you sure do you want to delete your {type}?</p>
 

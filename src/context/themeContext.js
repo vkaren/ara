@@ -7,7 +7,7 @@ function ThemeProvider({ children }) {
   const [darkTheme, setDarkTheme] = useState(false);
 
   useEffect(() => {
-    const darkThemeStorage = getItem("dark-theme");
+    const darkThemeStorage = getItem("dark_theme");
 
     setDarkTheme(darkThemeStorage);
   }, []);

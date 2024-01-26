@@ -20,14 +20,3 @@
   opacity: 1;
   background: var(--very-light-purple);
 }
-
-/*    Dark mode     */
-.user_follow-btn.following.dark-mode {
-  background: var(--gray);
-  color: var(--white);
-}
-
-.user_follow-btn.following.dark-mode:hover {
-  opacity: 1;
-  background: var(--light-black);
-}

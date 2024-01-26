@@ -1,6 +1,6 @@
-import Head from "next/head";
 import { useContext } from "react";
 import { ThemeContext } from "@context/themeContext";
+import Head from "next/head";
 import styles from "./styles.module.css";
 
 const SignLayout = ({ children }) => {
@@ -12,12 +12,13 @@ const SignLayout = ({ children }) => {
         <title>Ara</title>
       </Head>
       <main
-        className={`${styles["sign-layout"]} ${
-          darkTheme && styles["dark-mode"]
-        }`}
+        id={darkTheme && "dark-mode"}
+        className={`${styles["sign-layout"]} `}
       >
         <aside className={styles["sign-layout__left"]}></aside>
-        <aside className={styles["sign-layout__right"]}>{children}</aside>
+        <aside className={`${styles["sign-layout__right"]} bckgBlack clrWhite`}>
+          {children}
+        </aside>
       </main>
     </>
   );

@@ -26,11 +26,3 @@
 .profile-photo__default {
   fill: var(--dark-blue);
 }
-
-/*      Dark mode       */
-.profile-photo.dark-mode {
-  background: var(--light-black);
-}
-.profile-photo.dark-mode .profile-photo__default {
-  fill: var(--very-light-gray);
-}

@@ -1,17 +1,19 @@
 import styles from "./styles.module.css";
 
-const FullContent = ({ showMore, contentLetters }) => {
+const FullContent = ({ onClickShowMore, showMore, contentLetters }) => {
   return (
     <>
       <div
-        // onClick={onClickShowMore}
+        onClick={onClickShowMore}
         className={`${styles["content__show-more"]} ${
           showMore && styles["show"]
         }`}
         role="button"
       >
         <span className={styles["show-more__dots"]}>...</span>
-        <span className={styles["show__span"]}>Show more</span>
+        <span className={`${styles["show__span"]} clrLgtPurple`}>
+          Show more
+        </span>
       </div>
 
       <span
@@ -23,13 +25,15 @@ const FullContent = ({ showMore, contentLetters }) => {
       </span>
 
       <div
-        // onClick={onClickShowMore}
+        onClick={onClickShowMore}
         className={`${styles["content__show-less"]} ${
           showMore && styles["show"]
         }`}
         role="button"
       >
-        <span className={styles["show__span"]}>Show less</span>
+        <span className={`${styles["show__span"]} clrLgtPurple`}>
+          Show less
+        </span>
       </div>
     </>
   );

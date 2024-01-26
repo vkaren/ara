@@ -25,12 +25,3 @@
   font-size: 1.3rem;
   font-weight: 500;
 }
-
-/*    Dark mode     */
-.notif-info.dark-mode {
-  border-color: var(--purple);
-}
-.notif-info.dark-mode:hover,
-.notif-info.dark-mode.not-seen {
-  background: var(--light-black);
-}

@@ -106,31 +106,6 @@
   color: var(--red);
 }
 
-/*      Dark mode styles       */
-
-/*      Aside right      */
-.sign-layout.dark-mode .sign-layout__right {
-  color: var(--white);
-  background: var(--black);
-}
-.sign-layout.dark-mode .sign-layout__right .field__title,
-.sign-layout.dark-mode .sign-layout__right .form__link {
-  color: var(--very-light-purple);
-}
-.sign-layout.dark-mode .sign-layout__right .field__input {
-  background: var(--light-purple);
-}
-.sign-layout.dark-mode .sign-layout__right .form__submit {
-  color: var(--purple);
-  background: var(--white);
-}
-.sign-layout.dark-mode .sign-layout__right .form__msg {
-  color: var(--light-green);
-}
-.sign-layout.dark-mode .sign-layout__right .form__msg.error {
-  color: var(--light-red);
-}
-
 @media (max-width: 650px) {
   .sign-layout .sign-layout__right {
     position: absolute;

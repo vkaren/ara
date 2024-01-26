@@ -2,7 +2,7 @@ import Link from "next/link";
 import ProfilePhoto from "@components/ProfilePhoto";
 import styles from "./styles.module.css";
 
-const NotifInfo = ({ notifFrom, postId, type, seen, darkTheme }) => {
+const NotifInfo = ({ notifFrom, postId, type, seen }) => {
   const getNotifMessage = () => {
     if (type === "like") {
       return `${notifFrom.username} liked your post.`;
@@ -15,9 +15,10 @@ const NotifInfo = ({ notifFrom, postId, type, seen, darkTheme }) => {
 
   return (
     <li
-      className={`${styles["notif-info"]} ${!seen && styles["not-seen"]} ${
-        darkTheme && styles["dark-mode"]
-      }`}
+      id="hover"
+      className={`${styles["notif-info"]} ${
+        !seen && `${styles["not-seen"]} bckgLgtBlack borderPurple`
+      } hoverBlack`}
     >
       <Link
         className={styles["notif-info__link"]}

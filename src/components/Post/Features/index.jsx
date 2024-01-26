@@ -4,14 +4,20 @@ import styles from "./styles.module.css";
 const Features = ({ onClickDeleteBtn }) => {
   return (
     <>
-      <div key="features_container" className={styles["features_container"]}>
+      <div
+        key="features_container"
+        className={`${styles["features_container"]} bckgBlack`}
+      >
         <ul>
           <li
             onClick={onClickDeleteBtn}
-            className={`${styles["feature__option"]} ${styles["delete"]}`}
+            className={`${styles["feature__option"]} ${styles["delete"]} clrLgtRed`}
             role="button"
           >
-            <IconComponent name="delete" className={styles["option_icon"]} />
+            <IconComponent
+              name="delete"
+              className={`${styles["option_icon"]} fillLgtRed`}
+            />
             <span>Delete</span>
           </li>
         </ul>

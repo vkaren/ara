@@ -13,7 +13,8 @@ const AppLayout = ({ children }) => {
         <title>Ara</title>
       </Head>
       <main
-        className={`${styles["app-main"]} ${darkTheme && styles["dark-mode"]}`}
+        id={darkTheme ? "dark-mode" : null}
+        className={`${styles["app-main"]} bckgBlack`}
       >
         <Menu />
         <section className={styles["main__section"]}>{children}</section>

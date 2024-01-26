@@ -87,17 +87,3 @@
 .form__msg.error {
   color: var(--red);
 }
-
-/*      Dark mode       */
-.edit-section.dark-mode {
-  color: var(--white);
-  background: var(--black);
-}
-
-.edit-section.dark-mode .form__msg {
-  color: var(--light-green);
-}
-
-.edit-section.dark-mode .form__msg.error {
-  color: var(--light-red);
-}

@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { ThemeContext } from "@context/themeContext";
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
 import PostInsertedImage from "./PostInsertedImage";
@@ -23,7 +22,6 @@ const Post = ({
   const isHomeOrProfilePage =
     router.asPath.includes("home") || router.asPath.includes("profile");
 
-  const { darkTheme } = useContext(ThemeContext);
   const [isReplying, setIsReplying] = useState(false);
 
   const onClickPost = () => {
@@ -39,12 +37,12 @@ const Post = ({
   return (
     <>
       <article
-        //  ${
-        //   darkTheme && styles["dark-mode"]
-        id={`${!!isAReply ? "reply" : "post"}-${id}`}
+        id="hover"
         className={`${styles["post-container"]} ${
           !!isAReply && styles["reply"]
-        } ${isHomeOrProfilePage && styles["link"]}`}
+        } ${
+          isHomeOrProfilePage && styles["link"]
+        } bckgBlack clrWhite hoverBlack`}
         role="button"
         onClick={onClickPost}
       >
@@ -54,7 +52,6 @@ const Post = ({
           createdAt={createdAt}
           isAReply={isAReply}
           onDeletePost={onDeletePost}
-          darkTheme={darkTheme}
         />
 
         <PostContent
@@ -62,7 +59,6 @@ const Post = ({
           content={content}
           replyingToUser={isAReply?.replyingToUser}
           isHomeOrProfilePage={isHomeOrProfilePage}
-          darkTheme={darkTheme}
         />
 
         {insertedImage && (
@@ -79,7 +75,6 @@ const Post = ({
           isAReply={isAReply}
           onClickReply={toggleReplyModal}
           isHomeOrProfilePage={isHomeOrProfilePage}
-          darkTheme={darkTheme}
         />
       </article>
 
@@ -87,8 +82,7 @@ const Post = ({
         <ReplyBox
           replyingToPost={!!isAReply ? isAReply.replyingToPost : id}
           replyingToUser={author.id}
-          darkTheme={darkTheme}
-          onCancelReply={toggleReplyModal}
+          closeModal={toggleReplyModal}
         />
       )}
     </>

@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "@context/themeContext";
+import { useEffect, useState } from "react";
 import MenuContainer from "./MenuContainer";
 import MobileHeader from "./MobileHeader";
 
 const Menu = () => {
-  const { darkTheme } = useContext(ThemeContext);
   const [isOnMobile, setIsOnMobile] = useState(false);
   const options = ["home", "search", "notifications", "profile", "settings"];
 
@@ -21,11 +19,7 @@ const Menu = () => {
     <>
       {isOnMobile && <MobileHeader />}
 
-      <MenuContainer
-        isOnMobile={isOnMobile}
-        darkTheme={darkTheme}
-        options={options}
-      />
+      <MenuContainer isOnMobile={isOnMobile} options={options} />
     </>
   );
 };

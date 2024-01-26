@@ -15,11 +15,6 @@
   float: right;
 }
 
-/*      Dark mode       */
-.app-main.dark-mode {
-  background: var(--black);
-}
-
 @media (max-width: 650px) {
   .main__section {
     width: 100%;

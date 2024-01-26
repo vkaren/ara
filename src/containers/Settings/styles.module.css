@@ -58,29 +58,3 @@
 .settings-option.delete-option .settings-option__icon {
   fill: var(--red);
 }
-
-/*    Dark mode     */
-.settings-section.dark-mode {
-  color: var(--white);
-  background: var(--black);
-}
-
-.settings-section.dark-mode .settings-option {
-  color: var(--white);
-}
-
-.settings-section.dark-mode .settings-option:hover {
-  background: var(--light-black);
-}
-.settings-section.dark-mode .settings-option__icon {
-  fill: var(--light-purple);
-}
-
-.settings-section.dark-mode .settings-option.delete-option {
-  color: var(--light-red);
-}
-.settings-section.dark-mode
-  .settings-option.delete-option
-  .settings-option__icon {
-  fill: var(--light-red);
-}

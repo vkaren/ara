@@ -1,4 +1,5 @@
 import api from "@utils/api";
+import getPreviousRoute from "@utils/getPreviousRoute";
 import { getItem } from "@utils/cookies";
 import AppLayout from "@containers/AppLayout";
 import SettingsEdit from "@containers/Settings/SettingsEdit";
@@ -7,6 +8,7 @@ import NavBack from "@components/NavBack";
 export async function getServerSideProps({ req, res, query }) {
   const props = {
     userInfo: {},
+    previousRoute: getPreviousRoute(req),
   };
   const userId = getItem("user_id", { req, res });
 
@@ -30,10 +32,10 @@ export async function getServerSideProps({ req, res, query }) {
   return { props };
 }
 
-const SettingsEditPage = ({ userInfo }) => {
+const SettingsEditPage = ({ userInfo, previousRoute }) => {
   return (
     <AppLayout>
-      <NavBack />
+      <NavBack prevRoute={previousRoute} />
       <SettingsEdit userInfo={userInfo} />
     </AppLayout>
   );

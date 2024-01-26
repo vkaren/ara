@@ -24,7 +24,7 @@ const UserInfo = ({
   };
 
   return (
-    <div className={styles["header__user-info"]}>
+    <div className={`${styles["header__user-info"]} bckgBlack clrWhite`}>
       <div className={styles["header__user-info_top"]}>
         <ProfilePhoto photoUrl={profilePhoto} profilePage={true} />
 

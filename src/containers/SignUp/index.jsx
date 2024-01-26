@@ -106,7 +106,7 @@ const SignUp = () => {
         route: "user",
       });
 
-      if (response.error) {
+      if (response.error || response.message === "Internal server error") {
         setSignUpMsg({ error: true, msg: response.message });
       } else {
         setSignUpMsg({
@@ -135,7 +135,10 @@ const SignUp = () => {
         onSubmit={onSubmit}
         styles={styles}
       >
-        <Link className={styles["form__link"]} href={"/login"}>
+        <Link
+          className={`${styles["form__link"]} clrVryLgtPurple`}
+          href={"/login"}
+        >
           Do you already have an account?
         </Link>
       </Form>

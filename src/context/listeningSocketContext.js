@@ -41,8 +41,6 @@ function ListeningSocketProvider({ children }) {
       newNotif: null,
     };
 
-    console.log({ type, data });
-
     switch (type) {
       case "post":
         newSocketData.newPost = data.post;

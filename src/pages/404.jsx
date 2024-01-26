@@ -1,3 +1,5 @@
-const NotFoundPage = () => <h1>NOT FOUND</h1>;
+import NotFound from "@containers/NotFound";
+
+const NotFoundPage = () => <NotFound />;
 
 export default NotFoundPage;

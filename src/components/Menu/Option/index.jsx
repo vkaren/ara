@@ -17,10 +17,10 @@ const Option = ({ type }) => {
         }  ${haveNotifications && styles["notify"]}`}
         href={type === "profile" ? `/${type}/${userId}` : `/${type}`}
       >
-        <IconComponent name={type} />
+        <IconComponent name={type} className="fillWhite" />
 
         <span
-          className={styles["option__title"]}
+          className={`${styles["option__title"]} clrWhite`}
         >{`${type[0].toUpperCase()}${type.slice(1)}`}</span>
       </Link>
     </li>

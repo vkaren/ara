@@ -13,25 +13,22 @@ function UserProvider({ children }) {
 
   const { notifyUser } = useContext(AppContext);
   const [userId, setUserId] = useState(null);
-  const [userData, setUserData] = useState(null);
 
   useEffect(() => {
     if (!isLoginOrSignUpPage) {
-      if (userId) {
-        getAndSaveUserData();
-      } else {
-        getAndSaveUserId();
-      }
+      onLoadAppPage();
     }
   }, [userId, isLoginOrSignUpPage]);
 
-  useEffect(() => {
-    if (userData) {
-      if (haveNewNotifications()) {
+  const onLoadAppPage = async () => {
+    if (userId) {
+      if (await haveNewNotifications()) {
         notifyUser();
       }
+    } else {
+      getAndSaveUserId();
     }
-  }, [userData]);
+  };
 
   const saveLoginResponse = ({ user_id, token }) => {
     setItem("user_id", user_id);
@@ -45,20 +42,17 @@ function UserProvider({ children }) {
     removeItem("user_id");
 
     setUserId(null);
-    setUserData(null);
   };
 
   const getAndSaveUserId = () => {
     setUserId(getItem("user_id") - "");
   };
 
-  const getAndSaveUserData = async () => {
-    const user = await api({
+  const getUserData = async () => {
+    return await api({
       route: `user/${userId}`,
       method: "GET",
     });
-
-    setUserData(user);
   };
 
   const getUserFollowingList = async () => {
@@ -68,8 +62,13 @@ function UserProvider({ children }) {
     });
   };
 
-  const haveNewNotifications = () => {
-    return userData.notifications.some((notif) => !notif.seen);
+  const haveNewNotifications = async () => {
+    const notifications = await api({
+      method: "GET",
+      route: `notification/${userId}`,
+    });
+
+    return notifications.some((notif) => !notif.seen);
   };
 
   const hasFollowedUser = async (id) => {
@@ -81,9 +80,9 @@ function UserProvider({ children }) {
     <UserContext.Provider
       value={{
         userId,
-        userData,
         saveLoginResponse,
         removeUserInfo,
+        getUserData,
         getUserFollowingList,
         hasFollowedUser,
       }}
