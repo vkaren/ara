@@ -1,7 +1,7 @@
 import { getCookie, setCookie, deleteCookie } from "cookies-next";
 
 const setItem = (key, value) => {
-  return setCookie(key, value, { path: "/", sameSite: "none" });
+  return setCookie(key, value, { path: "/", sameSite: "none", secure: true });
 };
 
 const getItem = (key, ssr) => {
@@ -15,7 +15,7 @@ const getItem = (key, ssr) => {
 };
 
 const removeItem = (key) => {
-  return deleteCookie(key, { path: "/", sameSite: "none" });
+  return deleteCookie(key, { path: "/", sameSite: "none", secure: true });
 };
 
 export { setItem, getItem, removeItem };
