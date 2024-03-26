@@ -1,7 +1,7 @@
 import AppLayout from "@containers/AppLayout";
 import Settings from "@containers/Settings";
 
-const SettingsPage = ({}) => {
+const SettingsPage = () => {
   return (
     <AppLayout>
       <Settings />

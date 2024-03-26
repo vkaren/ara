@@ -50,8 +50,8 @@ function UserProvider({ children }) {
 
   const getUserData = async () => {
     return await api({
-      route: `user/${userId}`,
       method: "GET",
+      route: `user/${userId}`,
     });
   };
 

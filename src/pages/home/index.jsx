@@ -8,7 +8,6 @@ import Home from "@containers/Home";
 export async function getServerSideProps({ req, res }) {
   const props = {
     postsData: [],
-    userLikes: [],
   };
 
   const posts = await api({
@@ -45,7 +44,8 @@ const HomePage = ({ postsData }) => {
     if (!!postDeleted) {
       const postToDeleteId = posts.findIndex((post) => post.id === postDeleted);
       const newPosts = [...posts];
-      newPosts.splice(postToDeleteId, 1);
+
+      if (postToDeleteId > -1) newPosts.splice(postToDeleteId, 1);
 
       setPosts(newPosts);
     }

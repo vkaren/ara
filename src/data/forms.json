@@ -1,0 +1,50 @@
+{
+  "forms": {
+    "login": [
+      {
+        "title": "Username",
+        "props": {
+          "name": "username",
+          "type": "text",
+          "required": true
+        }
+      },
+      {
+        "title": "Password",
+        "props": {
+          "name": "password",
+          "type": "password",
+          "minLength": "5",
+          "required": true
+        }
+      }
+    ],
+    "sign-up": [
+      {
+        "title": "Nickname",
+        "props": {
+          "name": "nickname",
+          "type": "text",
+          "required": true
+        }
+      },
+      {
+        "title": "Username",
+        "props": {
+          "name": "username",
+          "type": "text",
+          "required": true
+        }
+      },
+      {
+        "title": "Password",
+        "props": {
+          "name": "password",
+          "type": "password",
+          "minLength": "5",
+          "required": true
+        }
+      }
+    ]
+  }
+}

@@ -10,7 +10,8 @@
       "@pages/*": ["pages/*"],
       "@context/*": ["context/*"],
       "@utils/*": ["utils/*"],
-      "@config": ["../config"]
+      "@config": ["../config"],
+      "@data/*": ["data/*"]
     }
   }
 }

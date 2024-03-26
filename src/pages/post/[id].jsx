@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { AppContext } from "@context/appContext";
 import { ListeningSocketContext } from "@context/listeningSocketContext";
 import api from "@utils/api";
@@ -35,29 +36,43 @@ export async function getServerSideProps({ req, res, query }) {
 }
 
 const PostPage = ({ post, previousRoute }) => {
+  const router = useRouter();
   const { socketData } = useContext(ListeningSocketContext);
-  const { replyDeleted } = useContext(AppContext);
+  const { postDeleted, replyDeleted } = useContext(AppContext);
   const [replies, setReplies] = useState(post.replies);
+
+  useEffect(() => onDeletePost(), [postDeleted]);
 
   useEffect(() => addNewReply(), [socketData]);
 
   useEffect(() => removeReply(), [replyDeleted]);
 
+  const onDeletePost = () => {
+    if (post.id === postDeleted) {
+      if (previousRoute) {
+        router.back();
+      } else {
+        router.push("/home");
+      }
+    }
+  };
+
   const addNewReply = () => {
     const { newReply } = socketData;
 
-    if (newReply) {
+    if (!!newReply) {
       setReplies([...replies, newReply]);
     }
   };
 
   const removeReply = () => {
-    if (replyDeleted) {
+    if (!!replyDeleted) {
       const replyToDeleteId = replies.findIndex(
         (reply) => reply.id === replyDeleted
       );
       const newReplies = [...replies];
-      newReplies.splice(replyToDeleteId, 1);
+
+      if (replyToDeleteId > -1) newReplies.splice(replyToDeleteId, 1);
 
       setReplies(newReplies);
     }

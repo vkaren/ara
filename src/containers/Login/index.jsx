@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { UserContext } from "@context/userContext";
 import Form from "@components/Form";
+import formInputs from "@data/forms.json";
 import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
 import styles from "@containers/SignLayout/styles.module.css";
@@ -12,25 +13,6 @@ const Login = () => {
   const { saveLoginResponse } = useContext(UserContext);
   const [loginMsg, setLoginMsg] = useState({ error: false, msg: "" });
   const form = createRef();
-  const formInputs = [
-    {
-      title: "Username",
-      props: {
-        name: "username",
-        type: "text",
-        required: true,
-      },
-    },
-    {
-      title: "Password",
-      props: {
-        name: "password",
-        type: "password",
-        minLength: "5",
-        required: true,
-      },
-    },
-  ];
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -97,7 +79,7 @@ const Login = () => {
       <Form
         type="sign"
         form={form}
-        inputs={formInputs}
+        inputs={formInputs.forms.login}
         submitMsg={loginMsg}
         onSubmit={onSubmit}
         styles={styles}

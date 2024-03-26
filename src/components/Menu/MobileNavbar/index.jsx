@@ -2,13 +2,13 @@ import LogoImage from "../LogoImage";
 import LogoutButton from "../LogoutButton";
 import styles from "./styles.module.css";
 
-const MobileHeader = () => {
+const MobileNavbar = () => {
   return (
-    <header className={`${styles["menu-header__mobile"]} bckgBlack`}>
+    <nav className={`${styles["menu-nav__mobile"]} bckgBlack`}>
       <LogoImage />
       <LogoutButton />
-    </header>
+    </nav>
   );
 };
 
-export default MobileHeader;
+export default MobileNavbar;

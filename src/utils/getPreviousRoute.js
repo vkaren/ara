@@ -11,7 +11,7 @@ const getPreviousRoute = ({ headers: { referer } }) => {
   ];
 
   if (referer) {
-    return referer.split("/").filter((i) => appRoutes.includes(i))[0];
+    return referer.split("/").find((i) => appRoutes.includes(i));
   }
 
   return null;

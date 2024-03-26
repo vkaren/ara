@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import MenuContainer from "./MenuContainer";
-import MobileHeader from "./MobileHeader";
+import MobileNavbar from "./MobileNavbar";
 
 const Menu = () => {
   const [isOnMobile, setIsOnMobile] = useState(false);
@@ -17,7 +17,7 @@ const Menu = () => {
 
   return (
     <>
-      {isOnMobile && <MobileHeader />}
+      {isOnMobile && <MobileNavbar />}
 
       <MenuContainer isOnMobile={isOnMobile} options={options} />
     </>

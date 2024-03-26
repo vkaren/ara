@@ -1,4 +1,3 @@
-import api from "@utils/api";
 import AppLayout from "@containers/AppLayout";
 import Search from "@containers/Search";
 

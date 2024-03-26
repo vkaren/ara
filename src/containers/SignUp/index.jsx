@@ -1,41 +1,19 @@
-import { createRef, useState } from "react";
+import { createRef, useContext, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
+import { UserContext } from "@context/userContext";
 import Form from "@components/Form";
+import formInputs from "@data/forms.json";
 import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
 import styles from "@containers/SignLayout/styles.module.css";
 
 const SignUp = () => {
+  const router = useRouter();
+  const { saveLoginResponse } = useContext(UserContext);
   const [signUpMsg, setSignUpMsg] = useState({ error: false, msg: "" });
   const form = createRef();
-  const formInputs = [
-    {
-      title: "Nickname",
-      props: {
-        name: "nickname",
-        type: "text",
-        required: true,
-      },
-    },
-    {
-      title: "Username",
-      props: {
-        name: "username",
-        type: "text",
-        required: true,
-      },
-    },
-    {
-      title: "Password",
-      props: {
-        name: "password",
-        type: "password",
-        minLength: "5",
-        required: true,
-      },
-    },
-  ];
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -57,7 +35,7 @@ const SignUp = () => {
     });
 
     if (canCreateAccount) {
-      await createAccount(formData);
+      await createAccount(formData, { username, password });
     }
   };
 
@@ -97,7 +75,7 @@ const SignUp = () => {
     return false;
   };
 
-  const createAccount = async (formData) => {
+  const createAccount = async (formData, loginData) => {
     try {
       const response = await api({
         method: "POST",
@@ -111,11 +89,32 @@ const SignUp = () => {
       } else {
         setSignUpMsg({
           error: false,
-          msg: "Your account has been successfully created. Please log in with the username and password you provided.",
+          msg: "",
         });
+
+        redirectToAppHome(loginData);
       }
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const redirectToAppHome = async (data) => {
+    const response = await api({
+      method: "POST",
+      type: "application/json",
+      body: data,
+      route: "auth/login",
+    });
+
+    if (response.error || response.message === "Internal server error") {
+      setSignUpMsg({ error: true, msg: response.message });
+    } else {
+      setSignUpMsg({ error: false, msg: "" });
+
+      saveLoginResponse(response);
+
+      router.push("/home");
     }
   };
 
@@ -130,7 +129,7 @@ const SignUp = () => {
       <Form
         type="sign"
         form={form}
-        inputs={formInputs}
+        inputs={formInputs.forms["sign-up"]}
         submitMsg={signUpMsg}
         onSubmit={onSubmit}
         styles={styles}
