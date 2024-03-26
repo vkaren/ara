@@ -36,7 +36,9 @@ const HomePage = ({ postsData }) => {
     const newPost = socketData.newPost;
 
     if (!!newPost) {
-      setPosts([newPost, ...posts]);
+      const isPostAlreadyAdded = posts.find((post) => post.id === newPost.id);
+
+      if (!isPostAlreadyAdded) setPosts([newPost, ...posts]);
     }
   };
 
