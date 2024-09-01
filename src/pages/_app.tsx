@@ -1,7 +1,8 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { RootLayout } from "mui";
+import { RootLayout } from "config/mui";
 import { AppLayout, SignLayout } from "@containers/Layouts";
+import "config/i18n";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
