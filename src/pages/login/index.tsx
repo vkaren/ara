@@ -1,12 +1,7 @@
-import SignLayout from "@containers/SignLayout";
 import Login from "@containers/Login";
 
 const LoginPage = () => {
-  return (
-    <SignLayout>
-      <Login />
-    </SignLayout>
-  );
+  return <Login />;
 };
 
 export default LoginPage;
