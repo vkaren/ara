@@ -1,22 +1,26 @@
-// import { NextResponse } from 'next/server';
-// import { getItem } from '@utils/cookies';
+import { NextRequest, NextResponse } from "next/server";
 
-export async function middleware(req) {
-  //   const accessToken = getItem('token', { req });
-  //   if (accessToken) {
-  //     return NextResponse.rewrite(new URL(req.url));
-  //   }
-  //   return NextResponse.redirect(new URL('/login', req.url));
-}
+export const middleware = (request: NextRequest) => {
+  const { pathname } = request.nextUrl;
 
-// export const config = {
-//   matcher: [
-//     '/home/:path*',
-//     '/notifications/:path*',
-//     '/post/:path*',
-//     '/profile/:path*',
-//     '/search/:path*',
-//     '/settings/:path*',
-//     '/404',
-//   ],
-// };
+  // TODO
+  // if it's loggeado redirect to home
+  // if it's not to login
+  if (pathname === "/") {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  return NextResponse.next();
+};
+
+export const middlewareConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/home",
+        permanent: false,
+      },
+    ];
+  },
+};
