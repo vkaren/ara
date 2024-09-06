@@ -1,18 +1,10 @@
-import { createRef, useContext, useState } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import Link from "next/link";
-import { UserContext } from "@context/userContext";
-import Form from "@components/Form";
-import formInputs from "@data/forms.json";
-import api from "@utils/api";
-import iconTitle from "@icons/icon-title.png";
-import styles from "@containers/SignLayout/styles.module.css";
+import { AuthForm } from "@components/Forms";
 
+// TODO: Create controller
 const SignUp = () => {
-  const router = useRouter();
-  // const { saveLoginResponse } = useContext(UserContext);
-  const [signUpMsg, setSignUpMsg] = useState({ error: false, msg: "" });
+  // const router = useRouter();
+  // // const { saveLoginResponse } = useContext(UserContext);
+  // const [signUpMsg, setSignUpMsg] = useState({ error: false, msg: "" });
   // const form = createRef();
 
   // const onSubmit = async e => {
@@ -118,28 +110,7 @@ const SignUp = () => {
   //   }
   // };
 
-  return (
-    <>
-      <div className={styles["app-title"]}>
-        <Image src={iconTitle} alt="Ara" />
-      </div>
-
-      <h1 className={styles["page-title"]}>Sign up</h1>
-
-      <Form
-        type="sign"
-        // form={form}
-        inputs={formInputs.forms["sign-up"]}
-        submitMsg={signUpMsg}
-        // onSubmit={onSubmit}
-        styles={styles}
-      >
-        <Link className={`${styles["form__link"]} clrVryLgtPurple`} href={"/login"}>
-          Do you already have an account?
-        </Link>
-      </Form>
-    </>
-  );
+  return <AuthForm titleKey={"views.register.title"} showLink={true} />;
 };
 
 export default SignUp;

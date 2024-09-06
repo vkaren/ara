@@ -7,7 +7,7 @@ export const middleware = (request: NextRequest) => {
   // if it's loggeado redirect to home
   // if it's not to login
   if (pathname === "/") {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/register", request.url));
   }
 
   return NextResponse.next();

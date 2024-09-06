@@ -1,64 +1,9 @@
 "use client";
-import { Roboto } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import GlobalStyles from "@mui/material/GlobalStyles";
 
-// /* montserrat-regular - latin */
-// @font-face {
-//   font-display: swap;
-//   font-family: "Montserrat";
-//   font-style: normal;
-//   font-weight: 400;
-//   src: url("~@fonts/montserrat-v25-latin-regular.woff2") format("woff2");
-// }
-
-// /* montserrat-500 - latin */
-// @font-face {
-//   font-display: swap;
-//   font-family: "Montserrat";
-//   font-style: normal;
-//   font-weight: 500;
-//   src: url("~@fonts/montserrat-v25-latin-500.woff2") format("woff2");
-// }
-
-// /* montserrat-600 - latin */
-// @font-face {
-//   font-display: swap;
-//   font-family: "Montserrat";
-//   font-style: normal;
-//   font-weight: 600;
-//   src: url("~@fonts/montserrat-v25-latin-600.woff2") format("woff2");
-// }
-
-// /* montserrat-700 - latin */
-// @font-face {
-//   font-display: swap;
-//   font-family: "Montserrat";
-//   font-style: normal;
-//   font-weight: 700;
-//   src: url("~@fonts/montserrat-v25-latin-700.woff2") format("woff2");
-// }
-
-// :root {
-//   --purple: #2d66f9;
-//   --light-purple: #b3c9fc;
-//   --very-light-purple: #dae5ff;
-//   --green: #008900;
-//   --light-green: #96ef96;
-//   --red: #e43d3d;
-//   --light-red: #ffafaf;
-//   --blue: #02126a;
-//   --dark-blue: #000b26;
-//   --light-black: #2f2f2f;
-//   --black: #1e1e1e;
-//   --gray: #666666;
-//   --light-gray: #cccccc;
-//   --very-light-gray: #fbfbfb;
-//   --white: #ffffff;
-//   --overlay: #1e1e1e64;
-// }
-
-const roboto = Roboto({
+const roboto = Montserrat({
   weight: ["300", "400", "500", "700"],
   subsets: ["latin"],
   display: "swap",
@@ -67,6 +12,59 @@ const roboto = Roboto({
 const theme = createTheme({
   typography: {
     fontFamily: roboto.style.fontFamily,
+    h1: {
+      fontSize: 32,
+      fontWeight: 600,
+    },
+    h2: {
+      fontSize: 24,
+      fontWeight: 500,
+    },
+  },
+  palette: {
+    primary: {
+      main: "#2d66f9",
+      light: "#b3c9fc",
+      "100": "#dae5ff",
+    },
+    secondary: {
+      main: "#02126a",
+      dark: "#000b26",
+    },
+    success: {
+      main: "#008900",
+      light: "#96ef96",
+    },
+    error: {
+      main: "#e43d3d",
+      light: "#ffafaf",
+    },
+    common: {
+      black: "#1e1e1e",
+    },
+    background: {
+      default: "#ffffff",
+    },
+    grey: {
+      "100": "#fbfbfb",
+      "200": "#cccccc",
+      "600": "#666666",
+      "700": "#2f2f2f",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "initial",
+          backgroundColor: "#2d66f9",
+          color: "#ffffff",
+          "&:hover": {
+            backgroundColor: "#1a49d3",
+          },
+        },
+      },
+    },
   },
 });
 

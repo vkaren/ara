@@ -1,7 +1,16 @@
 {
+  "common": {
+    "username": "Username",
+    "password": "Password",
+    "continue": "Continue"
+  },
   "views": {
     "login": {
-      "title": "Bienvenido!"
+      "title": "Welcome back!"
+    },
+    "register": {
+      "title": "Sign up",
+      "redirectLink": "Do you already have an account?"
     }
   }
 }

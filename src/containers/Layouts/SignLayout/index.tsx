@@ -1,9 +1,8 @@
-import { Box, Grid, useTheme } from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2";
+import { Box } from "@mui/material";
 import Head from "next/head";
 
 const SignLayout = ({ children }) => {
-  const theme = useTheme();
-
   return (
     <>
       <Head>
@@ -11,22 +10,17 @@ const SignLayout = ({ children }) => {
       </Head>
       <Grid
         container
-        spacing={2}
+        direction={"row"}
+        columns={3}
         sx={{
           minWidth: "100%",
           minHeight: "100%",
+          maxWidth: "100%",
+          maxHeight: "100%",
           flexGrow: 1,
         }}
       >
-        <Grid
-          item
-          xs={5}
-          sx={{
-            [theme.breakpoints.down("sm")]: {
-              display: "none",
-            },
-          }}
-        >
+        <Grid xs={0} sm={1} p={0}>
           <Box
             sx={{
               width: "100%",
@@ -37,7 +31,7 @@ const SignLayout = ({ children }) => {
             }}
           />
         </Grid>
-        <Grid item xs={4}>
+        <Grid xs={3} sm={2} p={0}>
           {children}
         </Grid>
       </Grid>
