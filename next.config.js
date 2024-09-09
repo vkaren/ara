@@ -1,29 +1,14 @@
-// import { api } from './config';
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { i18n } = require("./next-i18next.config");
 
-// export function webpack(config) {
-//   config.module.rules.push({
-//     test: /\.svg$/,
-//     use: ['@svgr/webpack'],
-//   });
-
-//   return config;
-// }
-// export const images = {
-//   remotePatterns: [
-//     {
-//       protocol: 'https',
-//       hostname: api.split('https://')[1],
-//       port: '',
-//       pathname: '/files/**',
-//     },
-//   ],
-// };
-
-// @ts-check
-
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  /* config options here */
+module.exports = {
+  i18n,
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+      };
+    }
+    return config;
+  },
 };
-
-module.exports = nextConfig;

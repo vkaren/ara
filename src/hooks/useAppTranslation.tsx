@@ -1,6 +1,5 @@
-import i18n from "config/i18n";
-import { useTranslation } from "react-i18next";
+import { useTranslation } from "next-i18next";
 
 export default function useAppTranslation() {
-  return useTranslation("common", { i18n });
+  return useTranslation("common");
 }
