@@ -1,21 +1,24 @@
-import Image from "next/image";
-import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
+import { Icon } from "@iconify/react";
+import { Avatar, useTheme } from "@mui/material";
 
-const ProfilePhoto = ({ photoUrl, profilePage }) => {
+interface IProfilePhoto {
+  url?: string;
+  width?: number;
+  height?: number;
+}
+
+const ProfilePhoto = ({ url, width, height }: IProfilePhoto) => {
+  const theme = useTheme();
   return (
-    <div
-      className={`${styles["profile-photo"]} ${profilePage && styles["profile-page"]} bckgLgtBlack`}
+    <Avatar
+      src={url}
+      alt="profile Photo"
+      sx={{ width: width || 32, height: height || 32, backgroundColor: "transparent" }}
     >
-      {photoUrl ? (
-        <Image src={photoUrl} alt="User avatar" fill />
-      ) : (
-        <IconComponent
-          name="profile"
-          className={`${styles["profile-photo__default"]} fillVryLgtGray`}
-        />
+      {!url && (
+        <Icon icon={"mdi:user-circle"} color={theme.palette.secondary.main} width={"100%"} />
       )}
-    </div>
+    </Avatar>
   );
 };
 
