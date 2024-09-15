@@ -28,7 +28,7 @@ const theme = createTheme({
       "100": "#dae5ff",
     },
     secondary: {
-      main: "#02126a",
+      main: "#293EB3FF",
       dark: "#000b26",
     },
     success: {
@@ -46,8 +46,9 @@ const theme = createTheme({
       default: "#ffffff",
     },
     grey: {
-      "100": "#fbfbfb",
-      "200": "#cccccc",
+      "100": "#0000001F",
+      "200": "#F3F3F3FF",
+      "300": "#cccccc",
       "600": "#666666",
       "700": "#2f2f2f",
     },
@@ -62,6 +63,13 @@ const theme = createTheme({
           "&:hover": {
             backgroundColor: "#1a49d3",
           },
+        },
+      },
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          color: "#1e1e1e",
         },
       },
     },

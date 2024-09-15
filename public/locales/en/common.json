@@ -2,7 +2,8 @@
   "common": {
     "username": "Username",
     "password": "Password",
-    "continue": "Continue"
+    "continue": "Continue",
+    "logout": "Log out"
   },
   "views": {
     "login": {
@@ -12,5 +13,12 @@
       "title": "Sign up",
       "redirectLink": "Do you already have an account?"
     }
+  },
+  "navbar": {
+    "home": "Home",
+    "search": "Search",
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "settings": "Settings"
   }
 }
