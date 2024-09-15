@@ -3,7 +3,8 @@
     "username": "Username",
     "password": "Password",
     "continue": "Continue",
-    "logout": "Log out"
+    "logout": "Log out",
+    "send": "Send"
   },
   "views": {
     "login": {
