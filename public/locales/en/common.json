@@ -12,6 +12,11 @@
     "register": {
       "title": "Sign up",
       "redirectLink": "Do you already have an account?"
+    },
+    "home": {
+      "adc": {
+        "placeholder": "Say hi :)"
+      }
     }
   },
   "navbar": {

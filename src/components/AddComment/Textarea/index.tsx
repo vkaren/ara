@@ -1,12 +1,29 @@
-import styles from "./styles.module.css";
+import { TextField } from "@mui/material";
+import { useAppTranslation } from "hooks";
+import { ChangeEvent } from "react";
 
-const Textarea = ({ isAReply }) => {
+interface TextareaProps {
+  value?: string;
+  onChange: (value: string) => void;
+}
+
+const Textarea = ({ onChange, value }: TextareaProps) => {
+  const { t } = useAppTranslation();
+
+  const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    onChange(e.currentTarget.value);
+  };
+
   return (
-    <textarea
-      className={`${styles["adc_textarea"]} outlineLgtPurple`}
-      name="content"
-      placeholder={isAReply ? "Reply" : "What's happenning?"}
-      maxLength={250}
+    <TextField
+      placeholder={t("views.home.adc.placeholder")}
+      multiline
+      fullWidth
+      value={value}
+      onChange={handleChange}
+      variant="outlined"
+      rows={4}
+      sx={{ marginBottom: 2 }}
     />
   );
 };
