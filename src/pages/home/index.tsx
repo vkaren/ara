@@ -1,9 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-// import { ListeningSocketContext } from "@context/listeningSocketContext";
-// import { AppContext } from "@context/appContext";
-// import api from "@utils/api";
-import AppLayout from "@containers/AppLayout";
 import Home from "@containers/Home";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common"])),
+    },
+  };
+}
 
 // export async function getServerSideProps({ req, res }) {
 //   const props = {
@@ -23,10 +27,10 @@ import Home from "@containers/Home";
 //   return { props };
 // }
 
-const HomePage = ({ postsData }) => {
+const HomePage = () => {
   // const { socketData } = useContext(ListeningSocketContext);
   // const { postDeleted } = useContext(AppContext);
-  const [posts, setPosts] = useState(postsData || []);
+  // const [posts, setPosts] = useState(postsData || []);
 
   // useEffect(() => addNewPost(), [socketData]);
 
@@ -53,11 +57,7 @@ const HomePage = ({ postsData }) => {
   //   }
   // };
 
-  return (
-    <AppLayout>
-      <Home posts={posts} />
-    </AppLayout>
-  );
+  return <Home />;
 };
 
 export default HomePage;

@@ -1,98 +1,46 @@
-import { createRef, useContext, useEffect, useState } from "react";
-import { UserContext } from "@context/userContext";
-import api from "@utils/api";
+import React, { useState } from "react";
+import { Box, Grid, useTheme } from "@mui/material";
 import ProfilePhoto from "@components/ProfilePhoto";
-import Textarea from "./Textarea";
-import InsertedImage from "./InsertedImage";
-import SubmitButton from "./SubmitButton";
-import styles from "./styles.module.css";
+import Textarea from "../Textarea";
+import InsertedImage from "../InsertedImage";
+import { SubmitButton, UploadImageButton } from "@components/Buttons";
 
-const AddComment = ({ isAReply }) => {
-  // const { userId, getUserData } = useContext(UserContext);
-  // const [profilePhoto, setProfilePhoto] = useState(null);
-  // const form = createRef();
+const AddComment = () => {
+  const theme = useTheme();
+  const [comment, setComment] = useState<string>("");
 
-  // // useEffect(() => {
-  // //   if (userId) {
-  // //     getProfilePhoto();
-  // //   }
-  // // }, [userId]);
+  const handleSubmit = () => {};
 
-  // // const getProfilePhoto = async () => {
-  // //   const userData = await getUserData();
-  // //   const profilePh = userData.profile_photo;
-
-  // //   setProfilePhoto(profilePh);
-  // // };
-
-  // const onSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   const formData = new FormData(form.current);
-
-  //   // const canAddComment = validateForm(formData);
-
-  //   if (canAddComment) {
-  //     form.current.reset();
-
-  //     await sendComment(formData);
-
-  //     if (isAReply) {
-  //       isAReply.closeModal();
-  //     }
-  //   }
-  // };
-
-  // const validateForm = (formData) => {
-  //   const postContent = formData.get("content");
-  //   const postInsertedImage = formData.get("inserted_image").name;
-
-  //   if (!postContent && !postInsertedImage) {
-  //     return false;
-  //   } else if (!postContent && postInsertedImage) {
-  //     formData.set("content", " ");
-  //   }
-
-  //   formData.set("author_id", userId);
-
-  //   return true;
-  // };
-
-  // const sendComment = async (formData) => {
-  //   const apiRequest = {
-  //     method: "POST",
-  //     type: "multipart/form-data",
-  //     body: formData,
-  //   };
-
-  //   if (!isAReply) {
-  //     apiRequest.route = "post";
-  //   } else {
-  //     formData.append("replying_to_post", isAReply.replyingToPost);
-  //     formData.append("replying_to_user", isAReply.replyingToUser);
-
-  //     apiRequest.route = "reply";
-  //   }
-
-  //   return await api(apiRequest);
-  // };
+  const handleUploadImage = () => {};
 
   return (
-    <form
-      ref={form}
-      // className={`${styles["add-comment__section"]} ${
-      //   // isAReply && styles["reply"]
-      // } bckgBlack
-      // `}
+    <Box
+      sx={{
+        p: "12px",
+        border: `1px solid ${theme.palette.primary.main}`,
+        borderRadius: "5px",
+      }}
     >
-      <ProfilePhoto photoUrl={profilePhoto} />
+      <Grid container>
+        <Grid item xs={12}>
+          <Textarea value={comment} onChange={setComment} />
+        </Grid>
 
-      <Textarea isAReply={isAReply} />
+        <Grid item xs={12} padding={0}>
+          <Grid container alignItems="center" justifyContent="space-between" pt={0}>
+            <Grid item sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+              <ProfilePhoto />
+              <InsertedImage url="/assets/ara.png" />
+            </Grid>
 
-      <InsertedImage />
-
-      <SubmitButton isAReply={isAReply} onSubmit={onSubmit} />
-    </form>
+            <Grid item sx={{ display: "flex", gap: 2, alignItems: "center" }}>
+              <UploadImageButton onUpload={handleUploadImage} />
+              <SubmitButton onSubmit={handleSubmit} />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

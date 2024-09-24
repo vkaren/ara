@@ -21,9 +21,10 @@ const Textarea = ({ onChange, value }: TextareaProps) => {
       fullWidth
       value={value}
       onChange={handleChange}
-      variant="outlined"
-      rows={4}
-      sx={{ marginBottom: 2 }}
+      rows={2}
+      sx={{
+        marginBottom: 1,
+      }}
     />
   );
 };

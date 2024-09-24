@@ -27,8 +27,9 @@ const DesktopNavbar = ({ theme, navbarOptions, drawerWidth }: MobileNavbarProps)
   return (
     <Drawer
       sx={{
-        flexShrink: 0,
-        width: `${drawerWidth}px`,
+        "&.MuiDrawer-root": {
+          width: `${drawerWidth}px`,
+        },
         "& .MuiDrawer-paper": {
           display: "flex",
           alignItems: "center",
