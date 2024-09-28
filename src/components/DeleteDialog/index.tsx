@@ -23,17 +23,17 @@ const DeleteDialog = ({ isOpen, onClose, onDelete }: DeleteDialogProps) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{"Confirm Delete"}</DialogTitle>
+      <DialogTitle id="alert-dialog-title">{t("views.home.confirmDelete")}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">
           {t("views.home.deletePost")}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button onClick={onClose} color="primary" sx={{ px: "15px" }}>
           {t("common.cancel")}
         </Button>
-        <Button onClick={onDelete} color="primary" autoFocus>
+        <Button onClick={onDelete} color="primary" autoFocus sx={{ px: "15px" }}>
           {t("common.delete")}
         </Button>
       </DialogActions>

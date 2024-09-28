@@ -25,8 +25,8 @@ const AppLayout = ({ children }) => {
         <Box
           component="main"
           sx={{
-            minWidth: `calc(${isMobile ? "100%" : "80%"} - ${isMobile ? 0 : drawerWidth}px)`,
-            maxWidth: `calc(${isMobile ? "100%" : "80%"} - ${isMobile ? 0 : drawerWidth}px)`,
+            minWidth: `calc(${isMobile ? "100%" : "70%"} - ${isMobile ? 0 : drawerWidth}px)`,
+            maxWidth: `calc(${isMobile ? "100%" : "70%"} - ${isMobile ? 0 : drawerWidth}px)`,
             flexGrow: 1,
             bgcolor: "background.default",
             px: 3,

@@ -20,7 +20,8 @@
       "adc": {
         "placeholder": "Say hi :)"
       },
-      "deletePost": "Are you sure you want to delete this post? This action cannot be undone."
+      "deletePost": "Are you sure you want to delete this post? This action cannot be undone.",
+      "confirmDelete": "Confirm Delete"
     }
   },
   "navbar": {

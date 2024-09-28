@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { Box, Grid, useTheme } from "@mui/material";
+import { Card, Grid } from "@mui/material";
 import ProfilePhoto from "@components/ProfilePhoto";
 import Textarea from "../Textarea";
 import InsertedImage from "../InsertedImage";
 import { SubmitButton, UploadImageButton } from "@components/Buttons";
 
 const AddComment = () => {
-  const theme = useTheme();
   const [comment, setComment] = useState<string>("");
 
   const handleSubmit = () => {};
@@ -14,10 +13,9 @@ const AddComment = () => {
   const handleUploadImage = () => {};
 
   return (
-    <Box
+    <Card
       sx={{
         p: "12px",
-        border: `1px solid ${theme.palette.primary.main}`,
         borderRadius: "5px",
       }}
     >
@@ -40,7 +38,7 @@ const AddComment = () => {
           </Grid>
         </Grid>
       </Grid>
-    </Box>
+    </Card>
   );
 };
 
