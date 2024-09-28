@@ -18,7 +18,8 @@
     },
     "home": {
       "adc": {
-        "placeholder": "Say hi :)"
+        "placeholder": "Say hi :)",
+        "replyPlaceholder": "Post your reply"
       },
       "deletePost": "Are you sure you want to delete this post? This action cannot be undone.",
       "confirmDelete": "Confirm Delete"

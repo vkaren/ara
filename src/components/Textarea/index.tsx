@@ -4,10 +4,15 @@ import { ChangeEvent } from "react";
 
 interface TextareaProps {
   value?: string;
+  placeholderLocal?: string;
   onChange: (value: string) => void;
 }
 
-const Textarea = ({ onChange, value }: TextareaProps) => {
+const Textarea = ({
+  onChange,
+  value,
+  placeholderLocal = "views.home.adc.placeholder",
+}: TextareaProps) => {
   const { t } = useAppTranslation();
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -16,7 +21,7 @@ const Textarea = ({ onChange, value }: TextareaProps) => {
 
   return (
     <TextField
-      placeholder={t("views.home.adc.placeholder")}
+      placeholder={t(placeholderLocal)}
       multiline
       fullWidth
       value={value}
