@@ -1,0 +1,64 @@
+import React, { useState } from "react";
+import { IconButton, Menu, MenuItem, Box, Theme, Typography } from "@mui/material";
+import { Icon } from "@iconify/react";
+import { useAppTranslation } from "hooks";
+
+interface PostManagementProps {
+  theme: Theme;
+  onClickDelete: () => void;
+}
+
+// TODO: Management controller
+const Management = ({ theme, onClickDelete }: PostManagementProps) => {
+  const { t } = useAppTranslation();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  // const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  // const handleDeleteClick = () => {
+  //   handleClose();
+  //   setDeleteDialogOpen(true);
+  // };
+
+  // const handleDeleteConfirm = () => {
+  //   setDeleteDialogOpen(false);
+  //   onClickDelete();
+  // };
+
+  return (
+    <Box display={"flex"} flex={1} justifyContent={"flex-end"}>
+      <IconButton
+        aria-label="more"
+        aria-controls="long-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+        color="primary"
+      >
+        <Icon icon={"mdi:more-horiz"} />
+      </IconButton>
+      <Menu
+        id="long-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem onClick={onClickDelete}>
+          <Icon icon={"mdi:delete"} color={theme.palette.error.main} />
+          <Typography variant="caption" color={theme.palette.error.main} ml={"5px"}>
+            {t("common.delete")}
+          </Typography>
+        </MenuItem>
+      </Menu>
+    </Box>
+  );
+};
+
+export default Management;

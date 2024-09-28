@@ -4,7 +4,9 @@
     "password": "Password",
     "continue": "Continue",
     "logout": "Log out",
-    "send": "Send"
+    "send": "Send",
+    "delete": "Delete",
+    "cancel": "Cancel"
   },
   "views": {
     "login": {
@@ -17,7 +19,8 @@
     "home": {
       "adc": {
         "placeholder": "Say hi :)"
-      }
+      },
+      "deletePost": "Are you sure you want to delete this post? This action cannot be undone."
     }
   },
   "navbar": {
