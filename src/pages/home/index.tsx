@@ -1,6 +1,6 @@
 import Home from "@containers/Home";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-
+// TODO
 export async function getStaticProps({ locale }) {
   return {
     props: {
