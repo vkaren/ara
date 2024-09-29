@@ -3,7 +3,19 @@ import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
 
-const Post = () => {
+interface PostProps {
+  id: number;
+  author: any;
+  content: string;
+  createdAt: any;
+  insertedImage: string;
+  likes: any;
+  replies: any;
+}
+
+const Post = (props: PostProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+  props;
   const theme = useTheme();
 
   return (
