@@ -1,97 +1,31 @@
-import { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-// import { AppContext } from "@context/appContext";
-// import { ListeningSocketContext } from "@context/listeningSocketContext";
-// import api from "@utils/api";
-// import getPreviousRoute from "@utils/getPreviousRoute";
-import AppLayout from "@containers/AppLayout";
-import NavBack from "@components/NavBack";
-import Post from "@components/Post";
-import Replies from "@components/Replies";
+import ExpandedPost from "@containers/Post";
 
-// export async function getServerSideProps({ req, res, query }) {
-//   const props = {
-//     post: {},
-//     previousRoute: getPreviousRoute(req),
-//   };
+export async function getStaticPaths() {
+  // const posts = await fetchPosts();
 
-//   const post = await api({
-//     method: "GET",
-//     route: `post/${query.id}`,
-//     ssr: {
-//       req,
-//       res,
-//     },
-//   });
+  // const paths = posts.map(post => ({
+  //   params: { id: 1 post.id.toString() }, // Assuming 'id' is the dynamic route
+  // }));
 
-//   if (!post.error && post.message !== "Internal server error") {
-//     props.post = post;
-//   } else {
-//     return {
-//       notFound: true,
-//     };
-//   }
+  return {
+    paths: ["post/1"],
+    fallback: "blocking", // 'true', 'false', or 'blocking' depending on your needs
+  };
+}
 
-//   return { props };
-// }
-
-const PostPage = ({ post, previousRoute }) => {
-  const router = useRouter();
-  // const { socketData } = useContext(ListeningSocketContext);
-  // const { postDeleted, replyDeleted } = useContext(AppContext);
-  const [replies, setReplies] = useState([]);
-
-  // useEffect(() => onDeletePost(), [postDeleted]);
-
-  // useEffect(() => addNewReply(), [socketData]);
-
-  // useEffect(() => removeReply(), [replyDeleted]);
-
-  // const onDeletePost = () => {
-  //   if (post.id === postDeleted) {
-  //     if (previousRoute) {
-  //       router.back();
-  //     } else {
-  //       router.push("/home");
-  //     }
-  //   }
-  // };
-
-  // const addNewReply = () => {
-  //   const { newReply } = socketData;
-
-  //   if (!!newReply) {
-  //     setReplies([...replies, newReply]);
-  //   }
-  // };
-
-  // const removeReply = () => {
-  //   if (!!replyDeleted) {
-  //     const replyToDeleteId = replies.findIndex(
-  //       (reply) => reply.id === replyDeleted
-  //     );
-  //     const newReplies = [...replies];
-
-  //     if (replyToDeleteId > -1) newReplies.splice(replyToDeleteId, 1);
-
-  //     setReplies(newReplies);
-  //   }
-  // };
+const PostPage = () => {
   return (
-    <AppLayout>
-      <NavBack prevRoute={previousRoute} />
-
-      {/* <Post
-        id={post.id}
-        author={post.author}
-        content={post.content}
-        createdAt={post.createdAt}
-        insertedImage={post.inserted_image}
-        likes={post.likes}
-        replies={replies}
-      />
-      <Replies replies={replies} /> */}
-    </AppLayout>
+    <>
+      {/* TODO Looks awful */}
+      {/* <Box position={"fixed"} top={50} left={0} zIndex={5} p={"5px"}>
+        <BackButton
+          onBack={() => {
+            return;
+          }}
+        />
+      </Box> */}
+      <ExpandedPost post={""} replies={[]} />
+    </>
   );
 };
 

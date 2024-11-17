@@ -1,23 +1,23 @@
-import NotifInfo from "./NotifInfo";
-import styles from "./styles.module.css";
+// import NotifInfo from "./NotifInfo";
 
-const Notifications = ({ notifications = [] }) => {
+const Notifications = () => {
   return (
-    <section className={`${styles["notifs-section"]} bckgBlack clrWhite`}>
-      <h2 className={styles["notifs-section__title"]}>Notifications</h2>
+    <></>
+    // <section className={`${styles["notifs-section"]} bckgBlack clrWhite`}>
+    //   <h2 className={styles["notifs-section__title"]}>Notifications</h2>
 
-      <ul className={styles["notifs-section__list"]}>
-        {notifications.map(notif => (
-          <NotifInfo
-            key={`notif-${notif.id}`}
-            notifFrom={notif.notif_from}
-            postId={notif.post_id}
-            type={notif.type}
-            seen={notif.seen}
-          />
-        ))}
-      </ul>
-    </section>
+    //   <ul className={styles["notifs-section__list"]}>
+    //     {notifications.map(notif => (
+    //       <NotifInfo
+    //         key={`notif-${notif.id}`}
+    //         notifFrom={notif.notif_from}
+    //         postId={notif.post_id}
+    //         type={notif.type}
+    //         seen={notif.seen}
+    //       />
+    //     ))}
+    //   </ul>
+    // </section>
   );
 };
 

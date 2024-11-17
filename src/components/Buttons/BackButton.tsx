@@ -10,12 +10,7 @@ const BackButton = ({ onBack }: BackButtonProps) => {
 
   return (
     <IconButton onClick={onBack}>
-      <Icon
-        icon={"mdi:arrow-back-rounded"}
-        width={24}
-        height={24}
-        color={theme.palette.secondary.main}
-      />
+      <Icon icon={"mdi:arrow-back"} width={24} height={24} color={theme.palette.secondary.main} />
     </IconButton>
   );
 };

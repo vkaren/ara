@@ -2,6 +2,8 @@ import { Card, useTheme } from "@mui/material";
 import Header from "./Header";
 import Content from "./Content";
 import Footer from "./Footer";
+import { useCallback } from "react";
+import { useRouter } from "next/router";
 
 interface PostProps {
   id: number;
@@ -13,13 +15,18 @@ interface PostProps {
   replies: any;
 }
 
-const Post = (props: PostProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  props;
+const Post = ({ id }: PostProps) => {
+  const router = useRouter();
   const theme = useTheme();
+  const onClickPost = useCallback(() => {
+    router.push(`post/${id}`);
+  }, [id, router]);
 
   return (
-    <Card sx={{ display: "flex", flexDirection: "column", p: "24px", borderRadius: "5px" }}>
+    <Card
+      sx={{ display: "flex", flexDirection: "column", p: "24px", borderRadius: "5px" }}
+      onClick={onClickPost}
+    >
       <Header nickname="Nickname" username="@username" avatarUrl="" createdAt="1m" theme={theme} />
       <Content comment="" image="" />
       <Footer />

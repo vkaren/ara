@@ -1,41 +1,12 @@
-import AppLayout from "@containers/AppLayout";
-import Profile from "@containers/Profile";
-import NavBack from "@components/NavBack";
-// import api from "@utils/api";
-// import getPreviousRoute from "@utils/getPreviousRoute";
+// import Profile from "@containers/Profile";
+// import NavBack from "@components/NavBack";
 
-// export async function getServerSideProps({ req, res, query }) {
-//   const props = {
-//     profile: {},
-//     previousRoute: getPreviousRoute(req),
-//   };
-
-//   const profile = await api({
-//     method: "GET",
-//     route: `user/${query.id}`,
-//     ssr: {
-//       req,
-//       res,
-//     },
-//   });
-
-//   if (!profile.error && profile.message !== "Internal server error") {
-//     props.profile = profile;
-//   } else {
-//     return {
-//       notFound: true,
-//     };
-//   }
-
-//   return { props };
-// }
-
-const ProfilePage = ({ profile, previousRoute }) => {
+const ProfilePage = () => {
   return (
-    <AppLayout>
-      <NavBack prevRoute={previousRoute} />
+    <>
+      {/* <NavBack prevRoute={previousRoute} /> */}
 
-      {profile && (
+      {/* {profile && (
         <Profile
           id={profile.id}
           nickname={profile.nickname}
@@ -45,8 +16,8 @@ const ProfilePage = ({ profile, previousRoute }) => {
           bio={profile.bio}
           posts={profile.posts}
         />
-      )}
-    </AppLayout>
+      )} */}
+    </>
   );
 };
 

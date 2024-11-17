@@ -1,10 +1,4 @@
-import { useContext } from "react";
-// import { ThemeContext } from "@context/themeContext";
-import switchStyles from "./styles.module.css";
-
 const DarkModeOption = ({ styles }) => {
-  // const { darkTheme, toggleDarkTheme } = useContext(ThemeContext);
-
   return (
     <li>
       <label
@@ -12,19 +6,17 @@ const DarkModeOption = ({ styles }) => {
         id="hover"
         className={`${styles["settings-option"]} clrWhite hoverBlack`}
       >
-        <span className={styles["settings-option__title"]}>Set dark mode</span>
+        <span className="">Set dark mode</span>
 
-        <div className={switchStyles["settings-option__switch"]}>
+        <div className={""}>
           <input
-            className={switchStyles["switch-checkbox"]}
+            className={""}
             id="switch"
             name="mode"
             type="checkbox"
             aria-label="enable or disable dark mode"
-            // onChange={toggleDarkTheme}
-            // defaultChecked={darkTheme}
           />
-          <span className={switchStyles["switch-slider"]}></span>
+          <span className={""}></span>
         </div>
       </label>
     </li>

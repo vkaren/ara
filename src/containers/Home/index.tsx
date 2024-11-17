@@ -7,9 +7,33 @@ const Home = () => {
     <>
       <AddComment />
       <Stack my={"24px"} spacing={2}>
-        <Post />
-        <Post />
-        <Post />
+        <Post
+          id={0}
+          author={undefined}
+          content={""}
+          createdAt={undefined}
+          insertedImage={""}
+          likes={undefined}
+          replies={undefined}
+        />
+        <Post
+          id={0}
+          author={undefined}
+          content={""}
+          createdAt={undefined}
+          insertedImage={""}
+          likes={undefined}
+          replies={undefined}
+        />
+        <Post
+          id={0}
+          author={undefined}
+          content={""}
+          createdAt={undefined}
+          insertedImage={""}
+          likes={undefined}
+          replies={undefined}
+        />
       </Stack>
     </>
   );

@@ -1,12 +1,7 @@
-import AppLayout from "@containers/AppLayout";
 import Settings from "@containers/Settings";
 
 const SettingsPage = () => {
-  return (
-    <AppLayout>
-      <Settings />
-    </AppLayout>
-  );
+  return <Settings />;
 };
 
 export default SettingsPage;

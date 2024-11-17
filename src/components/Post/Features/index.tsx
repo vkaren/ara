@@ -1,10 +1,9 @@
-import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
+// import IconComponent from "@components/Icon";
 
-const Features = ({ onClickDeleteBtn }) => {
+const Features = () => {
   return (
     <>
-      <div key="features_container" className={`${styles["features_container"]} bckgBlack`}>
+      {/* <div key="features_container" className={`${styles["features_container"]} bckgBlack`}>
         <ul>
           <li
             onClick={onClickDeleteBtn}
@@ -16,7 +15,7 @@ const Features = ({ onClickDeleteBtn }) => {
           </li>
         </ul>
       </div>
-      <div key="features_overlay" className={styles["features_overlay"]} role="button"></div>
+      <div key="features_overlay" className={styles["features_overlay"]} role="button"></div> */}
     </>
   );
 };

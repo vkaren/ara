@@ -1,14 +1,12 @@
-import User from "../User";
-import styles from "./styles.module.css";
+// import User from "../User";
 
 const PeopleToFollow = ({ peopleToFollow = [] }) => {
   return (
     peopleToFollow.length > 0 && (
-      <section className={`${styles["people-tf__section"]}`}>
-        <h2 className={`${styles["people-tf__title"]} clrWhite`}>People to follow</h2>
-
-        <div id="scroll" className={`${styles["people-tf__container"]} scrollPurpleLgtBlck`}>
-          {peopleToFollow.map(user => (
+      <section>
+        <h2>People to follow</h2>
+        <div id="scroll">
+          {/* {peopleToFollow.map(user => (
             <User
               key={`user-to-follow-${user.id}`}
               id={user.id}
@@ -18,7 +16,7 @@ const PeopleToFollow = ({ peopleToFollow = [] }) => {
               styles={styles}
               type={"people-tf"}
             />
-          ))}
+          ))} */}
         </div>
       </section>
     )

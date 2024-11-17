@@ -1,24 +1,12 @@
-import { useContext, useState } from "react";
-// import { UserContext } from "@context/userContext";
-import ProfilePhoto from "@components/ProfilePhoto";
-import FollowButton from "@components/FollowButton";
-import styles from "./styles.module.css";
+// import ProfilePhoto from "@components/ProfilePhoto";
+// import FollowButton from "@components/FollowButton";
 
-const UserInfo = ({ id, nickname, username, profilePhoto, followers = [], bio }) => {
-  // const { userId } = useContext(UserContext);
-  const [numberFollowers, setNumberFollowers] = useState(followers.length);
-
-  const updateNumberFollowers = type => {
-    if (type === "follow") {
-      setNumberFollowers(numberFollowers + 1);
-    } else {
-      setNumberFollowers(numberFollowers - 1);
-    }
-  };
-
+const UserInfo = () => {
   return (
-    <div className={`${styles["header__user-info"]} bckgBlack clrWhite`}>
-      <div className={styles["header__user-info_top"]}>
+    <div
+    // className={`${styles["header__user-info"]} bckgBlack clrWhite`}
+    >
+      {/* <div className={styles["header__user-info_top"]}>
         <ProfilePhoto photoUrl={profilePhoto} profilePage={true} />
 
         <div className={styles["user-info__names"]}>
@@ -35,10 +23,12 @@ const UserInfo = ({ id, nickname, username, profilePhoto, followers = [], bio })
             <FollowButton userIdToFollow={id} updateNumberFollowers={updateNumberFollowers} />
           )}
         </div>
-      </div>
+      </div> */}
 
-      <div className={styles["header__user-info_bottom"]}>
-        <span className={styles["user-info__bio"]}>{bio}</span>
+      <div
+      // className={styles["header__user-info_bottom"]}
+      >
+        {/* <span className={styles["user-info__bio"]}>{bio}</span> */}
       </div>
     </div>
   );

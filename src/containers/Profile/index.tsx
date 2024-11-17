@@ -1,25 +1,24 @@
-import UserInfo from "./UserInfo";
-import Post from "@components/Post";
-import styles from "./styles.module.css";
+// import UserInfo from "./UserInfo";
+// import Post from "@components/Post";
 
-const Profile = ({ id, nickname, username, profilePhoto, followers = [], bio, posts = [] }) => {
+const Profile = () => {
   return (
     <>
-      <header className={`${styles["user-profile__header"]}`}>
-        <div className={styles["header__bckg"]}></div>
+      <header>
+        <div></div>
 
-        <UserInfo
+        {/* <UserInfo
           id={id}
           nickname={nickname}
           username={username}
           profilePhoto={profilePhoto}
           bio={bio}
           followers={followers}
-        />
+        /> */}
       </header>
 
-      <section className={styles["user-profile__posts"]}>
-        {posts.map(post => (
+      <section>
+        {/* {posts.map(post => (
           <Post
             key={`post-${post.id}`}
             id={post.id}
@@ -30,7 +29,7 @@ const Profile = ({ id, nickname, username, profilePhoto, followers = [], bio, po
             likes={post.likes}
             replies={post.replies}
           />
-        ))}
+        ))} */}
       </section>
     </>
   );
