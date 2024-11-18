@@ -12,7 +12,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { LogoutButton } from "@components/Buttons";
-import { INavbarOption } from "config/nav";
+import { INavbarOption } from "config/navbar";
 import { useAppTranslation } from "hooks";
 
 interface MobileNavbarProps {

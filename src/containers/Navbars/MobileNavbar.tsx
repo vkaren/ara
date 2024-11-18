@@ -1,7 +1,7 @@
 import { LogoutButton } from "@components/Buttons";
 import { Icon } from "@iconify/react";
 import { AppBar, Box, IconButton, Theme, Toolbar } from "@mui/material";
-import { INavbarOption } from "config/nav";
+import { INavbarOption } from "config/navbar";
 import Image from "next/image";
 import Link from "next/link";
 

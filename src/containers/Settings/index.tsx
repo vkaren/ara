@@ -1,17 +1,12 @@
-import { useState } from "react";
-import EditOption from "./EditOption";
-import DarkModeOption from "./DarkModeOption";
-import DeleteOption from "./DeleteOption";
-import styles from "./styles.module.css";
+// import { useState } from "react";
+// import EditOption from "./EditOption";
+// import DarkModeOption from "./DarkModeOption";
+// import DeleteOption from "./DeleteOption";
 
 const Settings = () => {
-  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
-
-  const toggleDeleteModal = () => setIsDeletingAccount(!isDeletingAccount);
-
   return (
     <>
-      <section className={`${styles["settings-section"]} bckgBlack clrWhite`}>
+      {/* <section className={`${styles["settings-section"]} bckgBlack clrWhite`}>
         <h2 className={styles["settings-section__title"]}>Settings</h2>
 
         <ul className={styles["settings-section__options"]}>
@@ -19,7 +14,7 @@ const Settings = () => {
           <DarkModeOption styles={styles} />
           <DeleteOption onDelete={toggleDeleteModal} styles={styles} />
         </ul>
-      </section>
+      </section> */}
 
       {/* {isDeletingAccount && (
         <DeleteModal type="account" onDelete={onDeleteAccount} onCancelDelete={toggleDeleteModal} />

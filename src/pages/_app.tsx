@@ -1,11 +1,10 @@
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { RootLayout } from "config/mui";
 import { AppLayout, SignLayout } from "@containers/Layouts";
-import { appWithTranslation } from "next-i18next";
-import nextI18NextConfig from "../../next-i18next.config";
+import { RootLayout } from "config/mui";
+import "config/i18n";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
   const shouldUseSignLayout = ["/login", "/register"].includes(router.pathname);
 
@@ -22,6 +21,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       )}
     </RootLayout>
   );
-}
+};
 
-export default appWithTranslation(MyApp, nextI18NextConfig);
+export default MyApp;

@@ -1,6 +1,6 @@
 import { DesktopNavbar, MobileNavbar } from "@containers/Navbars";
 import { Box, useMediaQuery, useTheme } from "@mui/material";
-import { navbarOptions } from "config/nav";
+import { navbarOptions } from "config/navbar";
 import Head from "next/head";
 
 const drawerWidth = 220;
