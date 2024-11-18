@@ -1,9 +1,9 @@
-import { Card, useTheme } from "@mui/material";
-import Header from "./Header";
-import Content from "./Content";
-import Footer from "./Footer";
-import { useCallback } from "react";
 import { useRouter } from "next/router";
+import { useCallback } from "react";
+import { Card, useTheme } from "@mui/material";
+import Header from "./PostHeader";
+import Content from "./PostContent";
+import Footer from "./PostFooter";
 
 interface PostProps {
   id: number;

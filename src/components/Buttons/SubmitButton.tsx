@@ -1,12 +1,12 @@
 import { Button } from "@mui/material";
-import { useAppTranslation } from "hooks";
+import { useTranslation } from "react-i18next";
 
 interface SubmitButtonProps {
   onSubmit: () => void;
 }
 
 const SubmitButton = ({ onSubmit }: SubmitButtonProps) => {
-  const { t } = useAppTranslation();
+  const { t } = useTranslation();
 
   return (
     <Button

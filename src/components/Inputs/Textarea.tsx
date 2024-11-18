@@ -1,6 +1,6 @@
-import { TextField } from "@mui/material";
-import { useAppTranslation } from "hooks";
 import { ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
+import { TextField } from "@mui/material";
 
 interface TextareaProps {
   value?: string;
@@ -13,7 +13,7 @@ const Textarea = ({
   value,
   placeholderLocal = "views.home.adc.placeholder",
 }: TextareaProps) => {
-  const { t } = useAppTranslation();
+  const { t } = useTranslation();
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.currentTarget.value);

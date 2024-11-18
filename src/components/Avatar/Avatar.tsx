@@ -7,7 +7,7 @@ interface IProfilePhoto {
   height?: number;
 }
 
-const ProfilePhoto = ({ url, width, height }: IProfilePhoto) => {
+const UserAvatar = ({ url, width, height }: IProfilePhoto) => {
   const theme = useTheme();
   return (
     <Avatar
@@ -22,4 +22,4 @@ const ProfilePhoto = ({ url, width, height }: IProfilePhoto) => {
   );
 };
 
-export default ProfilePhoto;
+export default UserAvatar;

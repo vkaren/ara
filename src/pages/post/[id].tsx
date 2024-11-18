@@ -1,17 +1,4 @@
-import ExpandedPost from "@containers/Post";
-
-export async function getStaticPaths() {
-  // const posts = await fetchPosts();
-
-  // const paths = posts.map(post => ({
-  //   params: { id: 1 post.id.toString() }, // Assuming 'id' is the dynamic route
-  // }));
-
-  return {
-    paths: ["post/1"],
-    fallback: "blocking", // 'true', 'false', or 'blocking' depending on your needs
-  };
-}
+import ExpandedPost from "@containers/ExpandedPost";
 
 const PostPage = () => {
   return (

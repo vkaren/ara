@@ -1,6 +1,6 @@
+import { useTranslation } from "react-i18next";
 import { Icon } from "@iconify/react";
 import { Button, SxProps, Theme, Typography } from "@mui/material";
-import { useAppTranslation } from "hooks";
 
 interface LogoutButtonProps {
   theme: Theme;
@@ -8,7 +8,7 @@ interface LogoutButtonProps {
 }
 
 const LogoutButton = ({ theme, styles }: LogoutButtonProps) => {
-  const { t } = useAppTranslation();
+  const { t } = useTranslation();
 
   return (
     <Button

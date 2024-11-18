@@ -1,7 +1,7 @@
-import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import AddComment from "@components/AddComment";
 import { Icon } from "@iconify/react";
-import ProfilePhoto from "@components/ProfilePhoto";
+import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
+import { AddComment } from "@components/Inputs";
+import { Avatar } from "@components/Avatar";
 
 interface ReplyDialogProps {
   isOpen: boolean;
@@ -20,7 +20,7 @@ const ReplyPostDialog = ({ isOpen, onClose, onReply }: ReplyDialogProps) => {
           pb: 0,
         }}
       >
-        <ProfilePhoto />
+        <Avatar />
         <IconButton
           size="small"
           sx={{

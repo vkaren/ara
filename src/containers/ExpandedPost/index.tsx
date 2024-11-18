@@ -1,5 +1,5 @@
-import Post from "@components/Post";
 import { Divider, Stack } from "@mui/material";
+import { Post } from "@components/Cards";
 
 interface ExpandedPostProps {
   post: any;
@@ -19,6 +19,7 @@ const ExpandedPost = ({ post, replies }: ExpandedPostProps) => {
         replies={"replies"}
       />
 
+      {/* TODO: Replies */}
       <Stack direction={"row"} justifyContent={"space-between"} mt={"24px"}>
         <Divider orientation="vertical" flexItem={true} />
         <Stack width={"90%"} spacing={2}>

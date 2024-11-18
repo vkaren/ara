@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from "react";
-import { Card, Grid } from "@mui/material";
-import ProfilePhoto from "@components/ProfilePhoto";
-import Textarea from "../Textarea";
-import InsertedImage from "../InsertedImage";
+import { Card, Grid, SxProps, Theme } from "@mui/material";
+import { Avatar } from "@components/Avatar";
 import { SubmitButton, UploadImageButton } from "@components/Buttons";
+import { UploadedImage } from "@components/Cards";
+import Textarea from "./Textarea";
 
 interface AddCommentProps {
   type?: "replyComment" | "postComment";
@@ -13,12 +13,13 @@ interface AddCommentProps {
 
 const AddComment = ({ type = "postComment", onSend, onUploadImage }: AddCommentProps) => {
   const [comment, setComment] = useState<string>("");
-  const cardStyles = useMemo(
+  const cardStyles: SxProps<Theme> = useMemo(
     () =>
       type === "postComment"
         ? {
             p: "12px",
             borderRadius: "5px",
+            boxShadow: 1,
           }
         : {
             py: "12px",
@@ -55,8 +56,10 @@ const AddComment = ({ type = "postComment", onSend, onUploadImage }: AddCommentP
         <Grid item xs={12} padding={0}>
           <Grid container alignItems="center" justifyContent="space-between" pt={0}>
             <Grid item sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-              {type === "postComment" && <ProfilePhoto />}
-              <InsertedImage url="/assets/ara.png" />
+              {type === "postComment" && <Avatar />}
+              <UploadedImage
+                url="/assets/ara.png" // TODO: Remove this
+              />
             </Grid>
 
             <Grid item sx={{ display: "flex", gap: 2, alignItems: "center" }}>

@@ -13,7 +13,7 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { LogoutButton } from "@components/Buttons";
 import { INavbarOption } from "config/navbar";
-import { useAppTranslation } from "hooks";
+import { useTranslation } from "react-i18next";
 
 interface MobileNavbarProps {
   theme: Theme;
@@ -22,7 +22,7 @@ interface MobileNavbarProps {
 }
 
 const DesktopNavbar = ({ theme, navbarOptions, drawerWidth }: MobileNavbarProps) => {
-  const { t } = useAppTranslation();
+  const { t } = useTranslation();
 
   return (
     <Drawer

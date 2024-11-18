@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import {
   Button,
   Dialog,
@@ -6,7 +7,6 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { useAppTranslation } from "hooks";
 
 interface DeleteDialogProps {
   isOpen: boolean;
@@ -15,7 +15,7 @@ interface DeleteDialogProps {
 }
 
 const DeleteDialog = ({ isOpen, onClose, onDelete }: DeleteDialogProps) => {
-  const { t } = useAppTranslation();
+  const { t } = useTranslation();
   return (
     <Dialog
       open={isOpen}

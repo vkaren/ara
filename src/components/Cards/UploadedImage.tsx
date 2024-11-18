@@ -1,10 +1,10 @@
 import { Box, useTheme } from "@mui/material";
 
-interface InsertedImageProps {
+interface UploadedImageProps {
   url?: string;
 }
 
-const InsertedImage = ({ url }: InsertedImageProps) => {
+const UploadedImage = ({ url }: UploadedImageProps) => {
   const theme = useTheme();
 
   return url ? (
@@ -25,4 +25,4 @@ const InsertedImage = ({ url }: InsertedImageProps) => {
   ) : null;
 };
 
-export default InsertedImage;
+export default UploadedImage;

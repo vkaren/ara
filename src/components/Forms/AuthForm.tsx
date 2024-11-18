@@ -1,15 +1,15 @@
 import React from "react";
-import { Stack, Container, Typography, TextField, Box, Button, Link } from "@mui/material";
 import Image from "next/image";
-import { useAppTranslation } from "hooks";
+import { useTranslation } from "react-i18next";
+import { Stack, Container, Typography, TextField, Box, Button, Link } from "@mui/material";
 
 interface IAuthFormProps {
   titleKey: string;
-  showLink?: boolean;
+  showRegisterLink?: boolean;
 }
 
-const AuthForm = ({ titleKey, showLink }: IAuthFormProps) => {
-  const { t } = useAppTranslation();
+const AuthForm = ({ titleKey, showRegisterLink }: IAuthFormProps) => {
+  const { t } = useTranslation();
 
   return (
     <Stack
@@ -65,7 +65,7 @@ const AuthForm = ({ titleKey, showLink }: IAuthFormProps) => {
             {t("common.continue")}
           </Button>
 
-          {showLink && (
+          {showRegisterLink && (
             <Link
               href="/login"
               underline="none"

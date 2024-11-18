@@ -1,6 +1,6 @@
-import ProfilePhoto from "@components/ProfilePhoto";
 import { Link, Stack, Theme, Typography } from "@mui/material";
-import Management from "../Management";
+import { Avatar } from "@components/Avatar";
+import Management from "./PostManagement";
 
 interface PostHeaderProps {
   nickname: string;
@@ -13,12 +13,12 @@ interface PostHeaderProps {
 const Header = ({ nickname, username, avatarUrl, createdAt, theme }: PostHeaderProps) => {
   return (
     <Stack direction={"row"} alignItems={"center"} gap={"10px"}>
-      <ProfilePhoto url={avatarUrl} width={24} height={24} />
+      <Avatar url={avatarUrl} width={24} height={24} />
       <Typography variant="subtitle2" fontWeight={500}>
         {nickname}
       </Typography>
       <Link
-        href="#"
+        href="#" // TODO
         variant="subtitle2"
         sx={{ color: theme.palette.grey[600], textDecoration: "none" }}
       >

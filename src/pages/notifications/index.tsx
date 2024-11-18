@@ -1,5 +1,6 @@
 import Notifications from "@containers/Notifications";
 
+// TODO
 const NotificationsPage = () => {
   return <Notifications />;
 };

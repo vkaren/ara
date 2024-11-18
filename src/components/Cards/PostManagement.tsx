@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { IconButton, Menu, MenuItem, Box, Theme, Typography } from "@mui/material";
 import { Icon } from "@iconify/react";
-import { useAppTranslation } from "hooks";
 
 interface PostManagementProps {
   theme: Theme;
@@ -10,7 +10,7 @@ interface PostManagementProps {
 
 // TODO: Management controller
 const Management = ({ theme, onClickDelete }: PostManagementProps) => {
-  const { t } = useAppTranslation();
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   // const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 

@@ -1,6 +1,6 @@
-import AddComment from "@components/AddComment";
-import Post from "@components/Post";
 import { Stack } from "@mui/material";
+import { AddComment } from "@components/Inputs";
+import { Post } from "@components/Cards";
 
 const Home = () => {
   return (
