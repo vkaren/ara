@@ -41,6 +41,7 @@ const theme = createTheme({
     },
     common: {
       black: "#1e1e1e",
+      white: "#ffffff",
     },
     background: {
       default: "#ffffff",
@@ -51,6 +52,9 @@ const theme = createTheme({
       "300": "#cccccc",
       "600": "#666666",
       "700": "#2f2f2f",
+    },
+    text: {
+      primary: "#1e1e1e",
     },
   },
   components: {

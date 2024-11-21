@@ -1,12 +1,13 @@
-import SearchBox from "./SearchBox";
-import PeopleToFollow from "./PeopleToFollow";
+import SearchController from "./SearchController";
+import PeopleToFollow from "../PeopleToFollow";
+import { Stack } from "@mui/material";
 
 const Search = () => {
   return (
-    <>
-      <SearchBox />
+    <Stack direction={"column"} spacing={20}>
+      <SearchController />
       <PeopleToFollow />
-    </>
+    </Stack>
   );
 };
 

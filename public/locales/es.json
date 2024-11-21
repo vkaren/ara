@@ -6,7 +6,9 @@
     "logout": "Log out",
     "send": "Send",
     "delete": "Delete",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "follow": "Follow",
+    "following": "Following"
   },
   "views": {
     "login": {
@@ -23,6 +25,9 @@
       },
       "deletePost": "Are you sure you want to delete this post? This action cannot be undone.",
       "confirmDelete": "Confirm Delete"
+    },
+    "search": {
+      "placeholder": "Search..."
     }
   },
   "navbar": {
