@@ -28,6 +28,12 @@
     },
     "search": {
       "placeholder": "Search..."
+    },
+    "notifications": {
+      "title": "Notifications",
+      "like": "{{user}} liked your post",
+      "follow": "{{user}} followed you",
+      "reply": "{{user}} replied to your post"
     }
   },
   "navbar": {

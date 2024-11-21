@@ -1,23 +1,34 @@
-// import NotifInfo from "./NotifInfo";
+import { NotifsList } from "@components/Lists";
+import { Card, Stack, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Notifications = () => {
+  const { t } = useTranslation();
   return (
-    <></>
-    // <section className={`${styles["notifs-section"]} bckgBlack clrWhite`}>
-    //   <h2 className={styles["notifs-section__title"]}>Notifications</h2>
-
-    //   <ul className={styles["notifs-section__list"]}>
-    //     {notifications.map(notif => (
-    //       <NotifInfo
-    //         key={`notif-${notif.id}`}
-    //         notifFrom={notif.notif_from}
-    //         postId={notif.post_id}
-    //         type={notif.type}
-    //         seen={notif.seen}
-    //       />
-    //     ))}
-    //   </ul>
-    // </section>
+    <Stack direction={"column"} spacing={2}>
+      <Typography variant="h2" fontSize={20} fontWeight={500}>
+        {t("views.notifications.title")}
+      </Typography>
+      <Card
+        sx={{
+          minWidth: "100%",
+        }}
+      >
+        <NotifsList
+          notifications={[
+            {
+              type: "follow",
+            },
+            {
+              type: "like",
+            },
+            {
+              type: "reply",
+            },
+          ]}
+        />
+      </Card>
+    </Stack>
   );
 };
 
