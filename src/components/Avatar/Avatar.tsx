@@ -1,24 +1,23 @@
-import { Icon } from "@iconify/react";
-import { Avatar, useTheme } from "@mui/material";
+import { Avatar, SxProps, Theme } from "@mui/material";
 
 interface IProfilePhoto {
   url?: string;
   width?: number;
   height?: number;
+  sx?: SxProps<Theme>;
 }
 
-const UserAvatar = ({ url, width, height }: IProfilePhoto) => {
-  const theme = useTheme();
+const UserAvatar = ({ url, width = 32, height = 32, sx }: IProfilePhoto) => {
   return (
     <Avatar
       src={url}
-      alt="profile Photo"
-      sx={{ width: width || 32, height: height || 32, backgroundColor: "transparent" }}
-    >
-      {!url && (
-        <Icon icon={"mdi:user-circle"} color={theme.palette.secondary.main} width={"100%"} />
-      )}
-    </Avatar>
+      sx={{
+        width,
+        height,
+        bgcolor: "secondary.main",
+        ...sx,
+      }}
+    />
   );
 };
 

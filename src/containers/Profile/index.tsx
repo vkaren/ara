@@ -1,37 +1,19 @@
-// import UserInfo from "./UserInfo";
-// import Post from "@components/Post";
+import { Container, useMediaQuery, useTheme } from "@mui/material";
+import ProfileHeader from "./ProfileHeader";
+import { PostList } from "@components/Lists";
 
 const Profile = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <>
-      <header>
-        <div></div>
-
-        {/* <UserInfo
-          id={id}
-          nickname={nickname}
-          username={username}
-          profilePhoto={profilePhoto}
-          bio={bio}
-          followers={followers}
-        /> */}
-      </header>
-
-      <section>
-        {/* {posts.map(post => (
-          <Post
-            key={`post-${post.id}`}
-            id={post.id}
-            author={post.author}
-            createdAt={post.createdAt}
-            content={post.content}
-            insertedImage={post.inserted_image}
-            likes={post.likes}
-            replies={post.replies}
-          />
-        ))} */}
-      </section>
-    </>
+    <Container>
+      <ProfileHeader />
+      <PostList
+        posts={[]}
+        sx={{ mt: isMobile ? "210px" : "24px", mb: isMobile ? "60px" : "24px" }}
+      />
+    </Container>
   );
 };
 

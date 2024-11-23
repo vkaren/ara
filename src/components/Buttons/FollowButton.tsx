@@ -24,7 +24,7 @@ const FollowButton = ({ isFollowing, onClick }: SubmitButtonProps) => {
         textTransform: "capitalize",
         py: "0px",
         px: "12px",
-        borderRadius: "15px",
+        borderRadius: "5px",
         backgroundColor: "primary.main",
         borderColor: "primary.main",
         color: "common.white",

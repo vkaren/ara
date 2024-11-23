@@ -27,7 +27,8 @@
       "confirmDelete": "Confirm Delete"
     },
     "search": {
-      "placeholder": "Search..."
+      "placeholder": "Search...",
+      "peopleToFollow": "People To Follow"
     },
     "notifications": {
       "title": "Notifications",

@@ -29,8 +29,7 @@ const AppLayout = ({ children }) => {
             maxWidth: `calc(${isMobile ? "100%" : "70%"} - ${isMobile ? 0 : drawerWidth}px)`,
             flexGrow: 1,
             bgcolor: "background.default",
-            px: 3,
-            py: 6,
+            p: 3,
             mt: isMobile ? "60px" : 0,
             mx: "auto",
           }}
