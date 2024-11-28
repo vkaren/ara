@@ -1,25 +1,31 @@
-// import { useState } from "react";
-// import EditOption from "./EditOption";
-// import DarkModeOption from "./DarkModeOption";
-// import DeleteOption from "./DeleteOption";
+import { DeleteDialog } from "@components/Dialogs";
+import { SettingsList } from "@components/Lists";
+import { Card, Stack, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 const Settings = () => {
+  const { t } = useTranslation();
+
   return (
-    <>
-      {/* <section className={`${styles["settings-section"]} bckgBlack clrWhite`}>
-        <h2 className={styles["settings-section__title"]}>Settings</h2>
-
-        <ul className={styles["settings-section__options"]}>
-          <EditOption styles={styles} />
-          <DarkModeOption styles={styles} />
-          <DeleteOption onDelete={toggleDeleteModal} styles={styles} />
-        </ul>
-      </section> */}
-
-      {/* {isDeletingAccount && (
-        <DeleteModal type="account" onDelete={onDeleteAccount} onCancelDelete={toggleDeleteModal} />
-      )} */}
-    </>
+    <Stack direction={"column"} spacing={2}>
+      <Typography variant="h2" fontSize={20} fontWeight={500}>
+        {t("views.settings.title")}
+      </Typography>
+      <Card
+        sx={{
+          minWidth: "100%",
+          p: "12px",
+        }}
+      >
+        <SettingsList onEditClick={() => {}} onDarkModeClick={() => {}} onDeleteClick={() => {}} />
+        <DeleteDialog
+          isOpen={false}
+          subtitle={t("views.settings.confirmDeleteAccount")}
+          onClose={() => {}}
+          onDelete={() => {}}
+        />
+      </Card>
+    </Stack>
   );
 };
 

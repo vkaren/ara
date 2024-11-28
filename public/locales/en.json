@@ -8,7 +8,8 @@
     "delete": "Delete",
     "cancel": "Cancel",
     "follow": "Follow",
-    "following": "Following"
+    "following": "Following",
+    "confirmDelete": "Confirm Delete"
   },
   "views": {
     "login": {
@@ -23,8 +24,7 @@
         "placeholder": "Say hi :)",
         "replyPlaceholder": "Post your reply"
       },
-      "deletePost": "Are you sure you want to delete this post? This action cannot be undone.",
-      "confirmDelete": "Confirm Delete"
+      "deletePost": "Are you sure you want to delete this post? This action cannot be undone."
     },
     "search": {
       "placeholder": "Search...",
@@ -35,6 +35,13 @@
       "like": "{{user}} liked your post",
       "follow": "{{user}} followed you",
       "reply": "{{user}} replied to your post"
+    },
+    "settings": {
+      "title": "Settings",
+      "edit": "Edit profile",
+      "darkMode": "Set dark mode",
+      "deleteAccount": "Delete my account",
+      "confirmDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone."
     }
   },
   "navbar": {

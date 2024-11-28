@@ -9,25 +9,19 @@ import {
 } from "@mui/material";
 
 interface DeleteDialogProps {
+  subtitle?: string;
   isOpen: boolean;
   onClose: () => void;
   onDelete: () => void;
 }
 
-const DeleteDialog = ({ isOpen, onClose, onDelete }: DeleteDialogProps) => {
+const DeleteDialog = ({ subtitle, isOpen, onClose, onDelete }: DeleteDialogProps) => {
   const { t } = useTranslation();
   return (
-    <Dialog
-      open={isOpen}
-      onClose={onClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-    >
-      <DialogTitle id="alert-dialog-title">{t("views.home.confirmDelete")}</DialogTitle>
+    <Dialog open={isOpen} onClose={onClose}>
+      <DialogTitle>{t("common.confirmDelete")}</DialogTitle>
       <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          {t("views.home.deletePost")}
-        </DialogContentText>
+        <DialogContentText>{subtitle}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} color="primary" sx={{ px: "15px" }}>

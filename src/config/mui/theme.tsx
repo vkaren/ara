@@ -38,6 +38,7 @@ const theme = createTheme({
     error: {
       main: "#e43d3d",
       light: "#ffafaf",
+      "200": "#FFF5F5FF",
     },
     common: {
       black: "#1e1e1e",
