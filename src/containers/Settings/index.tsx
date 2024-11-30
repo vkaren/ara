@@ -1,4 +1,5 @@
 import { DeleteDialog } from "@components/Dialogs";
+// import { UpdateAccountForm } from "@components/Forms";
 import { SettingsList } from "@components/Lists";
 import { Card, Stack, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
@@ -17,6 +18,8 @@ const Settings = () => {
           p: "12px",
         }}
       >
+        {/* TODO Edit view */}
+        {/* <UpdateAccountForm /> */}
         <SettingsList onEditClick={() => {}} onDarkModeClick={() => {}} onDeleteClick={() => {}} />
         <DeleteDialog
           isOpen={false}

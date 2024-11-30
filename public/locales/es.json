@@ -1,5 +1,6 @@
 {
   "common": {
+    "nickname": "Nickname",
     "username": "Username",
     "password": "Password",
     "continue": "Continue",
@@ -41,7 +42,12 @@
       "edit": "Edit profile",
       "darkMode": "Set dark mode",
       "deleteAccount": "Delete my account",
-      "confirmDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone."
+      "confirmDeleteAccount": "Are you sure you want to delete your account? This action cannot be undone.",
+      "editNickname": "Change your nickname",
+      "editUsername": "Change your username",
+      "editPassword": "Change your password",
+      "editAvatar": "Upload a new avatar",
+      "saveChanges": "Save changes"
     }
   },
   "navbar": {
