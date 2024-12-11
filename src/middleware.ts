@@ -3,24 +3,20 @@ import { NextRequest, NextResponse } from "next/server";
 export const middleware = (request: NextRequest) => {
   const { pathname } = request.nextUrl;
 
-  // TODO
-  // if it's loggeado redirect to home
-  // if it's not to login
+  const isLoggedIn = true;
+
   if (pathname === "/") {
+    if (isLoggedIn) {
+      return NextResponse.redirect(new URL("/home", request.url));
+    }
+
+    return NextResponse.redirect(new URL("/register", request.url));
+  }
+
+  const protectedRoutes = ["/home", "/notifications", "/search", "/profile", "/post", "/settings"];
+  if (protectedRoutes.includes(pathname) && !isLoggedIn) {
     return NextResponse.redirect(new URL("/register", request.url));
   }
 
   return NextResponse.next();
-};
-
-export const middlewareConfig = {
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/home",
-        permanent: false,
-      },
-    ];
-  },
 };

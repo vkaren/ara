@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
-import { AddComment } from "@components/Inputs";
 import { Avatar } from "@components/Avatar";
+import { AddCommentForm } from "@components/Forms";
 
 interface ReplyDialogProps {
   isOpen: boolean;
@@ -35,7 +35,7 @@ const ReplyPostDialog = ({ isOpen, onClose, onReply }: ReplyDialogProps) => {
       </DialogTitle>
 
       <DialogContent sx={{ py: 0 }}>
-        <AddComment type="replyComment" onSend={onReply} />
+        <AddCommentForm type="replyComment" onSend={onReply} />
       </DialogContent>
     </Dialog>
   );
