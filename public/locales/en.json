@@ -56,5 +56,10 @@
     "notifications": "Notifications",
     "profile": "Profile",
     "settings": "Settings"
+  },
+  "validation": {
+    "required": "This field is required",
+    "min": "This field must have at least {{min}} characters",
+    "max": "This field cannot exceed {{max}} characters"
   }
 }

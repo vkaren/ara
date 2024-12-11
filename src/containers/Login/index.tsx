@@ -1,8 +1,7 @@
-import { AuthForm } from "@components/Forms";
+import { LoginForm } from "@components/Forms";
 
-// TODO: Create controller
 const Login = () => {
-  return <AuthForm titleKey={"views.login.title"} />;
+  return <LoginForm />;
 };
 
 export default Login;
