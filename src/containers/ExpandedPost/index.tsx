@@ -11,13 +11,11 @@ const ExpandedPost = ({ post, replies }: ExpandedPostProps) => {
   return (
     <>
       <Post
-        id={1}
         author={"post.author"}
         content={"post.content"}
         createdAt={"post.createdAt"}
         insertedImage={"post.inserted_image"}
         likes={"post.likes"}
-        replies={"replies"}
       />
 
       {/* TODO: Replies */}

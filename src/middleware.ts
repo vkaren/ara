@@ -13,6 +13,7 @@ export const middleware = (request: NextRequest) => {
     return NextResponse.redirect(new URL("/register", request.url));
   }
 
+  // TODO: IMPROVE
   const protectedRoutes = ["/home", "/notifications", "/search", "/profile", "/post", "/settings"];
   if (protectedRoutes.includes(pathname) && !isLoggedIn) {
     return NextResponse.redirect(new URL("/register", request.url));

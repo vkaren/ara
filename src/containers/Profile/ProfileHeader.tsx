@@ -38,9 +38,8 @@ const ProfileHeader = () => {
         sx={{
           bgcolor: "primary.light",
         }}
-      >
-        {/* TODO image */}
-      </Box>
+      />
+
       <Box
         width={"100%"}
         minHeight={"100px"}

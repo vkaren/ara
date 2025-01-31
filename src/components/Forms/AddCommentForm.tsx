@@ -50,7 +50,9 @@ const AddComment = ({ type = "postComment", onSubmit }: AddCommentProps) => {
               render={({ field }) => (
                 <Textarea
                   placeholderLocal={
-                    type === "replyComment" ? "views.home.adc.replyPlaceholder" : undefined
+                    type === "replyComment"
+                      ? "views.home.adc.replyPlaceholder"
+                      : "views.home.adc.placeholder"
                   }
                   {...field}
                 />

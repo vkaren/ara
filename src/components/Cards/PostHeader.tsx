@@ -18,7 +18,7 @@ const Header = ({ nickname, username, avatarUrl, createdAt, theme }: PostHeaderP
         {nickname}
       </Typography>
       <Link
-        href="#" // TODO
+        href={`/profile/${username}`}
         variant="subtitle2"
         sx={{ color: theme.palette.grey[600], textDecoration: "none" }}
       >

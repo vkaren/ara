@@ -9,15 +9,21 @@ import {
   useTheme,
 } from "@mui/material";
 import { notificationsTypes, TNotifOption } from "config/notifications";
+import { useRouter } from "next/router";
 import { useTranslation } from "react-i18next";
 
 interface NotifsListProps {
-  notifications: { type: TNotifOption }[];
+  notifications: { type: TNotifOption; user: string; href: string }[];
 }
 
 const NotifsList = ({ notifications }: NotifsListProps) => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const router = useRouter();
+
+  const handleRedirect = (href: string) => {
+    router.push(href);
+  };
 
   return (
     <List>
@@ -29,6 +35,7 @@ const NotifsList = ({ notifications }: NotifsListProps) => {
             borderBottom: 1,
             borderColor: "primary.100",
           }}
+          onClick={() => handleRedirect(n.href)}
         >
           <ListItemButton
             sx={{
@@ -54,7 +61,7 @@ const NotifsList = ({ notifications }: NotifsListProps) => {
             </ListItemIcon>
             <ListItemText
               primary="Karen"
-              secondary={t(`${notificationsTypes[n.type].message}`, { user: "@karen" })}
+              secondary={t(`${notificationsTypes[n.type].message}`, { user: n.user })}
               sx={{
                 ".MuiTypography-root": { fontSize: "14px" },
               }}

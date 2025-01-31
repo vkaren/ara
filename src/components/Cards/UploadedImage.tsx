@@ -1,13 +1,13 @@
 import { Box, useTheme } from "@mui/material";
 
 interface UploadedImageProps {
-  url?: string;
+  url: string;
 }
 
 const UploadedImage = ({ url }: UploadedImageProps) => {
   const theme = useTheme();
 
-  return url ? (
+  return (
     <Box
       width={35}
       height={35}
@@ -22,7 +22,7 @@ const UploadedImage = ({ url }: UploadedImageProps) => {
         sx={{ width: "100%", height: "100%", objectFit: "cover" }}
       />
     </Box>
-  ) : null;
+  );
 };
 
 export default UploadedImage;

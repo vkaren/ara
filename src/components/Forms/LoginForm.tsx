@@ -36,6 +36,7 @@ const LoginForm = () => {
           {t("views.login.title")}
         </Typography>
       </Container>
+
       <BaseAuthForm
         fields={[
           { name: "username", label: t("common.username"), minLength: 3, maxLength: 30 },

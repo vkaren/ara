@@ -64,6 +64,7 @@ const BaseAuthForm = ({ schema, fields, onSubmit }: IBaseAuthFormProps) => {
           )}
         />
       ))}
+
       <Button
         variant="contained"
         type="submit"

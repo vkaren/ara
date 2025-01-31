@@ -11,31 +11,28 @@ const PostList = ({ posts, spacing = 2, sx }: PostListProps) => {
   return (
     <Stack spacing={spacing} sx={sx}>
       <Post
-        id={0}
         author={undefined}
         content={""}
         createdAt={undefined}
         insertedImage={""}
         likes={undefined}
-        replies={undefined}
+        href={`/post/1`}
       />
       <Post
-        id={0}
         author={undefined}
         content={""}
         createdAt={undefined}
         insertedImage={""}
         likes={undefined}
-        replies={undefined}
+        href={`/post/1`}
       />
       <Post
-        id={0}
         author={undefined}
         content={""}
         createdAt={undefined}
         insertedImage={""}
         likes={undefined}
-        replies={undefined}
+        href={`/post/1`}
       />
     </Stack>
   );

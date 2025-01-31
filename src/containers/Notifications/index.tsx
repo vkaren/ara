@@ -18,12 +18,18 @@ const Notifications = () => {
           notifications={[
             {
               type: "follow",
+              user: "@karen",
+              href: "/profile/@karen",
             },
             {
               type: "like",
+              user: "@karen",
+              href: "/post/1",
             },
             {
               type: "reply",
+              user: "@karen",
+              href: "/post/1",
             },
           ]}
         />

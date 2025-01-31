@@ -8,11 +8,7 @@ interface TextareaProps {
   onChange: (value: string) => void;
 }
 
-const Textarea = ({
-  onChange,
-  value,
-  placeholderLocal = "views.home.adc.placeholder",
-}: TextareaProps) => {
+const Textarea = ({ onChange, value, placeholderLocal }: TextareaProps) => {
   const { t } = useTranslation();
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -21,7 +17,7 @@ const Textarea = ({
 
   return (
     <TextField
-      placeholder={t(placeholderLocal)}
+      placeholder={placeholderLocal && t(placeholderLocal)}
       multiline
       fullWidth
       value={value}

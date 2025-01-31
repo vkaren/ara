@@ -6,6 +6,7 @@ const UserSearchList = () => {
     <List>
       <ListItem disablePadding>
         <ListItemButton
+          href="/profile/@username"
           sx={{
             borderRadius: "8px",
             py: "4px",

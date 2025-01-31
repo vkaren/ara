@@ -15,6 +15,8 @@ const Management = ({ theme, onClickDelete }: PostManagementProps) => {
   // const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
@@ -34,22 +36,10 @@ const Management = ({ theme, onClickDelete }: PostManagementProps) => {
 
   return (
     <Box display={"flex"} flex={1} justifyContent={"flex-end"}>
-      <IconButton
-        aria-label="more"
-        aria-controls="long-menu"
-        aria-haspopup="true"
-        onClick={handleClick}
-        color="primary"
-      >
+      <IconButton onClick={handleClick} color="primary">
         <Icon icon={"mdi:more-horiz"} />
       </IconButton>
-      <Menu
-        id="long-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-      >
+      <Menu anchorEl={anchorEl} keepMounted open={!!anchorEl} onClose={handleClose}>
         <MenuItem onClick={onClickDelete}>
           <Icon icon={"mdi:delete"} color={theme.palette.error.main} />
           <Typography variant="caption" color={theme.palette.error.main} ml={"5px"}>

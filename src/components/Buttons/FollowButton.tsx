@@ -1,10 +1,10 @@
 import { ToggleButton } from "@mui/material";
-import { useMemo } from "react";
+import { MouseEvent, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 interface SubmitButtonProps {
   isFollowing?: boolean;
-  onClick: () => void;
+  onClick: (e: MouseEvent<HTMLElement>) => void;
 }
 
 const FollowButton = ({ isFollowing, onClick }: SubmitButtonProps) => {
