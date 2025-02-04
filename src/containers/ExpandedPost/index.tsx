@@ -1,6 +1,9 @@
 import { Divider, Stack } from "@mui/material";
 import { Post } from "@components/Cards";
 import { PostList } from "@components/Lists";
+import { BackButton } from "@components/Buttons";
+import { useCallback } from "react";
+import { useRouter } from "next/router";
 
 interface ExpandedPostProps {
   post: any;
@@ -8,8 +11,15 @@ interface ExpandedPostProps {
 }
 
 const ExpandedPost = ({ post, replies }: ExpandedPostProps) => {
+  const router = useRouter();
+  const handleBackBtnClick = useCallback(() => {
+    // TODO: FIX
+    router.back();
+  }, [router]);
+
   return (
-    <>
+    <Stack spacing={2}>
+      <BackButton onBack={handleBackBtnClick} />
       <Post
         author={"post.author"}
         content={"post.content"}
@@ -23,7 +33,7 @@ const ExpandedPost = ({ post, replies }: ExpandedPostProps) => {
         <Divider orientation="vertical" flexItem={true} />
         <PostList posts={[]} sx={{ width: "90%" }} />
       </Stack>
-    </>
+    </Stack>
   );
 };
 

@@ -9,7 +9,7 @@ const BackButton = ({ onBack }: BackButtonProps) => {
   const theme = useTheme();
 
   return (
-    <IconButton onClick={onBack}>
+    <IconButton onClick={onBack} sx={{ alignSelf: "flex-start" }}>
       <Icon icon={"mdi:arrow-back"} width={24} height={24} color={theme.palette.secondary.main} />
     </IconButton>
   );
