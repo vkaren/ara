@@ -1,24 +1,15 @@
 import Joi from "joi";
-
-const name = Joi.string().min(3).max(30).required().messages({
-  "string.empty": "validation.required",
-  "string.min": "validation.min",
-  "string.max": "validation.max",
-});
-const password = Joi.string().min(6).max(30).required().messages({
-  "string.empty": "validation.required",
-  "string.min": "validation.min",
-});
+import { name, password } from "./common.validator";
 
 const signUpSchema = Joi.object({
-  nickname: name,
-  username: name,
-  password: password,
+  nickname: name.required(),
+  username: name.required(),
+  password: password.required(),
 });
 
 const loginSchema = Joi.object({
-  username: name,
-  password: password,
+  username: name.required(),
+  password: password.required(),
 });
 
 export { signUpSchema, loginSchema };

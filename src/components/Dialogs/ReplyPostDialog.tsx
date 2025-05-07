@@ -35,7 +35,7 @@ const ReplyPostDialog = ({ isOpen, onClose, onReply }: ReplyDialogProps) => {
       </DialogTitle>
 
       <DialogContent sx={{ py: 0 }}>
-        <AddCommentForm type="replyComment" onSend={onReply} />
+        <AddCommentForm type="replyComment" onSubmit={onReply} />
       </DialogContent>
     </Dialog>
   );
