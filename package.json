@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next -p 8080",
+    "dev": "next -p 3001",
     "build": "next build",
-    "start": "next start -p 8080"
+    "start": "next start -p 3001"
   },
   "author": "",
   "license": "ISC",
