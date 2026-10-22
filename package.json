@@ -6,8 +6,8 @@
     "dev": "next -p 8080",
     "build": "next build",
     "start": "next start -p 8080",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },
@@ -19,17 +19,17 @@
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.9.1",
     "@mui/material": "^5.16.7",
-    "@mui/material-nextjs": "^5.16.6",
+    "@mui/material-nextjs": "^9.4.0",
     "dotenv": "^16.3.1",
     "i18next": "^23.16.5",
-    "i18next-http-backend": "^2.6.2",
+    "i18next-http-backend": "^4.0.2",
     "joi": "^17.13.3",
-    "next": "^14.0.4",
+    "next": "^15.5.27",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.55.0",
     "react-i18next": "^15.1.1",
-    "sharp": "^0.33.2",
+    "sharp": "^0.35.5",
     "socket.io-client": "^4.7.4"
   },
   "devDependencies": {
@@ -38,12 +38,12 @@
     "@types/react": "^18.3.4",
     "@typescript-eslint/eslint-plugin": "^8.2.0",
     "@typescript-eslint/parser": "^8.2.0",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "^14.2.6",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.27",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "prettier": "^3.3.3",
-    "typescript": "^5.5.4"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=14.0.0"

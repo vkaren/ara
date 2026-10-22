@@ -1,17 +1,10 @@
 "use client";
-import { Montserrat } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import GlobalStyles from "@mui/material/GlobalStyles";
 
-const roboto = Montserrat({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-});
-
 const theme = createTheme({
   typography: {
-    fontFamily: roboto.style.fontFamily,
+    fontFamily: '"Montserrat", Arial, sans-serif',
     h1: {
       fontSize: 32,
       fontWeight: 600,

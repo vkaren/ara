@@ -12,7 +12,18 @@ const AvatarUpload = ({ initialImage, onImageUpload }: IAvatarUploadProps) => {
   const [error, setError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {};
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      setError("Please select an image file.");
+      return;
+    }
+
+    setAvatarUrl(URL.createObjectURL(file));
+    onImageUpload(file);
+  };
 
   const handleButtonClick = () => {
     fileInputRef.current?.click();
