@@ -9,7 +9,7 @@ function ThemeProvider({ children }) {
   useEffect(() => {
     const darkThemeStorage = getItem("dark_theme");
 
-    setDarkTheme(darkThemeStorage);
+    setDarkTheme(darkThemeStorage === true || darkThemeStorage === "true");
   }, []);
 
   const toggleDarkTheme = (e) => {

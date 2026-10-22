@@ -11,7 +11,8 @@
       "@context/*": ["context/*"],
       "@utils/*": ["utils/*"],
       "@config": ["../config"],
-      "@data/*": ["data/*"]
+      "@data/*": ["data/*"],
+      "@theme": ["theme"]
     }
   }
 }

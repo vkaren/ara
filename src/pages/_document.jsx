@@ -1,10 +1,25 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import {
+  DocumentHeadTags,
+  documentGetInitialProps,
+  createEmotionCache,
+} from "@mui/material-nextjs/v14-pagesRouter";
 
 class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const emotionCache = createEmotionCache({ enableCssLayer: true });
+    const initialProps = await documentGetInitialProps(ctx, {
+      emotionCache,
+    });
+
+    return initialProps;
+  }
+
   render() {
     return (
       <Html lang="en">
         <Head>
+          <DocumentHeadTags {...this.props} />
           <meta charSet="UTF-8" />
           <link
             rel="icon"
