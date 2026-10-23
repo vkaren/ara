@@ -2,6 +2,8 @@ import { useContext, useRef, useState } from "react";
 import { UserContext } from "@context/userContext";
 import Typography from "@mui/material/Typography";
 import api from "@utils/api";
+import { profileUpdateSchema } from "@validation/authSchemas";
+import validateSchema from "@validation/validateSchema";
 import Form from "@components/Form";
 import FileUploaded from "../FileUploaded";
 import styles from "./styles.module.css";
@@ -36,7 +38,7 @@ const SettingsEdit = ({ userInfo }) => {
         type: "file",
         accept: ".png,.jpg",
         onChange: (e) => {
-          setFileUploaded(e.currentTarget.files[0].name);
+          setFileUploaded(e.currentTarget.files[0]?.name || "");
         },
       },
       anotherComponent: (file) => <FileUploaded file={file} />,
@@ -64,54 +66,27 @@ const SettingsEdit = ({ userInfo }) => {
 
     const nickname = formData.get("nickname");
     const bio = formData.get("bio");
-    const profilePicture = formData.get("profile_photo").name;
+    const profilePicture = formData.get("profile_photo")?.name || "";
     const username = formData.get("username");
     const password = formData.get("password");
 
-    const canUpdateProfile = validateForm({
+    const values = {
       nickname,
       bio,
-      profilePicture,
       username,
       password,
-    });
+    };
+    const hasChanges =
+      Object.values(values).some(Boolean) || Boolean(profilePicture);
+    const { error, message } = validateSchema(profileUpdateSchema, values);
 
-    if (canUpdateProfile) {
+    if (error) {
+      setEditMsg({ error: true, msg: message });
+    } else if (!hasChanges) {
+      setEditMsg({ error: true, msg: "Add at least one profile change." });
+    } else {
       updateProfile(formData);
     }
-  };
-
-  const validateForm = ({
-    nickname,
-    bio,
-    profilePicture,
-    username,
-    password,
-  }) => {
-    const allowedCharacters = /^([a-z0-9_])+$/i;
-    const isPasswordRightLength = password.length >= 5;
-    const nicknameHaveSpaces = nickname.includes(" ");
-
-    if (nickname && nicknameHaveSpaces) {
-      setEditMsg({ error: true, msg: "Nickname cannot contain spaces." });
-    } else if (password && !isPasswordRightLength) {
-      setEditMsg({
-        error: true,
-        msg: "Password must be at least 5 characters long.",
-      });
-    } else if (
-      (password && !allowedCharacters.test(password)) ||
-      (username && !allowedCharacters.test(username))
-    ) {
-      setEditMsg({
-        error: true,
-        msg: "Username and password can only contain underscores and alphanumeric characters.",
-      });
-    } else if (nickname || bio || profilePicture || username || password) {
-      return true;
-    }
-
-    return false;
   };
 
   const updateProfile = async (formData) => {

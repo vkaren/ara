@@ -8,6 +8,8 @@ import Form from "@components/Form";
 import formInputs from "@data/forms.json";
 import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
+import { loginSchema } from "@validation/authSchemas";
+import validateSchema from "@validation/validateSchema";
 import styles from "@containers/SignLayout/styles.module.css";
 
 const Login = () => {
@@ -26,25 +28,21 @@ const Login = () => {
     const username = formData.get("username").toLowerCase();
     const password = formData.get("password");
 
-    const canLogin = validateForm({ username, password });
+    const { error, message } = validateSchema(loginSchema, {
+      username,
+      password,
+    });
 
-    if (canLogin) {
+    if (error) {
+      setLoginMsg({ error: true, msg: message });
+    }
+
+    if (!error) {
       await login({
         username,
         password,
       });
     }
-  };
-
-  const validateForm = ({ username, password }) => {
-    if (!username) {
-      setLoginMsg({ error: true, msg: "Username required." });
-      return false;
-    } else if (!password) {
-      setLoginMsg({ error: true, msg: "Password required." });
-      return false;
-    }
-    return true;
   };
 
   const login = async (data) => {

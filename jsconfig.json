@@ -12,7 +12,8 @@
       "@utils/*": ["utils/*"],
       "@config": ["../config"],
       "@data/*": ["data/*"],
-      "@theme": ["theme"]
+      "@theme": ["theme"],
+      "@validation/*": ["validation/*"]
     }
   }
 }

@@ -9,6 +9,8 @@ import Form from "@components/Form";
 import formInputs from "@data/forms.json";
 import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
+import { signUpSchema } from "@validation/authSchemas";
+import validateSchema from "@validation/validateSchema";
 import styles from "@containers/SignLayout/styles.module.css";
 
 const SignUp = () => {
@@ -30,51 +32,17 @@ const SignUp = () => {
 
     formData.set("username", username);
 
-    const canCreateAccount = validateForm({
+    const { error, message } = validateSchema(signUpSchema, {
       nickname,
       username,
       password,
     });
 
-    if (canCreateAccount) {
+    if (error) {
+      setSignUpMsg({ error: true, msg: message });
+    } else {
       await createAccount(formData, { username, password });
     }
-  };
-
-  const validateForm = ({ nickname, username, password }) => {
-    const allowedCharacters = /^([a-z0-9_])+$/i;
-    const isPasswordRightLength = password.length >= 5;
-    const nicknameHaveSpaces = nickname.includes(" ");
-
-    if (
-      nickname &&
-      !nicknameHaveSpaces &&
-      allowedCharacters.test(username) &&
-      allowedCharacters.test(password) &&
-      isPasswordRightLength
-    ) {
-      setSignUpMsg({ error: false, msg: "" });
-      return true;
-    } else if (!nickname) {
-      setSignUpMsg({ error: true, msg: "Nickname required." });
-    } else if (!username) {
-      setSignUpMsg({ error: true, msg: "Username required." });
-    } else if (!password) {
-      setSignUpMsg({ error: true, msg: "Password required." });
-    } else if (!isPasswordRightLength) {
-      setSignUpMsg({
-        error: true,
-        msg: "Password must be at least 5 characters long.",
-      });
-    } else if (nicknameHaveSpaces) {
-      setSignUpMsg({ error: true, msg: "Nickname cannot contain spaces." });
-    } else {
-      setSignUpMsg({
-        error: true,
-        msg: "Username and password can only contain underscores and alphanumeric characters.",
-      });
-    }
-    return false;
   };
 
   const createAccount = async (formData, loginData) => {
