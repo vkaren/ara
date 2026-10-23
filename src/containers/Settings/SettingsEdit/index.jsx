@@ -1,5 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import { UserContext } from "@context/userContext";
+import Typography from "@mui/material/Typography";
 import api from "@utils/api";
 import Form from "@components/Form";
 import FileUploaded from "../FileUploaded";
@@ -137,9 +138,13 @@ const SettingsEdit = ({ userInfo }) => {
 
   return (
     <section className={`${styles["edit-section"]} bckgBlack clrWhite`}>
-      <h2 className={styles["edit-section__title"]}>Settings</h2>
+      <Typography variant="h5" component="h2" fontWeight={600}>
+        Settings
+      </Typography>
 
-      <h3 className={styles["edit-section__title-2"]}>Edit Profile</h3>
+      <Typography variant="h6" component="h3" fontWeight={500}>
+        Edit Profile
+      </Typography>
 
       <Form
         type="edit"
@@ -148,7 +153,6 @@ const SettingsEdit = ({ userInfo }) => {
         fileUploaded={fileUploaded}
         submitMsg={editMsg}
         onSubmit={onSubmit}
-        styles={styles}
       />
     </section>
   );

@@ -1,6 +1,8 @@
 import { createRef, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import Link from "next/link";
 import { UserContext } from "@context/userContext";
 import Form from "@components/Form";
@@ -120,11 +122,13 @@ const SignUp = () => {
 
   return (
     <>
-      <div className={styles["app-title"]}>
+      <Box className={styles["app-title"]}>
         <Image src={iconTitle} alt="Ara" />
-      </div>
+      </Box>
 
-      <h1 className={styles["page-title"]}>Sign up</h1>
+      <Typography variant="h4" component="h1" fontWeight={600}>
+        Sign up
+      </Typography>
 
       <Form
         type="sign"

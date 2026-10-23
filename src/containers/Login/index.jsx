@@ -1,6 +1,8 @@
 import { createRef, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import { UserContext } from "@context/userContext";
 import Form from "@components/Form";
 import formInputs from "@data/forms.json";
@@ -70,11 +72,13 @@ const Login = () => {
 
   return (
     <>
-      <div className={styles["app-title"]}>
+      <Box className={styles["app-title"]}>
         <Image src={iconTitle} alt="Ara" />
-      </div>
+      </Box>
 
-      <h1 className={styles["page-title"]}>Welcome back!</h1>
+      <Typography variant="h4" component="h1" fontWeight={600}>
+        Welcome back!
+      </Typography>
 
       <Form
         type="sign"
@@ -82,7 +86,6 @@ const Login = () => {
         inputs={formInputs.forms.login}
         submitMsg={loginMsg}
         onSubmit={onSubmit}
-        styles={styles}
       />
     </>
   );
