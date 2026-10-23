@@ -1,20 +1,26 @@
 import Image from "next/image";
-import styles from "./styles.module.css";
+import Box from "@mui/material/Box";
 
 const PostInsertedImage = ({ insertedImage, isHomeOrProfilePage }) => {
   return (
-    <div
-      className={`${styles["post__inserted-image"]}  ${
-        !isHomeOrProfilePage && styles["full"]
-      }`}
+    <Box
+      sx={{
+        position: "relative",
+        width: "100%",
+        height: isHomeOrProfilePage ? 200 : 250,
+        mb: 1,
+      }}
     >
       <Image
-        className={styles["inserted-image"]}
         src={insertedImage}
         alt="post content"
         fill
+        style={{
+          objectFit: isHomeOrProfilePage ? "cover" : "contain",
+          borderRadius: 8,
+        }}
       />
-    </div>
+    </Box>
   );
 };
 

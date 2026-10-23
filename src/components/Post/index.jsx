@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Card from "@mui/material/Card";
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
 import PostInsertedImage from "./PostInsertedImage";
 import PostFooter from "./PostFooter";
 import ReplyBox from "./ReplyBox";
-import styles from "./styles.module.css";
 
 const Post = ({
   id,
@@ -30,21 +30,40 @@ const Post = ({
     }
   };
 
+  const onPostKeyDown = (event) => {
+    if (isHomeOrProfilePage && (event.key === "Enter" || event.key === " ")) {
+      event.preventDefault();
+      onClickPost();
+    }
+  };
+
   const toggleReplyModal = () => {
     setIsReplying(!isReplying);
   };
 
   return (
     <>
-      <article
-        id="hover"
-        className={`${styles["post-container"]} ${
-          !!isAReply && styles["reply"]
-        } ${
-          isHomeOrProfilePage && styles["link"]
-        } bckgBlack clrWhite hoverBlack`}
-        role="button"
+      <Card
+        component="article"
         onClick={onClickPost}
+        onKeyDown={onPostKeyDown}
+        role={isHomeOrProfilePage ? "button" : undefined}
+        tabIndex={isHomeOrProfilePage ? 0 : undefined}
+        sx={{
+          position: "relative",
+          width: { xs: "calc(100% - 2rem)", sm: isAReply ? "85%" : "75%" },
+          maxWidth: 600,
+          minWidth: { xs: 0, sm: isAReply ? 280 : 300 },
+          p: 2,
+          border: 1,
+          borderColor: "primary.main",
+          borderRadius: 2,
+          overflow: "visible",
+          cursor: isHomeOrProfilePage ? "pointer" : "default",
+          "&:hover": isHomeOrProfilePage
+            ? { backgroundColor: "action.hover" }
+            : undefined,
+        }}
       >
         <PostHeader
           id={id}
@@ -76,7 +95,7 @@ const Post = ({
           onClickReply={toggleReplyModal}
           isHomeOrProfilePage={isHomeOrProfilePage}
         />
-      </article>
+      </Card>
 
       {isReplying && (
         <ReplyBox

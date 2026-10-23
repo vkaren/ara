@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { UserContext } from "@context/userContext";
 import ProfilePhoto from "@components/ProfilePhoto";
 import FollowButton from "@components/FollowButton";
-import styles from "./styles.module.css";
 
 const UserInfo = ({
   id,
@@ -24,19 +26,24 @@ const UserInfo = ({
   };
 
   return (
-    <div className={`${styles["header__user-info"]} bckgBlack clrWhite`}>
-      <div className={styles["header__user-info_top"]}>
+    <Box sx={{ px: { xs: 2, sm: 13 }, py: 3, borderBottom: 1, borderColor: "primary.main" }}>
+      <Stack
+        direction={{ xs: "column", sm: "row" }}
+        alignItems={{ xs: "flex-start", sm: "center" }}
+        justifyContent="space-between"
+        spacing={2}
+      >
         <ProfilePhoto photoUrl={profilePhoto} profilePage={true} />
 
-        <div className={styles["user-info__names"]}>
-          <span className={styles["user-info__nickname"]}>{nickname}</span>
-          <span className={styles["user-info__username"]}>@{username}</span>
-        </div>
+        <Box sx={{ flex: 1 }}>
+          <Typography variant="h6" fontWeight={600}>{nickname}</Typography>
+          <Typography variant="body1" color="text.secondary">@{username}</Typography>
+        </Box>
 
-        <div className={styles["user-info__follow"]}>
-          <span className={styles["user-info__followers"]}>
+        <Stack direction="row" alignItems="center" spacing={2}>
+          <Typography variant="body2">
             {`${numberFollowers} follower${numberFollowers === 1 ? "" : "s"}`}
-          </span>
+          </Typography>
 
           {userId !== id && (
             <FollowButton
@@ -44,13 +51,11 @@ const UserInfo = ({
               updateNumberFollowers={updateNumberFollowers}
             />
           )}
-        </div>
-      </div>
+        </Stack>
+      </Stack>
 
-      <div className={styles["header__user-info_bottom"]}>
-        <span className={styles["user-info__bio"]}>{bio}</span>
-      </div>
-    </div>
+      {bio && <Typography sx={{ mt: 2 }}>{bio}</Typography>}
+    </Box>
   );
 };
 

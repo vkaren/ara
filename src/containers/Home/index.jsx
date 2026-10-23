@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
+import Stack from "@mui/material/Stack";
 import AddComment from "@components/AddComment";
-import styles from "./styles.module.css";
 
 const Post = dynamic(() => import("@components/Post"), { ssr: false });
 
@@ -9,7 +9,12 @@ const Home = ({ posts }) => {
     <>
       <AddComment />
 
-      <section className={styles["post-list__container"]}>
+      <Stack
+        component="section"
+        alignItems="center"
+        spacing={2}
+        sx={{ width: "100%" }}
+      >
         {posts.map((post) => (
           <Post
             key={`post-${post.id}`}
@@ -22,7 +27,7 @@ const Home = ({ posts }) => {
             replies={post.replies}
           />
         ))}
-      </section>
+      </Stack>
     </>
   );
 };

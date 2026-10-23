@@ -1,27 +1,27 @@
+import Button from "@mui/material/Button";
 import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
 
 const FooterOption = ({ type, text, haveLike, onClick }) => {
-  let className = `${styles[`${type}_icon`]} ${
-    haveLike && styles["post_liked"]
-  }`;
-
-  if (type === "like") {
-    if (haveLike) {
-      className += " fillLgtPurple";
-    } else {
-      className += " fillBlack strLgtPurple";
-    }
-  }
+  const iconStyle = {
+    width: type === "comment" ? 20 : 24,
+    height: type === "comment" ? 20 : 24,
+    fill: haveLike ? "#2d66f9" : type === "like" ? "transparent" : "#2d66f9",
+    stroke: type === "like" ? "#2d66f9" : "none",
+    strokeWidth: type === "like" ? 1.5 : 0,
+  };
 
   return (
-    <div
-      onClick={onClick}
-      className={`${styles["footer__option"]} clrLgtPurple`}
+    <Button
+      onClick={(event) => {
+        event.stopPropagation();
+        onClick?.(event);
+      }}
+      size="small"
+      startIcon={<IconComponent name={type} style={iconStyle} />}
+      sx={{ minWidth: 0, textTransform: "none", color: "primary.main" }}
     >
-      <IconComponent name={type} className={className} />
-      <span>{text}</span>
-    </div>
+      {text}
+    </Button>
   );
 };
 

@@ -1,23 +1,22 @@
-import Image from "next/image";
+import Avatar from "@mui/material/Avatar";
 import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
 
 const ProfilePhoto = ({ photoUrl, profilePage }) => {
   return (
-    <div
-      className={`${styles["profile-photo"]} ${
-        profilePage && styles["profile-page"]
-      } bckgLgtBlack`}
+    <Avatar
+      src={photoUrl || undefined}
+      alt="User avatar"
+      sx={{
+        width: profilePage ? 100 : 40,
+        height: profilePage ? 100 : 40,
+        flexShrink: 0,
+        border: 1,
+        borderColor: "primary.main",
+        bgcolor: "background.paper",
+      }}
     >
-      {photoUrl ? (
-        <Image src={photoUrl} alt="User avatar" fill />
-      ) : (
-        <IconComponent
-          name="profile"
-          className={`${styles["profile-photo__default"]} fillVryLgtGray`}
-        />
-      )}
-    </div>
+      <IconComponent name="profile" style={{ fill: "currentColor" }} />
+    </Avatar>
   );
 };
 

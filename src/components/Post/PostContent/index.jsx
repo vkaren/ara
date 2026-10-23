@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 import ContentIntro from "../ContentIntro";
 import FullContent from "../FullContent";
-import styles from "./styles.module.css";
 
 const PostContent = ({ id, content, replyingToUser, isHomeOrProfilePage }) => {
   const router = useRouter();
@@ -20,14 +21,14 @@ const PostContent = ({ id, content, replyingToUser, isHomeOrProfilePage }) => {
   };
 
   return (
-    <div className={`${styles["post__content"]} `}>
+    <Box sx={{ mx: 1, my: 1, fontSize: "1rem", wordBreak: "break-word" }}>
       {replyingToUser && (
-        <span
-          className={`${styles["content_replying-to"]} clrLgtPurple`}
-        >{`@${replyingToUser} `}</span>
+        <Typography component="span" color="primary" fontWeight={600}>
+          {`@${replyingToUser} `}
+        </Typography>
       )}
 
-      {<ContentIntro contentLetters={contentLetters} />}
+      <ContentIntro contentLetters={contentLetters} />
 
       {contentLetters.length > 50 && (
         <FullContent
@@ -36,7 +37,7 @@ const PostContent = ({ id, content, replyingToUser, isHomeOrProfilePage }) => {
           showMore={showMore}
         />
       )}
-    </div>
+    </Box>
   );
 };
 

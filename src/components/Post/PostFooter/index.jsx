@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
+import Stack from "@mui/material/Stack";
 import { UserContext } from "@context/userContext";
 import { ListeningSocketContext } from "@context/listeningSocketContext";
 import FooterOption from "../FooterOption";
 import api from "@utils/api";
-import styles from "./styles.module.css";
 
 const PostFooter = ({
   id,
@@ -111,7 +111,12 @@ const PostFooter = ({
   };
 
   return (
-    <footer className={`${styles["post__footer"]}`}>
+    <Stack
+      component="footer"
+      direction="row"
+      justifyContent="flex-end"
+      spacing={1}
+    >
       {isHomeOrProfilePage ? (
         <FooterOption type={"comment"} text={numberReplies} />
       ) : (
@@ -124,7 +129,7 @@ const PostFooter = ({
         haveLike={haveLike}
         onClick={onClickLikeBtn}
       />
-    </footer>
+    </Stack>
   );
 };
 

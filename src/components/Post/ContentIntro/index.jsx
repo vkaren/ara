@@ -1,12 +1,12 @@
-import styles from "./styles.module.css";
+import Typography from "@mui/material/Typography";
 
 const ContentIntro = ({ contentLetters = [""] }) => {
   return (
-    <span className={styles["content_intro"]}>
+    <Typography component="span" variant="body1" fontWeight={500}>
       {contentLetters.length > 50
         ? contentLetters.slice(0, 40).join("")
         : contentLetters.join("")}
-    </span>
+    </Typography>
   );
 };
 

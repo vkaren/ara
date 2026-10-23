@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import Link from "next/link";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import getDateFormat from "@utils/getDateFormat";
 import { UserContext } from "@context/userContext";
 import ProfilePhoto from "@components/ProfilePhoto";
 import HeaderFeatures from "../HeaderFeatures";
-import styles from "./styles.module.css";
 
 const PostHeader = ({ id, author, createdAt, isAReply }) => {
   const { userId } = useContext(UserContext);
@@ -15,25 +16,37 @@ const PostHeader = ({ id, author, createdAt, isAReply }) => {
   };
 
   return (
-    <header className={`${styles["post__header"]}`}>
+    <Stack
+      component="header"
+      direction="row"
+      alignItems="center"
+      spacing={1}
+      sx={{ minWidth: 0 }}
+    >
       <ProfilePhoto photoUrl={author.profile_photo} />
 
-      <span className={styles["header__nickname"]}>{author.nickname}</span>
+      <Typography variant="body2" fontWeight={700} noWrap>
+        {author.nickname}
+      </Typography>
 
       <Link
-        className={styles["header__link"]}
         onClick={onClickLink}
         href={`/profile/${author.id}`}
+        style={{ color: "inherit", textDecoration: "none" }}
       >
-        <span className={styles["header__username"]}>@{author.username}</span>
+        <Typography variant="body2" color="text.secondary" noWrap>
+          @{author.username}
+        </Typography>
       </Link>
 
-      <span className={styles["header__time"]}>{dateFormat}</span>
+      <Typography variant="caption" color="text.secondary" noWrap>
+        {dateFormat}
+      </Typography>
 
       {author.id === userId && (
         <HeaderFeatures id={id} authorId={author.id} isAReply={isAReply} />
       )}
-    </header>
+    </Stack>
   );
 };
 

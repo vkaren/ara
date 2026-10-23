@@ -1,6 +1,7 @@
 import UserInfo from "./UserInfo";
 import Post from "@components/Post";
-import styles from "./styles.module.css";
+import Box from "@mui/material/Box";
+import Stack from "@mui/material/Stack";
 
 const Profile = ({
   id,
@@ -13,8 +14,8 @@ const Profile = ({
 }) => {
   return (
     <>
-      <header className={`${styles["user-profile__header"]}`}>
-        <div className={styles["header__bckg"]}></div>
+      <Box component="header" sx={{ width: "100%", mt: -6 }}>
+        <Box sx={{ width: "100%", height: "25vh", bgcolor: "primary.light" }} />
 
         <UserInfo
           id={id}
@@ -24,9 +25,14 @@ const Profile = ({
           bio={bio}
           followers={followers}
         />
-      </header>
+      </Box>
 
-      <section className={styles["user-profile__posts"]}>
+      <Stack
+        component="section"
+        alignItems="center"
+        spacing={2}
+        sx={{ width: "90%" }}
+      >
         {posts.map((post) => (
           <Post
             key={`post-${post.id}`}
@@ -39,7 +45,7 @@ const Profile = ({
             replies={post.replies}
           />
         ))}
-      </section>
+      </Stack>
     </>
   );
 };

@@ -1,6 +1,8 @@
 import { useRouter } from "next/router";
+import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
+import Toolbar from "@mui/material/Toolbar";
 import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
 
 const NavBack = ({ prevRoute }) => {
   const router = useRouter();
@@ -14,14 +16,22 @@ const NavBack = ({ prevRoute }) => {
   };
 
   return (
-    <nav className={`${styles["post-nav"]} bckgBlack`}>
-      <button onClick={onClickBack} className={styles["post-nav__back"]}>
+    <AppBar
+      component="nav"
+      position="fixed"
+      color="default"
+      elevation={0}
+      sx={{ width: { xs: "100%", sm: "calc(100% - 23rem)" }, right: 0 }}
+    >
+      <Toolbar sx={{ minHeight: 48 }}>
+        <IconButton onClick={onClickBack} aria-label="Go back">
         <IconComponent
           name="arrow"
-          className={`${styles["back__icon"]} fillWhite`}
+          style={{ width: 24, height: 24, transform: "rotate(180deg)" }}
         />
-      </button>
-    </nav>
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 };
 

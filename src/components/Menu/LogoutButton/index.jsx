@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
+import Button from "@mui/material/Button";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { UserContext } from "@context/userContext";
-import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
 
 const LogoutButton = () => {
   const router = useRouter();
@@ -12,15 +12,15 @@ const LogoutButton = () => {
     removeUserInfo();
     router.push("/login");
   };
-  return (
-    <button
-      onClick={onLogOut}
-      className={`${styles["logout-btn"]} fillLgtPurple`}
-    >
-      <span className={`${styles["logout__title"]} clrLgtPurple`}>Log out</span>
 
-      <IconComponent name={"logout"} />
-    </button>
+  return (
+    <Button
+      onClick={onLogOut}
+      endIcon={<LogoutIcon />}
+      sx={{ alignSelf: { xs: "center", sm: "flex-end" }, mt: "auto" }}
+    >
+      Log out
+    </Button>
   );
 };
 

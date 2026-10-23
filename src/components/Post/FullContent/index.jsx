@@ -1,41 +1,35 @@
-import styles from "./styles.module.css";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 const FullContent = ({ onClickShowMore, showMore, contentLetters }) => {
   return (
-    <>
-      <div
-        onClick={onClickShowMore}
-        className={`${styles["content__show-more"]} ${
-          showMore && styles["show"]
-        }`}
-        role="button"
-      >
-        <span className={styles["show-more__dots"]}>...</span>
-        <span className={`${styles["show__span"]} clrLgtPurple`}>
-          Show more
-        </span>
-      </div>
+    <Box component="span">
+      {!showMore && (
+        <Button
+          onClick={onClickShowMore}
+          size="small"
+          sx={{ ml: 1, textTransform: "none" }}
+        >
+          ... Show more
+        </Button>
+      )}
 
-      <span
-        className={`${styles["content__complete"]} ${
-          showMore && styles["show"]
-        }`}
-      >
-        {contentLetters.splice(41).join("")}
-      </span>
-
-      <div
-        onClick={onClickShowMore}
-        className={`${styles["content__show-less"]} ${
-          showMore && styles["show"]
-        }`}
-        role="button"
-      >
-        <span className={`${styles["show__span"]} clrLgtPurple`}>
-          Show less
-        </span>
-      </div>
-    </>
+      {showMore && (
+        <>
+          <Typography component="span" variant="body1">
+            {contentLetters.slice(41).join("")}
+          </Typography>
+          <Button
+            onClick={onClickShowMore}
+            size="small"
+            sx={{ ml: 1, textTransform: "none" }}
+          >
+            Show less
+          </Button>
+        </>
+      )}
+    </Box>
   );
 };
 
