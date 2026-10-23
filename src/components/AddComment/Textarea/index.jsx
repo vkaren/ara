@@ -1,12 +1,22 @@
-import styles from "./styles.module.css";
+import TextField from "@mui/material/TextField";
 
 const Textarea = ({ isAReply }) => {
   return (
-    <textarea
-      className={`${styles["adc_textarea"]} outlineLgtPurple`}
+    <TextField
       name="content"
+      multiline
+      minRows={3}
       placeholder={isAReply ? "Reply" : "What's happenning?"}
-      maxLength={250}
+      fullWidth
+      inputProps={{ maxLength: 250 }}
+      sx={{
+        gridColumn: "1 / -1",
+        mb: 1.5,
+        "& .MuiOutlinedInput-root": {
+          borderRadius: 2,
+          backgroundColor: "background.paper",
+        },
+      }}
     />
   );
 };

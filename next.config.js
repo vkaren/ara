@@ -1,4 +1,5 @@
 const config = require("./config");
+const apiUrl = config.api ? new URL(config.api) : null;
 
 module.exports = {
   webpack(config) {
@@ -10,13 +11,15 @@ module.exports = {
     return config;
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: config.api.split("https://")[1],
-        port: "",
-        pathname: "/files/**",
-      },
-    ],
+    remotePatterns: apiUrl
+      ? [
+          {
+            protocol: apiUrl.protocol.replace(":", ""),
+            hostname: apiUrl.hostname,
+            port: apiUrl.port,
+            pathname: "/files/**",
+          },
+        ]
+      : [],
   },
 };

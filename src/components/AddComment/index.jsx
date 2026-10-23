@@ -80,6 +80,7 @@ const AddComment = ({ isAReply }) => {
   return (
     <form
       ref={form}
+      onSubmit={onSubmit}
       className={`${styles["add-comment__section"]} ${
         isAReply && styles["reply"]
       } bckgBlack
@@ -91,7 +92,7 @@ const AddComment = ({ isAReply }) => {
 
       <InsertedImage />
 
-      <SubmitButton isAReply={isAReply} onSubmit={onSubmit} />
+      <SubmitButton isAReply={isAReply} />
     </form>
   );
 };

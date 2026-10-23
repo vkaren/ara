@@ -1,18 +1,24 @@
+import Button from "@mui/material/Button";
 import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
 
 const InsertedImage = () => {
   return (
-    <label className={styles["adc_inserted-image"]} htmlFor="inserted_image">
+    <Button
+      component="label"
+      variant="text"
+      size="small"
+      startIcon={<IconComponent name="insertedImage" />}
+      sx={{ justifySelf: "start", textTransform: "none" }}
+    >
+      Add image
       <input
         id="inserted_image"
         name="inserted_image"
         type="file"
         accept=".png,.jpg"
+        hidden
       />
-
-      <IconComponent name={"insertedImage"} className="fillLgtPurple" />
-    </label>
+    </Button>
   );
 };
 export default InsertedImage;

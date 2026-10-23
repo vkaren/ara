@@ -1,20 +1,23 @@
 import AddComment from "@components/AddComment";
-import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
+import CloseIcon from "@mui/icons-material/Close";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
 
 const ReplyBox = ({ replyingToPost, replyingToUser, closeModal }) => (
-  <>
-    <section className={`${styles["reply-modal"]} `}>
-      <button
+  <Dialog open fullWidth maxWidth="sm" onClose={closeModal}>
+    <DialogTitle sx={{ pr: 6 }}>
+      Reply
+      <IconButton
         onClick={closeModal}
-        className={`${styles["reply-modal__cancel"]} bckgLgtPurple`}
+        aria-label="Close reply dialog"
+        sx={{ position: "absolute", right: 12, top: 8 }}
       >
-        <IconComponent
-          name="cancel"
-          className={`${styles["cancel_icon"]} fillBlack`}
-        />
-      </button>
-
+        <CloseIcon />
+      </IconButton>
+    </DialogTitle>
+    <DialogContent dividers>
       <AddComment
         isAReply={{
           replyingToPost,
@@ -22,13 +25,7 @@ const ReplyBox = ({ replyingToPost, replyingToUser, closeModal }) => (
           closeModal,
         }}
       />
-    </section>
-
-    <div
-      onClick={closeModal}
-      className={styles["modal-overlay"]}
-      role="button"
-    ></div>
-  </>
+    </DialogContent>
+  </Dialog>
 );
 export default ReplyBox;

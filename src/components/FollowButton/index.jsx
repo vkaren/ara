@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
+import Button from "@mui/material/Button";
 import { UserContext } from "@context/userContext";
 import api from "@utils/api";
-import styles from "./styles.module.css";
 
 const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   const { userId, hasFollowedUser } = useContext(UserContext);
@@ -59,15 +59,15 @@ const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   };
 
   return (
-    <button
+    <Button
       onClick={onClickFollowBtn}
-      id="hover"
-      className={`${styles["user_follow-btn"]} ${
-        isFollowing && `${styles["following"]} bckgGray clrWhite hoverBlack`
-      }`}
+      variant={isFollowing ? "outlined" : "contained"}
+      color="primary"
+      size="small"
+      sx={{ borderRadius: 2, textTransform: "none", fontWeight: 600 }}
     >
       {isFollowing ? "Following" : "Follow"}
-    </button>
+    </Button>
   );
 };
 
