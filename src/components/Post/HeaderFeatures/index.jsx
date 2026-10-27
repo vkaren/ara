@@ -1,72 +1,86 @@
 import { useContext, useState } from "react";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import IconButton from "@mui/material/IconButton";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemIcon from "@mui/material/ListItemIcon";
 import { AppContext } from "@context/appContext";
 import DeleteModal from "@components/DeleteModal";
-import IconComponent from "@components/Icon";
-import Features from "../Features";
 import api from "@utils/api";
-import styles from "./styles.module.css";
 
 const HeaderFeatures = ({ id, authorId, isAReply }) => {
   const { savePostDeleted, saveReplyDeleted } = useContext(AppContext);
-  const [showFeatures, setShowFeatures] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [isDeletingPost, setIsDeletingPost] = useState(false);
 
-  const onClickFeaturesIcon = (e) => {
-    e.stopPropagation();
-    setShowFeatures(!showFeatures);
+  const closeMenu = () => setAnchorEl(null);
+
+  const toggleDeleteModal = (event) => {
+    event?.stopPropagation();
+    closeMenu();
+    setIsDeletingPost((isOpen) => !isOpen);
   };
 
-  const toggleDeleteModal = (e) => {
-    if (e) e.stopPropagation();
-
-    setIsDeletingPost(!isDeletingPost);
-  };
-
-  const onDeletePost = async (e) => {
-    e.stopPropagation();
+  const onDeletePost = async (event) => {
+    event?.stopPropagation();
 
     const request = {
       method: "DELETE",
       type: "application/json",
-      body: {
-        author_id: authorId,
-      },
+      body: { author_id: authorId },
+      route: isAReply ? "reply" : "post",
     };
 
-    if (!!isAReply) {
-      request.route = "reply";
+    if (isAReply) {
       request.body.reply_id = id;
     } else {
-      request.route = "post";
       request.body.post_id = id;
     }
 
     const isDeleted = await api(request);
 
-    if (isDeleted) {
+    if (isDeleted && !isDeleted.error) {
       isAReply
         ? saveReplyDeleted(isDeleted.replyDeleted)
         : savePostDeleted(isDeleted.postDeleted);
 
-      toggleDeleteModal();
+      setIsDeletingPost(false);
     }
   };
 
   return (
     <>
-      <div
-        onClick={onClickFeaturesIcon}
-        className={styles["header__features"]}
-        role="button"
+      <IconButton
+        onClick={(event) => {
+          event.stopPropagation();
+          setAnchorEl(event.currentTarget);
+        }}
+        aria-label="Post options"
+        aria-haspopup="menu"
+        aria-expanded={Boolean(anchorEl)}
+        size="small"
       >
-        <IconComponent name="features" className={styles["features_icon"]} />
+        <MoreHorizIcon />
+      </IconButton>
 
-        {showFeatures && <Features onClickDeleteBtn={toggleDeleteModal} />}
-      </div>
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={closeMenu}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <MenuItem onClick={toggleDeleteModal} sx={{ color: "error.main" }}>
+          <ListItemIcon>
+            <DeleteOutlineIcon color="error" fontSize="small" />
+          </ListItemIcon>
+          Delete
+        </MenuItem>
+      </Menu>
 
       {isDeletingPost && (
         <DeleteModal
-          type="post"
+          type={isAReply ? "reply" : "post"}
           onDelete={onDeletePost}
           onCancelDelete={toggleDeleteModal}
         />

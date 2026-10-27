@@ -2,6 +2,7 @@ import UserInfo from "./UserInfo";
 import Post from "@components/Post";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 const Profile = ({
   id,
@@ -33,18 +34,24 @@ const Profile = ({
         spacing={2}
         sx={{ width: "90%" }}
       >
-        {posts.map((post) => (
-          <Post
-            key={`post-${post.id}`}
-            id={post.id}
-            author={post.author}
-            createdAt={post.createdAt}
-            content={post.content}
-            insertedImage={post.inserted_image}
-            likes={post.likes}
-            replies={post.replies}
-          />
-        ))}
+        {posts.length > 0 ? (
+          posts.map((post) => (
+            <Post
+              key={`post-${post.id}`}
+              id={post.id}
+              author={post.author}
+              createdAt={post.createdAt}
+              content={post.content}
+              insertedImage={post.inserted_image}
+              likes={post.likes}
+              replies={post.replies}
+            />
+          ))
+        ) : (
+          <Typography color="text.secondary" role="status">
+            This user has not published anything yet.
+          </Typography>
+        )}
       </Stack>
     </>
   );

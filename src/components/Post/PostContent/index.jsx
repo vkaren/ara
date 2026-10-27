@@ -35,6 +35,7 @@ const PostContent = ({ id, content, replyingToUser, isHomeOrProfilePage }) => {
           onClickShowMore={onClickShowMore}
           contentLetters={contentLetters}
           showMore={showMore}
+          isHomeOrProfilePage={isHomeOrProfilePage}
         />
       )}
     </Box>

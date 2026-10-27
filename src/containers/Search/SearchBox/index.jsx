@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Typography from "@mui/material/Typography";
 import api from "@utils/api";
 import User from "../User";
 import styles from "./styles.module.css";
@@ -53,23 +54,30 @@ const SearchBox = () => {
           onChange={onSearchUser}
           className={styles["search-box__input"]}
           type="search"
+          aria-label="Search users"
           placeholder="Search..."
           autoComplete="off"
         />
       </section>
 
-      <ul className={`${styles["searched-container"]}`}>
-        {searchedUsers.map((user) => (
-          <User
-            key={user.id}
-            id={user.id}
-            nickname={user.nickname}
-            username={user.username}
-            profilePhoto={user.profile_photo}
-            styles={styles}
-            type={"searched-user"}
-          />
-        ))}
+      <ul className={`${styles["searched-container"]}`} aria-live="polite">
+        {searchedUsers.length > 0 ? (
+          searchedUsers.map((user) => (
+            <User
+              key={user.id}
+              id={user.id}
+              nickname={user.nickname}
+              username={user.username}
+              profilePhoto={user.profile_photo}
+              styles={styles}
+              type={"searched-user"}
+            />
+          ))
+        ) : (
+          <Typography component="li" color="text.secondary" role="status" sx={{ p: 2 }}>
+            Search for a user to see results.
+          </Typography>
+        )}
       </ul>
     </>
   );

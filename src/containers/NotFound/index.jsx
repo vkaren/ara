@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Button from "@mui/material/Button";
 import IconComponent from "@components/Icon";
 import styles from "./styles.module.css";
 
@@ -29,12 +30,13 @@ const NotFound = () => {
             This page doesn't exist.
           </span>
 
-          <button
+          <Button
             onClick={onClickBackToHome}
             className={styles["not-found__back-btn"]}
+            variant="contained"
           >
             Back to home
-          </button>
+          </Button>
         </section>
       </main>
     </>

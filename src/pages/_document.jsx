@@ -21,6 +21,11 @@ class MyDocument extends Document {
         <Head>
           <DocumentHeadTags {...this.props} />
           <meta charSet="UTF-8" />
+          <meta
+            name="description"
+            content="Ara is a social space for sharing posts, replies and conversations."
+          />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link
             rel="icon"
             type="image/png"

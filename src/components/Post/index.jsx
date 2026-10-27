@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
+import Box from "@mui/material/Box";
 import PostHeader from "./PostHeader";
 import PostContent from "./PostContent";
 import PostInsertedImage from "./PostInsertedImage";
@@ -30,13 +32,6 @@ const Post = ({
     }
   };
 
-  const onPostKeyDown = (event) => {
-    if (isHomeOrProfilePage && (event.key === "Enter" || event.key === " ")) {
-      event.preventDefault();
-      onClickPost();
-    }
-  };
-
   const toggleReplyModal = () => {
     setIsReplying(!isReplying);
   };
@@ -45,10 +40,6 @@ const Post = ({
     <>
       <Card
         component="article"
-        onClick={onClickPost}
-        onKeyDown={onPostKeyDown}
-        role={isHomeOrProfilePage ? "button" : undefined}
-        tabIndex={isHomeOrProfilePage ? 0 : undefined}
         sx={{
           position: "relative",
           width: { xs: "calc(100% - 2rem)", sm: isAReply ? "85%" : "75%" },
@@ -59,10 +50,6 @@ const Post = ({
           borderColor: "primary.main",
           borderRadius: 2,
           overflow: "visible",
-          cursor: isHomeOrProfilePage ? "pointer" : "default",
-          "&:hover": isHomeOrProfilePage
-            ? { backgroundColor: "action.hover" }
-            : undefined,
         }}
       >
         <PostHeader
@@ -73,18 +60,47 @@ const Post = ({
           onDeletePost={onDeletePost}
         />
 
-        <PostContent
-          id={id}
-          content={content}
-          replyingToUser={isAReply?.replyingToUser}
-          isHomeOrProfilePage={isHomeOrProfilePage}
-        />
+        {isHomeOrProfilePage ? (
+          <CardActionArea
+            onClick={onClickPost}
+            aria-label={`Open post by ${author.nickname}`}
+            sx={{
+              display: "block",
+              textAlign: "left",
+              borderRadius: 1,
+              p: 0.5,
+            }}
+          >
+            <PostContent
+              id={id}
+              content={content}
+              replyingToUser={isAReply?.replyingToUser}
+              isHomeOrProfilePage={isHomeOrProfilePage}
+            />
 
-        {insertedImage && (
-          <PostInsertedImage
-            insertedImage={insertedImage}
-            isHomeOrProfilePage={isHomeOrProfilePage}
-          />
+            {insertedImage && (
+              <PostInsertedImage
+                insertedImage={insertedImage}
+                isHomeOrProfilePage={isHomeOrProfilePage}
+              />
+            )}
+          </CardActionArea>
+        ) : (
+          <Box>
+            <PostContent
+              id={id}
+              content={content}
+              replyingToUser={isAReply?.replyingToUser}
+              isHomeOrProfilePage={isHomeOrProfilePage}
+            />
+
+            {insertedImage && (
+              <PostInsertedImage
+                insertedImage={insertedImage}
+                isHomeOrProfilePage={isHomeOrProfilePage}
+              />
+            )}
+          </Box>
         )}
 
         <PostFooter

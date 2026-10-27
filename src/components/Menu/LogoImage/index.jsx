@@ -12,7 +12,7 @@ const LogoImage = () => {
   return (
     <Link className={`${styles["logo"]} `} href="/home">
       <div className={styles["logo__image"]}>
-        <Image src={darkTheme ? iconLogoDarkMode : iconLogo} alt="Logo" />
+        <Image src={darkTheme ? iconLogoDarkMode : iconLogo} alt="Ara home" />
       </div>
     </Link>
   );

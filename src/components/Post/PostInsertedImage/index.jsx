@@ -13,7 +13,7 @@ const PostInsertedImage = ({ insertedImage, isHomeOrProfilePage }) => {
     >
       <Image
         src={insertedImage}
-        alt="post content"
+        alt="Image attached to the post"
         fill
         style={{
           objectFit: isHomeOrProfilePage ? "cover" : "contain",
