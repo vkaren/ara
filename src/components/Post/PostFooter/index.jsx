@@ -57,7 +57,7 @@ const PostFooter = ({
 
   const updateNumberReplies = (newReply) => {
     if (!isAReply && newReply.replying_to_post === id) {
-      setNumberReplies(numberReplies + 1);
+      setNumberReplies((currentNumber) => currentNumber + 1);
     }
   };
 
@@ -68,9 +68,9 @@ const PostFooter = ({
         (!isAReply && data.type === "post" && data.message_id === id)
       ) {
         if (type === "dislike") {
-          setNumberLikes(numberLikes - 1);
+          setNumberLikes((currentNumber) => Math.max(0, currentNumber - 1));
         } else {
-          setNumberLikes(numberLikes + 1);
+          setNumberLikes((currentNumber) => currentNumber + 1);
         }
       }
     }

@@ -43,9 +43,27 @@ const PostPage = ({ post, previousRoute }) => {
 
   useEffect(() => onDeletePost(), [postDeleted]);
 
-  useEffect(() => addNewReply(), [socketData]);
+  useEffect(() => {
+    const newReply = socketData.newReply;
 
-  useEffect(() => removeReply(), [replyDeleted]);
+    if (newReply) {
+      setReplies((currentReplies) => {
+        const alreadyAdded = currentReplies.some(
+          (reply) => reply.id === newReply.id
+        );
+
+        return alreadyAdded ? currentReplies : [...currentReplies, newReply];
+      });
+    }
+  }, [socketData.newReply]);
+
+  useEffect(() => {
+    if (replyDeleted) {
+      setReplies((currentReplies) =>
+        currentReplies.filter((reply) => reply.id !== replyDeleted)
+      );
+    }
+  }, [replyDeleted]);
 
   const onDeletePost = () => {
     if (post.id === postDeleted) {
@@ -57,26 +75,6 @@ const PostPage = ({ post, previousRoute }) => {
     }
   };
 
-  const addNewReply = () => {
-    const { newReply } = socketData;
-
-    if (!!newReply) {
-      setReplies([...replies, newReply]);
-    }
-  };
-
-  const removeReply = () => {
-    if (!!replyDeleted) {
-      const replyToDeleteId = replies.findIndex(
-        (reply) => reply.id === replyDeleted
-      );
-      const newReplies = [...replies];
-
-      if (replyToDeleteId > -1) newReplies.splice(replyToDeleteId, 1);
-
-      setReplies(newReplies);
-    }
-  };
   return (
     <AppLayout>
       <NavBack prevRoute={previousRoute} />

@@ -19,9 +19,9 @@ const UserInfo = ({
 
   const updateNumberFollowers = (type) => {
     if (type === "follow") {
-      setNumberFollowers(numberFollowers + 1);
+      setNumberFollowers((currentNumber) => currentNumber + 1);
     } else {
-      setNumberFollowers(numberFollowers - 1);
+      setNumberFollowers((currentNumber) => Math.max(0, currentNumber - 1));
     }
   };
 

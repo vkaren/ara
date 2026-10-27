@@ -28,30 +28,25 @@ const HomePage = ({ postsData }) => {
   const { postDeleted } = useContext(AppContext);
   const [posts, setPosts] = useState(postsData || []);
 
-  useEffect(() => addNewPost(), [socketData]);
-
-  useEffect(() => removePost(), [postDeleted]);
-
-  const addNewPost = () => {
+  useEffect(() => {
     const newPost = socketData.newPost;
 
-    if (!!newPost) {
-      const isPostAlreadyAdded = posts.find((post) => post.id === newPost.id);
+    if (newPost) {
+      setPosts((currentPosts) => {
+        const alreadyAdded = currentPosts.some((post) => post.id === newPost.id);
 
-      if (!isPostAlreadyAdded) setPosts([newPost, ...posts]);
+        return alreadyAdded ? currentPosts : [newPost, ...currentPosts];
+      });
     }
-  };
+  }, [socketData.newPost]);
 
-  const removePost = () => {
-    if (!!postDeleted) {
-      const postToDeleteId = posts.findIndex((post) => post.id === postDeleted);
-      const newPosts = [...posts];
-
-      if (postToDeleteId > -1) newPosts.splice(postToDeleteId, 1);
-
-      setPosts(newPosts);
+  useEffect(() => {
+    if (postDeleted) {
+      setPosts((currentPosts) =>
+        currentPosts.filter((post) => post.id !== postDeleted)
+      );
     }
-  };
+  }, [postDeleted]);
 
   return (
     <AppLayout>

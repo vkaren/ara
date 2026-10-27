@@ -45,7 +45,10 @@ function UserProvider({ children }) {
   };
 
   const getAndSaveUserId = () => {
-    setUserId(getItem("user_id") - "");
+    const storedUserId = getItem("user_id");
+    const parsedUserId = Number(storedUserId);
+
+    setUserId(Number.isNaN(parsedUserId) ? null : parsedUserId);
   };
 
   const getUserData = async () => {

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useState } from "react";
 import { getItem } from "@utils/cookies";
 import api from "@utils/api";
 
@@ -11,12 +11,20 @@ function AppProvider({ children }) {
     haveNotifications: false,
   });
 
-  const savePostDeleted = (post) => setState({ ...state, postDeleted: post });
+  const savePostDeleted = useCallback(
+    (post) => setState((currentState) => ({ ...currentState, postDeleted: post })),
+    []
+  );
 
-  const saveReplyDeleted = (reply) =>
-    setState({ ...state, replyDeleted: reply });
+  const saveReplyDeleted = useCallback(
+    (reply) => setState((currentState) => ({ ...currentState, replyDeleted: reply })),
+    []
+  );
 
-  const notifyUser = () => setState({ ...state, haveNotifications: true });
+  const notifyUser = useCallback(
+    () => setState((currentState) => ({ ...currentState, haveNotifications: true })),
+    []
+  );
 
   const updateSeenNotifs = async () => {
     const userId = getItem("user_id");
@@ -26,7 +34,7 @@ function AppProvider({ children }) {
       route: `notification/${userId}`,
     });
 
-    setState({ ...state, haveNotifications: false });
+    setState((currentState) => ({ ...currentState, haveNotifications: false }));
   };
 
   return (

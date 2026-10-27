@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import config from "@config";
 import { AppContext } from "./appContext";
@@ -7,7 +7,6 @@ import { UserContext } from "./userContext";
 const ListeningSocketContext = createContext({});
 
 function ListeningSocketProvider({ children }) {
-  const [socket, setSocket] = useState(null);
   const [socketData, setSocketData] = useState({
     newPost: null,
     newReply: null,
@@ -17,20 +16,41 @@ function ListeningSocketProvider({ children }) {
   });
   const { notifyUser } = useContext(AppContext);
   const { userId } = useContext(UserContext);
+  const userIdRef = useRef(userId);
+  const notifyUserRef = useRef(notifyUser);
 
   useEffect(() => {
-    setSocket(io.connect(config.api));
+    userIdRef.current = userId;
+    notifyUserRef.current = notifyUser;
+  }, [notifyUser, userId]);
+
+  useEffect(() => {
+    if (!config.api) {
+      return undefined;
+    }
+
+    const socket = io(config.api);
+    const handleNewPost = (data) => onNewSocketData("post", data);
+    const handleNewReply = (data) => onNewSocketData("reply", data);
+    const handleNewLike = (data) => onNewSocketData("like", data);
+    const handleNewDislike = (data) => onNewSocketData("dislike", data);
+    const handleNewNotification = (data) => onNewSocketData("notif", data);
+
+    socket.on("new post", handleNewPost);
+    socket.on("new reply", handleNewReply);
+    socket.on("new like", handleNewLike);
+    socket.on("new dislike", handleNewDislike);
+    socket.on("new notification", handleNewNotification);
+
+    return () => {
+      socket.off("new post", handleNewPost);
+      socket.off("new reply", handleNewReply);
+      socket.off("new like", handleNewLike);
+      socket.off("new dislike", handleNewDislike);
+      socket.off("new notification", handleNewNotification);
+      socket.disconnect();
+    };
   }, []);
-
-  useEffect(() => {
-    socket?.on("new post", (data) => onNewSocketData("post", data));
-    socket?.on("new reply", (data) => onNewSocketData("reply", data));
-    socket?.on("new like", (data) => onNewSocketData("like", data));
-    socket?.on("new dislike", (data) => onNewSocketData("dislike", data));
-    socket?.on("new notification", (data) => onNewSocketData("notif", data));
-
-    return () => socket?.removeAllListeners();
-  }, [socket, socketData]);
 
   const onNewSocketData = (type, data) => {
     const newSocketData = {
@@ -56,7 +76,8 @@ function ListeningSocketProvider({ children }) {
         break;
       case "notif":
         newSocketData.newNotif = data;
-        newSocketData.newNotif.notificationFor === userId && notifyUser();
+        newSocketData.newNotif.notificationFor === userIdRef.current &&
+          notifyUserRef.current();
         break;
       default:
         return;
