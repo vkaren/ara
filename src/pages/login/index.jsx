@@ -9,4 +9,6 @@ const LoginPage = () => {
   );
 };
 
+LoginPage.publicPage = true;
+
 export default LoginPage;

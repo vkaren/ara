@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import api from "@utils/api";
 import { profileUpdateSchema } from "@validation/authSchemas";
 import validateSchema from "@validation/validateSchema";
+import validateImageFile from "@utils/validateImageFile";
 import Form from "@components/Form";
 import FileUploaded from "../FileUploaded";
 import styles from "./styles.module.css";
@@ -20,7 +21,7 @@ const SettingsEdit = ({ userInfo }) => {
       props: {
         name: "nickname",
         type: "text",
-        placeholder: userInfo?.nickname,
+        defaultValue: userInfo?.nickname || "",
       },
     },
     {
@@ -28,7 +29,7 @@ const SettingsEdit = ({ userInfo }) => {
       props: {
         name: "bio",
         type: "text",
-        placeholder: userInfo?.bio,
+        defaultValue: userInfo?.bio || "",
       },
     },
     {
@@ -36,7 +37,7 @@ const SettingsEdit = ({ userInfo }) => {
       props: {
         name: "profile_photo",
         type: "file",
-        accept: ".png,.jpg",
+        accept: "image/png,image/jpeg",
         onChange: (e) => {
           setFileUploaded(e.currentTarget.files[0]?.name || "");
         },
@@ -48,7 +49,7 @@ const SettingsEdit = ({ userInfo }) => {
       props: {
         name: "username",
         type: "text",
-        placeholder: userInfo?.username,
+        defaultValue: userInfo?.username || "",
       },
     },
     {
@@ -66,7 +67,8 @@ const SettingsEdit = ({ userInfo }) => {
 
     const nickname = formData.get("nickname");
     const bio = formData.get("bio");
-    const profilePicture = formData.get("profile_photo")?.name || "";
+    const profilePictureFile = formData.get("profile_photo");
+    const profilePicture = profilePictureFile?.name || "";
     const username = formData.get("username");
     const password = formData.get("password");
 
@@ -76,11 +78,18 @@ const SettingsEdit = ({ userInfo }) => {
       username,
       password,
     };
+    const imageError = validateImageFile(profilePictureFile);
     const hasChanges =
-      Object.values(values).some(Boolean) || Boolean(profilePicture);
+      nickname !== (userInfo?.nickname || "") ||
+      bio !== (userInfo?.bio || "") ||
+      username !== (userInfo?.username || "") ||
+      Boolean(password) ||
+      Boolean(profilePicture);
     const { error, message } = validateSchema(profileUpdateSchema, values);
 
-    if (error) {
+    if (imageError) {
+      setEditMsg({ error: true, msg: imageError });
+    } else if (error) {
       setEditMsg({ error: true, msg: message });
     } else if (!hasChanges) {
       setEditMsg({ error: true, msg: "Add at least one profile change." });

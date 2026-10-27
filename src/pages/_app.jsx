@@ -26,12 +26,14 @@ function AppTheme({ children }) {
 }
 
 export default function MyApp({ Component, pageProps, ...props }) {
+  const isPublicPage = Component.publicPage === true;
+
   return (
     <AppCacheProvider {...props}>
       <GlobalStyles styles="@layer theme, base, mui, components, utilities;" />
       <ThemeProvider>
         <AppTheme>
-          {Component.name === "LoginPage" || Component.name === "SignUpPage" ? (
+          {isPublicPage ? (
             <UserProvider>
               <Component {...pageProps} />
             </UserProvider>

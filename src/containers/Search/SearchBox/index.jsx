@@ -1,28 +1,36 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import api from "@utils/api";
 import User from "../User";
 import styles from "./styles.module.css";
 
 const SearchBox = () => {
   const [searchedUsers, setSearchedUsers] = useState([]);
+  const timerRef = useRef(null);
+  const requestIdRef = useRef(0);
 
-  const onSearchUser = () => {
-    let timer;
+  useEffect(() => {
+    return () => clearTimeout(timerRef.current);
+  }, []);
 
-    return (e) => {
-      if (timer) {
-        clearTimeout(timer);
+  const onSearchUser = (e) => {
+    const filterBy = e.target.value.trim();
+    requestIdRef.current += 1;
+    const requestId = requestIdRef.current;
+
+    clearTimeout(timerRef.current);
+
+    if (!filterBy) {
+      setSearchedUsers([]);
+      return;
+    }
+
+    timerRef.current = setTimeout(async () => {
+      const users = await getUserListBy(filterBy);
+
+      if (requestId === requestIdRef.current) {
+        setSearchedUsers(users);
       }
-
-      timer = setTimeout(async () => {
-        const filterBy = e.target.value;
-        const regex = /\w+/gi;
-
-        if (regex.test(filterBy)) {
-          await getUserListBy(filterBy);
-        }
-      }, 500);
-    };
+    }, 500);
   };
 
   const getUserListBy = async (filterBy) => {
@@ -32,15 +40,17 @@ const SearchBox = () => {
     });
 
     if (Array.isArray(userList)) {
-      setSearchedUsers(userList);
+      return userList;
     }
+
+    return [];
   };
 
   return (
     <>
       <section className={`${styles["search-box"]} bckgBlack clrWhite`}>
         <input
-          onChange={onSearchUser()}
+          onChange={onSearchUser}
           className={styles["search-box__input"]}
           type="search"
           placeholder="Search..."

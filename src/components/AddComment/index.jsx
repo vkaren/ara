@@ -1,6 +1,8 @@
 import { createRef, useContext, useEffect, useState } from "react";
 import { UserContext } from "@context/userContext";
+import Alert from "@mui/material/Alert";
 import api from "@utils/api";
+import validateImageFile from "@utils/validateImageFile";
 import ProfilePhoto from "@components/ProfilePhoto";
 import Textarea from "./Textarea";
 import InsertedImage from "./InsertedImage";
@@ -10,6 +12,7 @@ import styles from "./styles.module.css";
 const AddComment = ({ isAReply }) => {
   const { userId, getUserData } = useContext(UserContext);
   const [profilePhoto, setProfilePhoto] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
   const form = createRef();
 
   useEffect(() => {
@@ -29,6 +32,7 @@ const AddComment = ({ isAReply }) => {
     e.preventDefault();
 
     const formData = new FormData(form.current);
+    setErrorMessage("");
 
     const canAddComment = validateForm(formData);
 
@@ -45,7 +49,15 @@ const AddComment = ({ isAReply }) => {
 
   const validateForm = (formData) => {
     const postContent = formData.get("content");
-    const postInsertedImage = formData.get("inserted_image").name;
+    const insertedImage = formData.get("inserted_image");
+    const imageError = validateImageFile(insertedImage);
+
+    if (imageError) {
+      setErrorMessage(imageError);
+      return false;
+    }
+
+    const postInsertedImage = insertedImage?.name;
 
     if (!postContent && !postInsertedImage) {
       return false;
@@ -91,6 +103,12 @@ const AddComment = ({ isAReply }) => {
       <Textarea isAReply={isAReply} />
 
       <InsertedImage />
+
+      {errorMessage && (
+        <Alert severity="error" sx={{ gridColumn: "1 / -1" }}>
+          {errorMessage}
+        </Alert>
+      )}
 
       <SubmitButton isAReply={isAReply} />
     </form>

@@ -9,4 +9,6 @@ const SignUpPage = () => {
   );
 };
 
+SignUpPage.publicPage = true;
+
 export default SignUpPage;

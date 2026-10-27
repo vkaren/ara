@@ -15,7 +15,7 @@ const InsertedImage = () => {
         id="inserted_image"
         name="inserted_image"
         type="file"
-        accept=".png,.jpg"
+        accept="image/png,image/jpeg"
         hidden
       />
     </Button>

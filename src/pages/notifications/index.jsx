@@ -24,7 +24,7 @@ export async function getServerSideProps({ req, res }) {
   });
 
   if (Array.isArray(notifications)) {
-    props.notifications = notifications.reverse();
+    props.notifications = [...notifications].reverse();
   }
 
   return { props };

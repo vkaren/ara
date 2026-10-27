@@ -38,6 +38,7 @@ const Form = ({
             required,
             minLength,
             placeholder,
+            defaultValue,
           } = input.props;
           const inputId = `${type}-${name}`;
 
@@ -77,6 +78,7 @@ const Form = ({
               type={inputType}
               required={required}
               placeholder={placeholder}
+              defaultValue={defaultValue}
               error={Boolean(submitMsg.error)}
               inputProps={{ minLength }}
               onChange={onChange}
