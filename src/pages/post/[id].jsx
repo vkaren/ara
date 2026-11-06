@@ -42,16 +42,22 @@ const PostPage = ({ post, previousRoute }) => {
   const { postDeleted, replyDeleted } = useContext(AppContext);
   const [replies, setReplies] = useState(post.replies);
 
-  useEffect(() => onDeletePost(), [postDeleted]);
+  useEffect(() => {
+    if (post.id !== postDeleted) return;
+
+    if (previousRoute) {
+      router.back();
+    } else {
+      router.push("/home");
+    }
+  }, [post.id, postDeleted, previousRoute, router]);
 
   useEffect(() => {
     const newReply = socketData.newReply;
 
     if (newReply) {
       setReplies((currentReplies) => {
-        const alreadyAdded = currentReplies.some(
-          (reply) => reply.id === newReply.id,
-        );
+        const alreadyAdded = currentReplies.some((reply) => reply.id === newReply.id);
 
         return alreadyAdded ? currentReplies : [...currentReplies, newReply];
       });
@@ -61,20 +67,10 @@ const PostPage = ({ post, previousRoute }) => {
   useEffect(() => {
     if (replyDeleted) {
       setReplies((currentReplies) =>
-        currentReplies.filter((reply) => reply.id !== replyDeleted),
+        currentReplies.filter((reply) => reply.id !== replyDeleted)
       );
     }
   }, [replyDeleted]);
-
-  const onDeletePost = () => {
-    if (post.id === postDeleted) {
-      if (previousRoute) {
-        router.back();
-      } else {
-        router.push("/home");
-      }
-    }
-  };
 
   return (
     <AppLayout title="Post | Ara">

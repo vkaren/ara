@@ -76,7 +76,11 @@ const SearchBox = () => {
 
   return (
     <>
-      <Paper component="section" variant="outlined" sx={{ width: "80%", maxWidth: 600, p: 2, borderColor: "primary.main" }}>
+      <Paper
+        component="section"
+        variant="outlined"
+        sx={{ width: "80%", maxWidth: 600, p: 2, borderColor: "primary.main" }}
+      >
         <TextField
           onChange={onSearchUser}
           type="search"
@@ -87,7 +91,10 @@ const SearchBox = () => {
         />
       </Paper>
 
-      <List sx={{ width: "80%", maxWidth: 600, p: 0, display: "grid", gap: 1 }} aria-live="polite">
+      <List
+        sx={{ width: "80%", maxWidth: 600, p: 0, display: "grid", gap: 1 }}
+        aria-live="polite"
+      >
         {isLoading ? (
           <Stack alignItems="center" component="li" sx={{ p: 2 }}>
             <CircularProgress size={24} aria-label="Searching users" />

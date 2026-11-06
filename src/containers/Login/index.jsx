@@ -30,7 +30,11 @@ const Login = () => {
     const username = formData.get("username").toLowerCase();
     const password = formData.get("password");
 
-    const { error, message, fieldErrors: validationErrors } = validateSchema(loginSchema, {
+    const {
+      error,
+      message,
+      fieldErrors: validationErrors,
+    } = validateSchema(loginSchema, {
       username,
       password,
     });

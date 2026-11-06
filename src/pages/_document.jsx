@@ -26,12 +26,7 @@ class MyDocument extends Document {
             content="Ara is a social space for sharing posts, replies and conversations."
           />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="/icons/favicon.png"
-          />
+          <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon.png" />
         </Head>
         <body>
           <Main />

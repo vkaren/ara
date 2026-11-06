@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Stack from "@mui/material/Stack";
 import { UserContext } from "@context/userContext";
 import { ListeningSocketContext } from "@context/listeningSocketContext";
@@ -20,13 +20,56 @@ const PostFooter = ({
   const [haveLike, setHaveLike] = useState(false);
   const [isLiking, setIsLiking] = useState(false);
 
+  const getLikedPostFromUser = useCallback(async () => {
+    return await api({ method: "GET", route: `like/${userId}` });
+  }, [userId]);
+
+  const hasUserLiked = useCallback(async () => {
+    const likedPostsFromUser = await getLikedPostFromUser();
+
+    return likedPostsFromUser.some((like) => {
+      if (isAReply) {
+        return like.reply_id === id;
+      }
+
+      return like.post_id === id;
+    });
+  }, [getLikedPostFromUser, id, isAReply]);
+
+  const updateNumberReplies = useCallback(
+    (newReply) => {
+      if (!isAReply && newReply.replying_to_post === id) {
+        setNumberReplies((currentNumber) => currentNumber + 1);
+      }
+    },
+    [id, isAReply]
+  );
+
+  const updateNumberLikes = useCallback(
+    (data, type) => {
+      if (data.user_id !== userId) {
+        if (
+          (isAReply && data.type === "reply" && data.message_id === id) ||
+          (!isAReply && data.type === "post" && data.message_id === id)
+        ) {
+          if (type === "dislike") {
+            setNumberLikes((currentNumber) => Math.max(0, currentNumber - 1));
+          } else {
+            setNumberLikes((currentNumber) => currentNumber + 1);
+          }
+        }
+      }
+    },
+    [id, isAReply, userId]
+  );
+
   useEffect(() => {
     (async () => {
       if (userId) {
         setHaveLike(await hasUserLiked());
       }
     })();
-  }, [userId]);
+  }, [hasUserLiked, userId]);
 
   useEffect(() => {
     const { newReply, newLike, newDislike } = socketData;
@@ -38,44 +81,7 @@ const PostFooter = ({
     } else if (newDislike) {
       updateNumberLikes(newDislike, "dislike");
     }
-  }, [socketData]);
-
-  const getLikedPostFromUser = async () => {
-    return await api({ method: "GET", route: `like/${userId}` });
-  };
-
-  const hasUserLiked = async () => {
-    const likedPostsFromUser = await getLikedPostFromUser();
-
-    return likedPostsFromUser.some((like) => {
-      if (isAReply) {
-        return like.reply_id === id;
-      } else {
-        return like.post_id === id;
-      }
-    });
-  };
-
-  const updateNumberReplies = (newReply) => {
-    if (!isAReply && newReply.replying_to_post === id) {
-      setNumberReplies((currentNumber) => currentNumber + 1);
-    }
-  };
-
-  const updateNumberLikes = (data, type) => {
-    if (data.user_id !== userId) {
-      if (
-        (isAReply && data.type === "reply" && data.message_id === id) ||
-        (!isAReply && data.type === "post" && data.message_id === id)
-      ) {
-        if (type === "dislike") {
-          setNumberLikes((currentNumber) => Math.max(0, currentNumber - 1));
-        } else {
-          setNumberLikes((currentNumber) => currentNumber + 1);
-        }
-      }
-    }
-  };
+  }, [socketData, updateNumberLikes, updateNumberReplies]);
 
   const onClickLikeBtn = async (e) => {
     e.stopPropagation();
@@ -116,12 +122,7 @@ const PostFooter = ({
   };
 
   return (
-    <Stack
-      component="footer"
-      direction="row"
-      justifyContent="flex-end"
-      spacing={1}
-    >
+    <Stack component="footer" direction="row" justifyContent="flex-end" spacing={1}>
       {isHomeOrProfilePage ? (
         <FooterOption type={"comment"} text={numberReplies} />
       ) : (

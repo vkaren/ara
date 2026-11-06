@@ -89,7 +89,11 @@ const SettingsEdit = ({ userInfo }) => {
       username !== (userInfo?.username || "") ||
       Boolean(password) ||
       Boolean(profilePicture);
-    const { error, message, fieldErrors: validationErrors } = validateSchema(profileUpdateSchema, values);
+    const {
+      error,
+      message,
+      fieldErrors: validationErrors,
+    } = validateSchema(profileUpdateSchema, values);
 
     if (imageError) {
       setEditMsg({ error: true, msg: imageError });
@@ -114,7 +118,10 @@ const SettingsEdit = ({ userInfo }) => {
       });
 
       if (response.error || response.message === "Internal server error") {
-        setEditMsg({ error: true, msg: response.message || "Unable to save your changes." });
+        setEditMsg({
+          error: true,
+          msg: response.message || "Unable to save your changes.",
+        });
       } else {
         setEditMsg({
           error: false,
@@ -130,27 +137,32 @@ const SettingsEdit = ({ userInfo }) => {
     <Paper
       component="section"
       variant="outlined"
-      sx={{ width: "80%", maxWidth: 600, p: { xs: 2, sm: 4 }, borderColor: "primary.main" }}
+      sx={{
+        width: "80%",
+        maxWidth: 600,
+        p: { xs: 2, sm: 4 },
+        borderColor: "primary.main",
+      }}
     >
       <Stack spacing={3}>
-      <Typography variant="h5" component="h2" fontWeight={600}>
-        Settings
-      </Typography>
+        <Typography variant="h5" component="h2" fontWeight={600}>
+          Settings
+        </Typography>
 
-      <Typography variant="h6" component="h3" fontWeight={500}>
-        Edit Profile
-      </Typography>
+        <Typography variant="h6" component="h3" fontWeight={500}>
+          Edit Profile
+        </Typography>
 
-      <Form
-        type="edit"
-        form={formRef}
-        inputs={formInputs}
-        fileUploaded={fileUploaded}
-        submitMsg={editMsg}
-        fieldErrors={fieldErrors}
-        onSubmit={onSubmit}
-        loading={isSubmitting}
-      />
+        <Form
+          type="edit"
+          form={formRef}
+          inputs={formInputs}
+          fileUploaded={fileUploaded}
+          submitMsg={editMsg}
+          fieldErrors={fieldErrors}
+          onSubmit={onSubmit}
+          loading={isSubmitting}
+        />
       </Stack>
     </Paper>
   );

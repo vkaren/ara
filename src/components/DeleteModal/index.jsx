@@ -31,7 +31,12 @@ const DeleteModal = ({ type, onDelete, onCancelDelete, isLoading = false }) => {
         <Button onClick={onCancelDelete} variant="outlined" disabled={isLoading}>
           No, cancel
         </Button>
-        <Button onClick={onDelete} variant="contained" color="error" disabled={isLoading}>
+        <Button
+          onClick={onDelete}
+          variant="contained"
+          color="error"
+          disabled={isLoading}
+        >
           {isLoading ? "Deleting..." : "Yes, delete"}
         </Button>
       </DialogActions>

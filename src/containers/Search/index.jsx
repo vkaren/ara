@@ -9,29 +9,29 @@ const Search = () => {
   const [peopleToFollow, setPeopleToFollow] = useState([]);
 
   useEffect(() => {
-    if (userId) {
-      getPeopleToFollow();
-    }
-  }, [userId]);
+    if (!userId) return;
 
-  const getPeopleToFollow = async () => {
-    const userFollowingList = await getUserFollowingList();
+    const loadPeopleToFollow = async () => {
+      const userFollowingList = await getUserFollowingList();
 
-    const followingListIds = userFollowingList.map((user) => user.follow_to);
+      const followingListIds = userFollowingList.map((user) => user.follow_to);
 
-    const userList = await api({
-      method: "GET",
-      route: "user",
-    });
+      const userList = await api({
+        method: "GET",
+        route: "user",
+      });
 
-    if (Array.isArray(userList)) {
-      const peopleToFollow = userList.filter(
-        (user) => !followingListIds.includes(user.id) && userId !== user.id
-      );
+      if (Array.isArray(userList)) {
+        const peopleToFollow = userList.filter(
+          (user) => !followingListIds.includes(user.id) && userId !== user.id
+        );
 
-      setPeopleToFollow(peopleToFollow);
-    }
-  };
+        setPeopleToFollow(peopleToFollow);
+      }
+    };
+
+    loadPeopleToFollow();
+  }, [getUserFollowingList, userId]);
 
   return (
     <>

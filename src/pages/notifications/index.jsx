@@ -38,7 +38,7 @@ const NotificationsPage = ({ notifications }) => {
     if (userId) {
       updateSeenNotifs();
     }
-  }, [userId]);
+  }, [updateSeenNotifs, userId]);
 
   return (
     <AppLayout title="Notifications | Ara">

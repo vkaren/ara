@@ -9,16 +9,16 @@ const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    checkIsFollowingUser();
-  }, [userId]);
+    const checkIsFollowing = async () => {
+      if (type === "people-tf") {
+        setIsFollowing(false);
+      } else if (userId) {
+        setIsFollowing(await hasFollowedUser(userIdToFollow));
+      }
+    };
 
-  const checkIsFollowingUser = async () => {
-    if (type === "people-tf") {
-      setIsFollowing(false);
-    } else if (userId) {
-      setIsFollowing(await hasFollowedUser(userIdToFollow));
-    }
-  };
+    checkIsFollowing();
+  }, [hasFollowedUser, type, userId, userIdToFollow]);
 
   const onClickFollowBtn = async (e) => {
     e.preventDefault();

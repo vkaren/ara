@@ -17,17 +17,10 @@ const AddComment = ({ isAReply }) => {
   const form = createRef();
 
   useEffect(() => {
-    if (userId) {
-      getProfilePhoto();
-    }
-  }, [userId]);
+    if (!userId) return;
 
-  const getProfilePhoto = async () => {
-    const userData = await getUserData();
-    const profilePh = userData.profile_photo;
-
-    setProfilePhoto(profilePh);
-  };
+    getUserData().then((userData) => setProfilePhoto(userData.profile_photo));
+  }, [getUserData, userId]);
 
   const onSubmit = async (e) => {
     e.preventDefault();

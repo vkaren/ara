@@ -46,10 +46,7 @@ const Form = ({
 
           if (inputType === "file") {
             return (
-              <Box
-                key={name}
-                sx={{ display: "flex", flexDirection: "column", gap: 1 }}
-              >
+              <Box key={name} sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                 <Button
                   component="label"
                   variant="outlined"
@@ -83,7 +80,7 @@ const Form = ({
               defaultValue={defaultValue}
               error={Boolean(fieldErrors[name])}
               helperText={fieldErrors[name] || " "}
-              inputProps={{ minLength }}
+              minLength={minLength}
               onChange={onChange}
               disabled={loading}
               variant="outlined"

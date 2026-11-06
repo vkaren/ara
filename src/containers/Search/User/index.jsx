@@ -18,9 +18,17 @@ const User = ({ id, nickname, username, profilePhoto, type }) => {
     >
       <Stack direction="row" alignItems="center" spacing={1.5}>
         <ProfilePhoto photoUrl={profilePhoto} />
-        <Stack component={Link} href={`/profile/${id}`} sx={{ minWidth: 0, flex: 1, color: "inherit", textDecoration: "none" }}>
-          <Typography fontWeight={600} noWrap>{nickname}</Typography>
-          <Typography variant="body2" color="text.secondary" noWrap>@{username}</Typography>
+        <Stack
+          component={Link}
+          href={`/profile/${id}`}
+          sx={{ minWidth: 0, flex: 1, color: "inherit", textDecoration: "none" }}
+        >
+          <Typography fontWeight={600} noWrap>
+            {nickname}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" noWrap>
+            @{username}
+          </Typography>
         </Stack>
         <FollowButton userIdToFollow={id} type={type} />
       </Stack>

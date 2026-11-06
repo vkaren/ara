@@ -26,7 +26,7 @@ function AppProvider({ children }) {
     []
   );
 
-  const updateSeenNotifs = async () => {
+  const updateSeenNotifs = useCallback(async () => {
     const userId = getItem("user_id");
 
     await api({
@@ -35,7 +35,7 @@ function AppProvider({ children }) {
     });
 
     setState((currentState) => ({ ...currentState, haveNotifications: false }));
-  };
+  }, []);
 
   return (
     <AppContext.Provider

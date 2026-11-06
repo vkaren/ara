@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "next -p 3001",
     "build": "next build",
-    "start": "next start -p 3001"
+    "start": "next start -p 3001",
+    "lint": "next lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "author": "",
   "license": "ISC",
@@ -26,5 +29,10 @@
     "react-dom": "^18.2.0",
     "sharp": "^0.33.2",
     "socket.io-client": "^4.7.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.2.33",
+    "prettier": "^3.6.2"
   }
 }

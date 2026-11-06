@@ -8,7 +8,12 @@ const Notifications = ({ notifications = [] }) => {
     <Paper
       component="section"
       variant="outlined"
-      sx={{ width: "80%", maxWidth: 600, p: { xs: 2, sm: 4 }, borderColor: "primary.main" }}
+      sx={{
+        width: "80%",
+        maxWidth: 600,
+        p: { xs: 2, sm: 4 },
+        borderColor: "primary.main",
+      }}
     >
       <Typography variant="h5" component="h2" fontWeight={600}>
         Notifications

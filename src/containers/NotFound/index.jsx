@@ -47,7 +47,7 @@ const NotFound = () => {
           />
 
           <Typography variant="h6" component="p" align="center">
-            This page doesn't exist.
+            This page doesn&apos;t exist.
           </Typography>
 
           <Button

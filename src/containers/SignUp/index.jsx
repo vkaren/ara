@@ -35,7 +35,11 @@ const SignUp = () => {
 
     formData.set("username", username);
 
-    const { error, message, fieldErrors: validationErrors } = validateSchema(signUpSchema, {
+    const {
+      error,
+      message,
+      fieldErrors: validationErrors,
+    } = validateSchema(signUpSchema, {
       nickname,
       username,
       password,
@@ -60,7 +64,10 @@ const SignUp = () => {
       });
 
       if (response.error || response.message === "Internal server error") {
-        setSignUpMsg({ error: true, msg: response.message || "Unable to create your account." });
+        setSignUpMsg({
+          error: true,
+          msg: response.message || "Unable to create your account.",
+        });
       } else {
         setSignUpMsg({
           error: false,
@@ -112,12 +119,7 @@ const SignUp = () => {
         onSubmit={onSubmit}
         loading={isSubmitting}
       >
-        <Link
-          component={NextLink}
-          href="/login"
-          underline="hover"
-          fontWeight={600}
-        >
+        <Link component={NextLink} href="/login" underline="hover" fontWeight={600}>
           Do you already have an account?
         </Link>
       </Form>

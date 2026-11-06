@@ -13,7 +13,7 @@ const DarkModeOption = () => {
         <Switch
           checked={Boolean(darkTheme)}
           onChange={toggleDarkTheme}
-          inputProps={{ "aria-label": "Enable or disable dark mode" }}
+          aria-label="Enable or disable dark mode"
         />
       }
       sx={{ borderRadius: 2 }}
