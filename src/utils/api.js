@@ -62,11 +62,11 @@ const api = async ({
 
     return data;
   } catch (err) {
-    if (err instanceof Error) {
-      throw err;
-    }
-
-    throw new Error("Unable to complete the API request.");
+    return {
+      error: true,
+      status: 0,
+      message: err instanceof Error ? err.message : "Unable to complete the API request.",
+    };
   }
 };
 

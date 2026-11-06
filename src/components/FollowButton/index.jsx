@@ -6,6 +6,7 @@ import api from "@utils/api";
 const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   const { userId, hasFollowedUser } = useContext(UserContext);
   const [isFollowing, setIsFollowing] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     checkIsFollowingUser();
@@ -30,7 +31,11 @@ const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
       type = "follow";
     }
 
-    await followOrUnfollowUser(type);
+    setIsLoading(true);
+    const succeeded = await followOrUnfollowUser(type);
+    setIsLoading(false);
+
+    if (!succeeded) return;
 
     if (updateNumberFollowers) {
       updateNumberFollowers(type);
@@ -55,18 +60,20 @@ const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
       request.method = "DELETE";
     }
 
-    await api(request);
+    const response = await api(request);
+    return !response.error;
   };
 
   return (
     <Button
       onClick={onClickFollowBtn}
+      disabled={isLoading || isFollowing === undefined}
       variant={isFollowing ? "outlined" : "contained"}
       color="primary"
       size="small"
       sx={{ borderRadius: 2, textTransform: "none", fontWeight: 600 }}
     >
-      {isFollowing ? "Following" : "Follow"}
+      {isLoading ? "Loading..." : isFollowing ? "Following" : "Follow"}
     </Button>
   );
 };

@@ -1,7 +1,7 @@
 import Button from "@mui/material/Button";
 import IconComponent from "@components/Icon";
 
-const FooterOption = ({ type, text, haveLike, onClick }) => {
+const FooterOption = ({ type, text, haveLike, onClick, disabled }) => {
   const iconStyle = {
     width: type === "comment" ? 20 : 24,
     height: type === "comment" ? 20 : 24,
@@ -16,6 +16,7 @@ const FooterOption = ({ type, text, haveLike, onClick }) => {
         event.stopPropagation();
         onClick?.(event);
       }}
+      disabled={disabled}
       size="small"
       startIcon={<IconComponent name={type} style={iconStyle} />}
       sx={{ minWidth: 0, textTransform: "none", color: "primary.main" }}

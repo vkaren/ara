@@ -18,6 +18,7 @@ const PostFooter = ({
   const [numberReplies, setNumberReplies] = useState(replies.length);
   const [numberLikes, setNumberLikes] = useState(likes.length);
   const [haveLike, setHaveLike] = useState(false);
+  const [isLiking, setIsLiking] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -104,7 +105,11 @@ const PostFooter = ({
       request.method = "POST";
     }
 
-    await api(request);
+    setIsLiking(true);
+    const response = await api(request);
+    setIsLiking(false);
+
+    if (response.error) return;
 
     setNumberLikes(newNumberLikes);
     setHaveLike(!haveLike);
@@ -128,6 +133,7 @@ const PostFooter = ({
         text={numberLikes}
         haveLike={haveLike}
         onClick={onClickLikeBtn}
+        disabled={isLiking}
       />
     </Stack>
   );

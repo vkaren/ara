@@ -11,6 +11,7 @@ const Form = ({
   type,
   fileUploaded,
   submitMsg = {},
+  loading = false,
   onSubmit,
   children,
 }) => {
@@ -82,6 +83,7 @@ const Form = ({
               error={Boolean(submitMsg.error)}
               inputProps={{ minLength }}
               onChange={onChange}
+              disabled={loading}
               variant="outlined"
               size="medium"
               fullWidth
@@ -105,8 +107,9 @@ const Form = ({
             fontWeight: 700,
             textTransform: "none",
           }}
+          disabled={loading}
         >
-          {type === "edit" ? "Save" : "Continue"}
+          {loading ? "Loading..." : type === "edit" ? "Save" : "Continue"}
         </Button>
 
         {submitMsg.msg && (

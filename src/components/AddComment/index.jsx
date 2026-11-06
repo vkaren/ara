@@ -13,6 +13,7 @@ const AddComment = ({ isAReply }) => {
   const { userId, getUserData } = useContext(UserContext);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = createRef();
 
   useEffect(() => {
@@ -39,7 +40,14 @@ const AddComment = ({ isAReply }) => {
     if (canAddComment) {
       form.current.reset();
 
-      await sendComment(formData);
+      setIsSubmitting(true);
+      const response = await sendComment(formData);
+      setIsSubmitting(false);
+
+      if (response.error) {
+        setErrorMessage(response.message || "Unable to publish your comment.");
+        return;
+      }
 
       if (isAReply) {
         isAReply.closeModal();
@@ -122,7 +130,7 @@ const AddComment = ({ isAReply }) => {
         </Alert>
       )}
 
-      <SubmitButton isAReply={isAReply} />
+      <SubmitButton isAReply={isAReply} disabled={isSubmitting} />
     </Box>
   );
 };

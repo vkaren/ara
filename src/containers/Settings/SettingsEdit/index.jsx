@@ -14,6 +14,7 @@ const SettingsEdit = ({ userInfo }) => {
   const { userId } = useContext(UserContext);
   const [fileUploaded, setFileUploaded] = useState("");
   const [editMsg, setEditMsg] = useState({ error: false, msg: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formRef = useRef();
   const formInputs = [
@@ -100,6 +101,7 @@ const SettingsEdit = ({ userInfo }) => {
   };
 
   const updateProfile = async (formData) => {
+    setIsSubmitting(true);
     try {
       const response = await api({
         method: "PATCH",
@@ -109,15 +111,15 @@ const SettingsEdit = ({ userInfo }) => {
       });
 
       if (response.error || response.message === "Internal server error") {
-        setEditMsg({ error: true, msg: "Internal server error" });
+        setEditMsg({ error: true, msg: response.message || "Unable to save your changes." });
       } else {
         setEditMsg({
           error: false,
           msg: "We’ve saved your profile changes.",
         });
       }
-    } catch (err) {
-      console.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -143,6 +145,7 @@ const SettingsEdit = ({ userInfo }) => {
         fileUploaded={fileUploaded}
         submitMsg={editMsg}
         onSubmit={onSubmit}
+        loading={isSubmitting}
       />
       </Stack>
     </Paper>

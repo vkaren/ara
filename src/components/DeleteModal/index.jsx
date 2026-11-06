@@ -7,7 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
-const DeleteModal = ({ type, onDelete, onCancelDelete }) => {
+const DeleteModal = ({ type, onDelete, onCancelDelete, isLoading = false }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -28,11 +28,11 @@ const DeleteModal = ({ type, onDelete, onCancelDelete }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions sx={{ px: 3, pb: 2 }}>
-        <Button onClick={onCancelDelete} variant="outlined">
+        <Button onClick={onCancelDelete} variant="outlined" disabled={isLoading}>
           No, cancel
         </Button>
-        <Button onClick={onDelete} variant="contained" color="error">
-          Yes, delete
+        <Button onClick={onDelete} variant="contained" color="error" disabled={isLoading}>
+          {isLoading ? "Deleting..." : "Yes, delete"}
         </Button>
       </DialogActions>
     </Dialog>

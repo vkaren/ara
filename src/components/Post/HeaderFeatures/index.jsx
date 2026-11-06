@@ -13,6 +13,7 @@ const HeaderFeatures = ({ id, authorId, isAReply }) => {
   const { savePostDeleted, saveReplyDeleted } = useContext(AppContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isDeletingPost, setIsDeletingPost] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const closeMenu = () => setAnchorEl(null);
 
@@ -38,7 +39,9 @@ const HeaderFeatures = ({ id, authorId, isAReply }) => {
       request.body.post_id = id;
     }
 
+    setIsDeleting(true);
     const isDeleted = await api(request);
+    setIsDeleting(false);
 
     if (isDeleted && !isDeleted.error) {
       isAReply
@@ -83,6 +86,7 @@ const HeaderFeatures = ({ id, authorId, isAReply }) => {
           type={isAReply ? "reply" : "post"}
           onDelete={onDeletePost}
           onCancelDelete={toggleDeleteModal}
+          isLoading={isDeleting}
         />
       )}
     </>

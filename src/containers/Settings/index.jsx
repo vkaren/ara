@@ -14,16 +14,20 @@ const Settings = () => {
   const router = useRouter();
   const { userId, removeUserInfo } = useContext(UserContext);
   const [isDeletingAccount, setIsDeletingAccount] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const toggleDeleteModal = () => setIsDeletingAccount(!isDeletingAccount);
 
   const onDeleteAccount = async () => {
-    const { userDeleted } = await api({
+    setIsDeleting(true);
+    const response = await api({
       method: "DELETE",
       route: `user/${userId}`,
     });
 
-    if (userDeleted) {
+    setIsDeleting(false);
+
+    if (response.userDeleted) {
       removeUserInfo();
       router.push("/");
     }
@@ -54,6 +58,7 @@ const Settings = () => {
           type="account"
           onDelete={onDeleteAccount}
           onCancelDelete={toggleDeleteModal}
+          isLoading={isDeleting}
         />
       )}
     </>

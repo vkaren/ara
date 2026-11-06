@@ -15,6 +15,7 @@ const Login = () => {
   const router = useRouter();
   const { saveLoginResponse } = useContext(UserContext);
   const [loginMsg, setLoginMsg] = useState({ error: false, msg: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = createRef();
 
   const onSubmit = async (e) => {
@@ -45,6 +46,7 @@ const Login = () => {
   };
 
   const login = async (data) => {
+    setIsSubmitting(true);
     try {
       const response = await api({
         method: "POST",
@@ -54,7 +56,7 @@ const Login = () => {
       });
 
       if (response.error || response.message === "Internal server error") {
-        setLoginMsg({ error: true, msg: response.message });
+        setLoginMsg({ error: true, msg: response.message || "Unable to log in." });
       } else {
         setLoginMsg({ error: false, msg: "" });
 
@@ -62,8 +64,8 @@ const Login = () => {
 
         router.push("/home");
       }
-    } catch (err) {
-      console.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -83,6 +85,7 @@ const Login = () => {
         inputs={formInputs.forms.login}
         submitMsg={loginMsg}
         onSubmit={onSubmit}
+        loading={isSubmitting}
       />
     </>
   );

@@ -1,9 +1,10 @@
 import Button from "@mui/material/Button";
 
-const SubmitButton = ({ isAReply }) => {
+const SubmitButton = ({ isAReply, disabled = false }) => {
   return (
     <Button
       type="submit"
+      disabled={disabled}
       variant="contained"
       sx={{
         gridColumn: "3 / 4",

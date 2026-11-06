@@ -17,6 +17,7 @@ const SignUp = () => {
   const router = useRouter();
   const { saveLoginResponse } = useContext(UserContext);
   const [signUpMsg, setSignUpMsg] = useState({ error: false, msg: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const form = createRef();
 
   const onSubmit = async (e) => {
@@ -46,6 +47,7 @@ const SignUp = () => {
   };
 
   const createAccount = async (formData, loginData) => {
+    setIsSubmitting(true);
     try {
       const response = await api({
         method: "POST",
@@ -55,7 +57,7 @@ const SignUp = () => {
       });
 
       if (response.error || response.message === "Internal server error") {
-        setSignUpMsg({ error: true, msg: response.message });
+        setSignUpMsg({ error: true, msg: response.message || "Unable to create your account." });
       } else {
         setSignUpMsg({
           error: false,
@@ -64,8 +66,8 @@ const SignUp = () => {
 
         redirectToAppHome(loginData);
       }
-    } catch (err) {
-      console.error(err);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -78,7 +80,7 @@ const SignUp = () => {
     });
 
     if (response.error || response.message === "Internal server error") {
-      setSignUpMsg({ error: true, msg: response.message });
+      setSignUpMsg({ error: true, msg: response.message || "Unable to sign you in." });
     } else {
       setSignUpMsg({ error: false, msg: "" });
 
@@ -104,6 +106,7 @@ const SignUp = () => {
         inputs={formInputs.forms["sign-up"]}
         submitMsg={signUpMsg}
         onSubmit={onSubmit}
+        loading={isSubmitting}
       >
         <Link
           component={NextLink}
