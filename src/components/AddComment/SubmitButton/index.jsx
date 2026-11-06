@@ -7,7 +7,7 @@ const SubmitButton = ({ isAReply }) => {
       variant="contained"
       sx={{
         gridColumn: "3 / 4",
-        gridRow: "2 / 3",
+        gridRow: "3 / 4",
         justifySelf: "end",
         borderRadius: 2,
         fontWeight: 700,

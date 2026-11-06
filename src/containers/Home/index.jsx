@@ -12,9 +12,12 @@ const Home = ({ posts }) => {
 
       <Stack
         component="section"
-        alignItems="center"
         spacing={2}
-        sx={{ width: "100%" }}
+        sx={{
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
       >
         {posts.length > 0 ? (
           posts.map((post) => (

@@ -8,6 +8,7 @@ import AppLayout from "@containers/AppLayout";
 import NavBack from "@components/NavBack";
 import Post from "@components/Post";
 import Replies from "@components/Replies";
+import { Box } from "@mui/material";
 
 export async function getServerSideProps({ req, res, query }) {
   const props = {
@@ -49,7 +50,7 @@ const PostPage = ({ post, previousRoute }) => {
     if (newReply) {
       setReplies((currentReplies) => {
         const alreadyAdded = currentReplies.some(
-          (reply) => reply.id === newReply.id
+          (reply) => reply.id === newReply.id,
         );
 
         return alreadyAdded ? currentReplies : [...currentReplies, newReply];
@@ -60,7 +61,7 @@ const PostPage = ({ post, previousRoute }) => {
   useEffect(() => {
     if (replyDeleted) {
       setReplies((currentReplies) =>
-        currentReplies.filter((reply) => reply.id !== replyDeleted)
+        currentReplies.filter((reply) => reply.id !== replyDeleted),
       );
     }
   }, [replyDeleted]);
@@ -79,16 +80,27 @@ const PostPage = ({ post, previousRoute }) => {
     <AppLayout>
       <NavBack prevRoute={previousRoute} />
 
-      <Post
-        id={post.id}
-        author={post.author}
-        content={post.content}
-        createdAt={post.createdAt}
-        insertedImage={post.inserted_image}
-        likes={post.likes}
-        replies={replies}
-      />
-      <Replies replies={replies} />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          mt: 2,
+        }}
+      >
+        <Post
+          id={post.id}
+          author={post.author}
+          content={post.content}
+          createdAt={post.createdAt}
+          insertedImage={post.inserted_image}
+          likes={post.likes}
+          replies={replies}
+        />
+        <Replies replies={replies} />
+      </Box>
     </AppLayout>
   );
 };

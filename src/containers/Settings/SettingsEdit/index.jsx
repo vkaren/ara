@@ -1,4 +1,6 @@
 import { useContext, useRef, useState } from "react";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import { UserContext } from "@context/userContext";
 import Typography from "@mui/material/Typography";
 import api from "@utils/api";
@@ -7,7 +9,6 @@ import validateSchema from "@validation/validateSchema";
 import validateImageFile from "@utils/validateImageFile";
 import Form from "@components/Form";
 import FileUploaded from "../FileUploaded";
-import styles from "./styles.module.css";
 
 const SettingsEdit = ({ userInfo }) => {
   const { userId } = useContext(UserContext);
@@ -121,7 +122,12 @@ const SettingsEdit = ({ userInfo }) => {
   };
 
   return (
-    <section className={`${styles["edit-section"]} bckgBlack clrWhite`}>
+    <Paper
+      component="section"
+      variant="outlined"
+      sx={{ width: "80%", maxWidth: 600, p: { xs: 2, sm: 4 }, borderColor: "primary.main" }}
+    >
+      <Stack spacing={3}>
       <Typography variant="h5" component="h2" fontWeight={600}>
         Settings
       </Typography>
@@ -138,7 +144,8 @@ const SettingsEdit = ({ userInfo }) => {
         submitMsg={editMsg}
         onSubmit={onSubmit}
       />
-    </section>
+      </Stack>
+    </Paper>
   );
 };
 

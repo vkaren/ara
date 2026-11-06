@@ -1,24 +1,40 @@
-import { useContext } from "react";
-import { ThemeContext } from "@context/themeContext";
 import Head from "next/head";
+import Box from "@mui/material/Box";
 import Menu from "@components/Menu";
-import styles from "./styles.module.css";
 
 const AppLayout = ({ children }) => {
-  const { darkTheme } = useContext(ThemeContext);
-
   return (
     <>
       <Head>
         <title>Ara</title>
       </Head>
-      <main
-        id={darkTheme ? "dark-mode" : null}
-        className={`${styles["app-main"]} bckgBlack`}
+      <Box
+        component="main"
+        sx={{
+          width: "100%",
+          minHeight: "100vh",
+          bgcolor: "background.default",
+        }}
       >
         <Menu />
-        <section className={styles["main__section"]}>{children}</section>
-      </main>
+        <Box
+          component="section"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 3,
+            width: { xs: "100%", sm: "calc(100% - 230px)" },
+            minHeight: "100vh",
+            px: { xs: 1, sm: 0 },
+            pt: { xs: 9, sm: 6 },
+            pb: { xs: 11, sm: 6 },
+            ml: { xs: 0, sm: "230px" },
+          }}
+        >
+          {children}
+        </Box>
+      </Box>
     </>
   );
 };

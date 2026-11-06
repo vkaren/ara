@@ -1,35 +1,33 @@
 import Link from "next/link";
-import ProfilePhoto from "@components/ProfilePhoto";
-import styles from "./styles.module.css";
+import Avatar from "@mui/material/Avatar";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import IconComponent from "@components/Icon";
 
 const NotifInfo = ({ notifFrom, postId, type, seen }) => {
   const getNotifMessage = () => {
-    if (type === "like") {
-      return `${notifFrom.username} liked your post.`;
-    } else if (type === "reply") {
-      return `${notifFrom.username} replied your post.`;
-    } else if (type === "follow") {
-      return `${notifFrom.username} followed you.`;
-    }
+    if (type === "like") return `${notifFrom.username} liked your post.`;
+    if (type === "reply") return `${notifFrom.username} replied to your post.`;
+    if (type === "follow") return `${notifFrom.username} followed you.`;
+    return "You have a new notification.";
   };
 
   return (
-    <li
-      id="hover"
-      className={`${styles["notif-info"]} ${
-        !seen && `${styles["not-seen"]} bckgLgtBlack borderPurple`
-      } hoverBlack`}
+    <ListItemButton
+      component={Link}
+      href={postId ? `/post/${postId}` : `/profile/${notifFrom.id}`}
+      sx={{
+        borderBottom: 1,
+        borderColor: "primary.light",
+        backgroundColor: seen ? "transparent" : "action.hover",
+        gap: 1,
+      }}
     >
-      <Link
-        className={styles["notif-info__link"]}
-        href={postId ? `post/${postId}` : `profile/${notifFrom.id}`}
-      >
-        <div className={styles["notif-info__photo"]}>
-          {<ProfilePhoto photoUrl={notifFrom.profile_photo} />}
-        </div>
-        <span className={styles["notif-info__msg"]}>{getNotifMessage()}</span>
-      </Link>
-    </li>
+      <Avatar src={notifFrom.profile_photo} alt={`${notifFrom.username} profile photo`}>
+        <IconComponent name="profile" />
+      </Avatar>
+      <ListItemText primary={getNotifMessage()} />
+    </ListItemButton>
   );
 };
 

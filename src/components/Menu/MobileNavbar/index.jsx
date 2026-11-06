@@ -1,13 +1,31 @@
 import LogoImage from "../LogoImage";
 import LogoutButton from "../LogoutButton";
-import styles from "./styles.module.css";
+import Box from "@mui/material/Box";
 
 const MobileNavbar = () => {
   return (
-    <nav className={`${styles["menu-nav__mobile"]} bckgBlack`}>
+    <Box
+      component="nav"
+      aria-label="Mobile header"
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        px: 3,
+        py: 1,
+        borderBottom: 1,
+        borderColor: "divider",
+        bgcolor: "background.paper",
+        zIndex: 10,
+      }}
+    >
       <LogoImage />
       <LogoutButton />
-    </nav>
+    </Box>
   );
 };
 

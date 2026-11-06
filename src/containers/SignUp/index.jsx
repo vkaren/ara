@@ -1,9 +1,10 @@
 import { createRef, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import NextLink from "next/link";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
-import Link from "next/link";
 import { UserContext } from "@context/userContext";
 import Form from "@components/Form";
 import formInputs from "@data/forms.json";
@@ -11,7 +12,6 @@ import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
 import { signUpSchema } from "@validation/authSchemas";
 import validateSchema from "@validation/validateSchema";
-import styles from "@containers/SignLayout/styles.module.css";
 
 const SignUp = () => {
   const router = useRouter();
@@ -90,8 +90,8 @@ const SignUp = () => {
 
   return (
     <>
-      <Box className={styles["app-title"]}>
-        <Image src={iconTitle} alt="Ara" />
+      <Box sx={{ width: 96 }}>
+        <Image src={iconTitle} alt="Ara" style={{ width: "100%", height: "auto" }} />
       </Box>
 
       <Typography variant="h4" component="h1" fontWeight={600}>
@@ -104,11 +104,12 @@ const SignUp = () => {
         inputs={formInputs.forms["sign-up"]}
         submitMsg={signUpMsg}
         onSubmit={onSubmit}
-        styles={styles}
       >
         <Link
-          className={`${styles["form__link"]} clrVryLgtPurple`}
-          href={"/login"}
+          component={NextLink}
+          href="/login"
+          underline="hover"
+          fontWeight={600}
         >
           Do you already have an account?
         </Link>

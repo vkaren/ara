@@ -10,7 +10,6 @@ import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
 import { loginSchema } from "@validation/authSchemas";
 import validateSchema from "@validation/validateSchema";
-import styles from "@containers/SignLayout/styles.module.css";
 
 const Login = () => {
   const router = useRouter();
@@ -70,8 +69,8 @@ const Login = () => {
 
   return (
     <>
-      <Box className={styles["app-title"]}>
-        <Image src={iconTitle} alt="Ara" />
+      <Box sx={{ width: 96 }}>
+        <Image src={iconTitle} alt="Ara" style={{ width: "100%", height: "auto" }} />
       </Box>
 
       <Typography variant="h4" component="h1" fontWeight={600}>

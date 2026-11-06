@@ -18,19 +18,19 @@ const Option = ({ type }) => {
       href={type === "profile" ? `/${type}/${userId}` : `/${type}`}
       sx={{
         position: "relative",
+        flex: { xs: 1, sm: "initial" },
+        justifyContent: "center",
         borderRadius: 2,
         mb: 1,
         color: "text.primary",
+        "& .MuiListItemText-root": { display: { xs: "none", sm: "block" } },
         "&:hover": { backgroundColor: "action.hover" },
       }}
     >
       <ListItemIcon sx={{ minWidth: 40 }}>
         <IconComponent name={type} style={{ width: 26, height: 26 }} />
       </ListItemIcon>
-      <ListItemText
-        primary={label}
-        sx={{ display: { xs: "none", sm: "block" } }}
-      />
+      <ListItemText primary={label} />
       {type === "notifications" && haveNotifications && (
         <span
           aria-label="New notifications"

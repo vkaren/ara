@@ -7,7 +7,7 @@ import ProfilePhoto from "@components/ProfilePhoto";
 import Textarea from "./Textarea";
 import InsertedImage from "./InsertedImage";
 import SubmitButton from "./SubmitButton";
-import styles from "./styles.module.css";
+import Box from "@mui/material/Box";
 
 const AddComment = ({ isAReply }) => {
   const { userId, getUserData } = useContext(UserContext);
@@ -90,13 +90,25 @@ const AddComment = ({ isAReply }) => {
   };
 
   return (
-    <form
+    <Box
+      component="form"
       ref={form}
       onSubmit={onSubmit}
-      className={`${styles["add-comment__section"]} ${
-        isAReply && styles["reply"]
-      } bckgBlack
-      `}
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "40px minmax(0, 1fr) auto",
+        alignItems: "center",
+        gap: 1.5,
+        width: isAReply ? "100%" : { xs: "calc(100% - 2rem)", sm: "85%" },
+        maxWidth: 700,
+        minWidth: 0,
+        mb: 2,
+        p: 2,
+        border: 1,
+        borderColor: "primary.main",
+        borderRadius: 2,
+        bgcolor: "background.paper",
+      }}
     >
       <ProfilePhoto photoUrl={profilePhoto} />
 
@@ -111,7 +123,7 @@ const AddComment = ({ isAReply }) => {
       )}
 
       <SubmitButton isAReply={isAReply} />
-    </form>
+    </Box>
   );
 };
 

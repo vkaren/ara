@@ -9,6 +9,8 @@ const Menu = () => {
   useEffect(() => {
     onWindowResize();
     window.addEventListener("resize", onWindowResize);
+
+    return () => window.removeEventListener("resize", onWindowResize);
   }, []);
 
   const onWindowResize = () => {

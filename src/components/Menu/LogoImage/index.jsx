@@ -4,16 +4,16 @@ import Link from "next/link";
 import { ThemeContext } from "@context/themeContext";
 import iconLogo from "@icons/icon-logo.png";
 import iconLogoDarkMode from "@icons/icon-logo-darkmode.png";
-import styles from "./styles.module.css";
+import Box from "@mui/material/Box";
 
 const LogoImage = () => {
   const { darkTheme } = useContext(ThemeContext);
 
   return (
-    <Link className={`${styles["logo"]} `} href="/home">
-      <div className={styles["logo__image"]}>
+    <Link href="/home" aria-label="Ara home">
+      <Box sx={{ width: { xs: 40, sm: 64 }, display: "flex" }}>
         <Image src={darkTheme ? iconLogoDarkMode : iconLogo} alt="Ara home" />
-      </div>
+      </Box>
     </Link>
   );
 };

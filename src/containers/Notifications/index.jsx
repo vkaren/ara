@@ -1,13 +1,20 @@
 import NotifInfo from "./NotifInfo";
+import List from "@mui/material/List";
+import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import styles from "./styles.module.css";
 
 const Notifications = ({ notifications = [] }) => {
   return (
-    <section className={`${styles["notifs-section"]} bckgBlack clrWhite`}>
-      <h2 className={styles["notifs-section__title"]}>Notifications</h2>
+    <Paper
+      component="section"
+      variant="outlined"
+      sx={{ width: "80%", maxWidth: 600, p: { xs: 2, sm: 4 }, borderColor: "primary.main" }}
+    >
+      <Typography variant="h5" component="h2" fontWeight={600}>
+        Notifications
+      </Typography>
 
-      <ul className={styles["notifs-section__list"]}>
+      <List sx={{ my: 4, p: 0 }}>
         {notifications.length > 0 ? (
           notifications.map((notif) => (
             <NotifInfo
@@ -23,8 +30,8 @@ const Notifications = ({ notifications = [] }) => {
             You have no notifications.
           </Typography>
         )}
-      </ul>
-    </section>
+      </List>
+    </Paper>
   );
 };
 

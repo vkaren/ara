@@ -1,21 +1,17 @@
 import Link from "next/link";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import IconComponent from "@components/Icon";
 
-const EditOption = ({ styles }) => {
+const EditOption = () => {
   return (
-    <li>
-      <Link
-        id="hover"
-        className={`${styles["settings-option"]} clrWhite hoverBlack`}
-        href={"/settings/edit"}
-      >
-        <span className={styles["settings-option__title"]}>Edit profile</span>
-        <IconComponent
-          name="arrow"
-          className={`${styles["settings-option__icon"]} fillLgtPurple`}
-        />
-      </Link>
-    </li>
+    <ListItemButton component={Link} href="/settings/edit" sx={{ borderRadius: 2 }}>
+      <ListItemText primary="Edit profile" />
+      <ListItemIcon sx={{ minWidth: 0 }}>
+        <IconComponent name="arrow" style={{ width: 24, height: 24 }} />
+      </ListItemIcon>
+    </ListItemButton>
   );
 };
 

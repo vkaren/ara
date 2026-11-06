@@ -8,7 +8,7 @@ const InsertedImage = () => {
       variant="text"
       size="small"
       startIcon={<IconComponent name="insertedImage" />}
-      sx={{ justifySelf: "start", textTransform: "none" }}
+      sx={{ gridColumn: 2, gridRow: 3, justifySelf: "start", textTransform: "none" }}
     >
       Add image
       <input

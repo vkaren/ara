@@ -8,7 +8,6 @@ import { UserProvider } from "@context/userContext";
 import { AppProvider } from "@context/appContext";
 import { ListeningSocketProvider } from "@context/listeningSocketContext";
 import { createAppTheme } from "@theme";
-import "../global.css";
 
 function AppTheme({ children }) {
   const { darkTheme } = useContext(ThemeContext);

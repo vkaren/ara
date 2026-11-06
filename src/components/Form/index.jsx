@@ -28,7 +28,7 @@ const Form = ({
         px: { xs: 0, sm: 1 },
       }}
     >
-      <Stack spacing={2} sx={{ width: "100%" }}>
+      <Stack spacing={2.1} sx={{ width: "100%" }}>
         {inputs.map((input) => {
           const {
             name,
@@ -87,8 +87,7 @@ const Form = ({
               fullWidth
               sx={{
                 "& .MuiInputBase-root": {
-                  borderRadius: 6,
-                  padding: 1.5,
+                  borderRadius: 5,
                 },
               }}
             />

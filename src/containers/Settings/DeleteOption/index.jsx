@@ -1,18 +1,19 @@
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 import IconComponent from "@components/Icon";
 
-const DeleteOption = ({ onDelete, styles }) => {
+const DeleteOption = ({ onDelete }) => {
   return (
-    <li
+    <ListItemButton
       onClick={onDelete}
-      id="hover"
-      className={`${styles["settings-option"]} ${styles["delete-option"]} clrLgtRed hoverBlack`}
+      sx={{ borderRadius: 2, color: "error.main" }}
     >
-      <span className={styles["settings-option__title"]}>Delete account</span>
-      <IconComponent
-        name="delete"
-        className={`${styles["settings-option__icon"]} fillLgtRed`}
-      />
-    </li>
+      <ListItemText primary="Delete account" />
+      <ListItemIcon sx={{ minWidth: 0, color: "error.main" }}>
+        <IconComponent name="delete" style={{ width: 24, height: 24 }} />
+      </ListItemIcon>
+    </ListItemButton>
   );
 };
 

@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import List from "@mui/material/List";
+import Paper from "@mui/material/Paper";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import api from "@utils/api";
 import User from "../User";
-import styles from "./styles.module.css";
 
 const SearchBox = () => {
   const [searchedUsers, setSearchedUsers] = useState([]);
@@ -49,18 +51,18 @@ const SearchBox = () => {
 
   return (
     <>
-      <section className={`${styles["search-box"]} bckgBlack clrWhite`}>
-        <input
+      <Paper component="section" variant="outlined" sx={{ width: "80%", maxWidth: 600, p: 2, borderColor: "primary.main" }}>
+        <TextField
           onChange={onSearchUser}
-          className={styles["search-box__input"]}
           type="search"
+          fullWidth
+          label="Search users"
           aria-label="Search users"
-          placeholder="Search..."
           autoComplete="off"
         />
-      </section>
+      </Paper>
 
-      <ul className={`${styles["searched-container"]}`} aria-live="polite">
+      <List sx={{ width: "80%", maxWidth: 600, p: 0, display: "grid", gap: 1 }} aria-live="polite">
         {searchedUsers.length > 0 ? (
           searchedUsers.map((user) => (
             <User
@@ -69,7 +71,6 @@ const SearchBox = () => {
               nickname={user.nickname}
               username={user.username}
               profilePhoto={user.profile_photo}
-              styles={styles}
               type={"searched-user"}
             />
           ))
@@ -78,7 +79,7 @@ const SearchBox = () => {
             Search for a user to see results.
           </Typography>
         )}
-      </ul>
+      </List>
     </>
   );
 };

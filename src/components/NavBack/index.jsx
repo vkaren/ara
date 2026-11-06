@@ -21,14 +21,14 @@ const NavBack = ({ prevRoute }) => {
       position="fixed"
       color="default"
       elevation={0}
-      sx={{ width: { xs: "100%", sm: "calc(100% - 23rem)" }, right: 0 }}
+      sx={{ width: { xs: "100%", sm: "calc(100% - 14.45rem)" }, right: 0 }}
     >
-      <Toolbar sx={{ minHeight: 48 }}>
+      <Toolbar variant="dense" sx={{ minHeight: 48 }}>
         <IconButton onClick={onClickBack} aria-label="Go back">
-        <IconComponent
-          name="arrow"
-          style={{ width: 24, height: 24, transform: "rotate(180deg)" }}
-        />
+          <IconComponent
+            name="arrow"
+            style={{ width: 24, height: 24, transform: "rotate(180deg)" }}
+          />
         </IconButton>
       </Toolbar>
     </AppBar>

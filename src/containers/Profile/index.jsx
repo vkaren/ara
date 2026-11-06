@@ -30,9 +30,8 @@ const Profile = ({
 
       <Stack
         component="section"
-        alignItems="center"
         spacing={2}
-        sx={{ width: "90%" }}
+        sx={{ width: "90%", alignItems: "center" }}
       >
         {posts.length > 0 ? (
           posts.map((post) => (

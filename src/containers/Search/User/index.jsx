@@ -1,20 +1,30 @@
 import Link from "next/link";
+import Card from "@mui/material/Card";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import ProfilePhoto from "@components/ProfilePhoto";
 import FollowButton from "@components/FollowButton";
 
-const User = ({ id, nickname, username, profilePhoto, type, styles }) => {
+const User = ({ id, nickname, username, profilePhoto, type }) => {
   return (
-    <Link className={`${styles[`${type}__link`]}`} href={`/profile/${id}`}>
-      <article
-        id="hover"
-        className={`${styles[type]} bckgBlack clrWhite borderPurple hoverBlack`}
-      >
+    <Card
+      variant="outlined"
+      sx={{
+        minWidth: type === "people-tf" ? 240 : "100%",
+        p: 2,
+        borderColor: "primary.main",
+        borderRadius: 2,
+      }}
+    >
+      <Stack direction="row" alignItems="center" spacing={1.5}>
         <ProfilePhoto photoUrl={profilePhoto} />
-        <span className={`${styles[`${type}__nickname`]}`}>{nickname}</span>
-        <span className={`${styles[`${type}__username`]}`}>@{username}</span>
+        <Stack component={Link} href={`/profile/${id}`} sx={{ minWidth: 0, flex: 1, color: "inherit", textDecoration: "none" }}>
+          <Typography fontWeight={600} noWrap>{nickname}</Typography>
+          <Typography variant="body2" color="text.secondary" noWrap>@{username}</Typography>
+        </Stack>
         <FollowButton userIdToFollow={id} type={type} />
-      </article>
-    </Link>
+      </Stack>
+    </Card>
   );
 };
 

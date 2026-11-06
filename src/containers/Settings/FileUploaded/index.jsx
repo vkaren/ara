@@ -1,12 +1,27 @@
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import IconComponent from "@components/Icon";
-import styles from "./styles.module.css";
 
 const FileUploaded = ({ file }) => {
   return (
-    <div className={styles["field__file"]}>
-      <IconComponent name="upload" className={styles["file_icon"]} />
-      <span className={styles["file_name"]}>{file}</span>
-    </div>
+    <Paper
+      variant="outlined"
+      component={Stack}
+      spacing={1}
+      sx={{
+        minHeight: 160,
+        borderColor: "primary.main",
+        p: 2,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <IconComponent name="upload" style={{ width: 48, height: 48 }} />
+      <Typography variant="body2" align="center">
+        {file || "No file selected"}
+      </Typography>
+    </Paper>
   );
 };
 
