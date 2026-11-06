@@ -11,6 +11,7 @@ const Form = ({
   type,
   fileUploaded,
   submitMsg = {},
+  fieldErrors = {},
   loading = false,
   onSubmit,
   children,
@@ -80,7 +81,8 @@ const Form = ({
               required={required}
               placeholder={placeholder}
               defaultValue={defaultValue}
-              error={Boolean(submitMsg.error)}
+              error={Boolean(fieldErrors[name])}
+              helperText={fieldErrors[name] || " "}
               inputProps={{ minLength }}
               onChange={onChange}
               disabled={loading}

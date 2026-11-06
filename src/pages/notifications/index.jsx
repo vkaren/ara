@@ -41,7 +41,7 @@ const NotificationsPage = ({ notifications }) => {
   }, [userId]);
 
   return (
-    <AppLayout>
+    <AppLayout title="Notifications | Ara">
       <Notifications notifications={notifications} />
     </AppLayout>
   );

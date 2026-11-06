@@ -2,11 +2,15 @@ import Head from "next/head";
 import Box from "@mui/material/Box";
 import Menu from "@components/Menu";
 
-const AppLayout = ({ children }) => {
+const AppLayout = ({ children, title = "Ara" }) => {
   return (
     <>
       <Head>
-        <title>Ara</title>
+        <title>{title}</title>
+        <meta
+          name="description"
+          content="Ara is a social space for sharing posts, replies and conversations."
+        />
       </Head>
       <Box
         component="main"

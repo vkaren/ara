@@ -34,7 +34,7 @@ export async function getServerSideProps({ req, res, query }) {
 
 const SettingsEditPage = ({ userInfo, previousRoute }) => {
   return (
-    <AppLayout>
+    <AppLayout title="Edit profile | Ara">
       <NavBack prevRoute={previousRoute} />
       <SettingsEdit userInfo={userInfo} />
     </AppLayout>

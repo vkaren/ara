@@ -14,6 +14,7 @@ const SettingsEdit = ({ userInfo }) => {
   const { userId } = useContext(UserContext);
   const [fileUploaded, setFileUploaded] = useState("");
   const [editMsg, setEditMsg] = useState({ error: false, msg: "" });
+  const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formRef = useRef();
@@ -64,6 +65,7 @@ const SettingsEdit = ({ userInfo }) => {
     e.preventDefault();
 
     setEditMsg({ error: false, msg: "" });
+    setFieldErrors({});
 
     const formData = new FormData(formRef.current);
 
@@ -87,12 +89,13 @@ const SettingsEdit = ({ userInfo }) => {
       username !== (userInfo?.username || "") ||
       Boolean(password) ||
       Boolean(profilePicture);
-    const { error, message } = validateSchema(profileUpdateSchema, values);
+    const { error, message, fieldErrors: validationErrors } = validateSchema(profileUpdateSchema, values);
 
     if (imageError) {
       setEditMsg({ error: true, msg: imageError });
     } else if (error) {
       setEditMsg({ error: true, msg: message });
+      setFieldErrors(validationErrors);
     } else if (!hasChanges) {
       setEditMsg({ error: true, msg: "Add at least one profile change." });
     } else {
@@ -144,6 +147,7 @@ const SettingsEdit = ({ userInfo }) => {
         inputs={formInputs}
         fileUploaded={fileUploaded}
         submitMsg={editMsg}
+        fieldErrors={fieldErrors}
         onSubmit={onSubmit}
         loading={isSubmitting}
       />

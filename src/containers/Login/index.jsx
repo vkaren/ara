@@ -15,6 +15,7 @@ const Login = () => {
   const router = useRouter();
   const { saveLoginResponse } = useContext(UserContext);
   const [loginMsg, setLoginMsg] = useState({ error: false, msg: "" });
+  const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = createRef();
 
@@ -22,19 +23,21 @@ const Login = () => {
     e.preventDefault();
 
     setLoginMsg({ error: false, msg: "" });
+    setFieldErrors({});
 
     const formData = new FormData(form.current);
 
     const username = formData.get("username").toLowerCase();
     const password = formData.get("password");
 
-    const { error, message } = validateSchema(loginSchema, {
+    const { error, message, fieldErrors: validationErrors } = validateSchema(loginSchema, {
       username,
       password,
     });
 
     if (error) {
       setLoginMsg({ error: true, msg: message });
+      setFieldErrors(validationErrors);
     }
 
     if (!error) {
@@ -84,6 +87,7 @@ const Login = () => {
         form={form}
         inputs={formInputs.forms.login}
         submitMsg={loginMsg}
+        fieldErrors={fieldErrors}
         onSubmit={onSubmit}
         loading={isSubmitting}
       />

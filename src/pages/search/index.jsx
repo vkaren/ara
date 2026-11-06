@@ -3,7 +3,7 @@ import Search from "@containers/Search";
 
 const SearchPage = () => {
   return (
-    <AppLayout>
+    <AppLayout title="Search | Ara">
       <Search />
     </AppLayout>
   );

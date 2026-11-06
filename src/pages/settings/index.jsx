@@ -3,7 +3,7 @@ import Settings from "@containers/Settings";
 
 const SettingsPage = () => {
   return (
-    <AppLayout>
+    <AppLayout title="Settings | Ara">
       <Settings />
     </AppLayout>
   );

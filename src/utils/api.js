@@ -7,6 +7,7 @@ const api = async ({
   body,
   route,
   headers = {},
+  signal,
   ssr = {},
   token = getItem("token", ssr),
 }) => {
@@ -19,6 +20,7 @@ const api = async ({
       method,
       credentials: "include",
       headers: { ...headers },
+      signal,
     };
 
     if (token) {

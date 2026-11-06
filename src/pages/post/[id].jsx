@@ -77,7 +77,7 @@ const PostPage = ({ post, previousRoute }) => {
   };
 
   return (
-    <AppLayout>
+    <AppLayout title="Post | Ara">
       <NavBack prevRoute={previousRoute} />
 
       <Box

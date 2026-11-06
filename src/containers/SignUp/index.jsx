@@ -17,6 +17,7 @@ const SignUp = () => {
   const router = useRouter();
   const { saveLoginResponse } = useContext(UserContext);
   const [signUpMsg, setSignUpMsg] = useState({ error: false, msg: "" });
+  const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = createRef();
 
@@ -24,6 +25,7 @@ const SignUp = () => {
     e.preventDefault();
 
     setSignUpMsg({ error: false, msg: "" });
+    setFieldErrors({});
 
     const formData = new FormData(form.current);
 
@@ -33,7 +35,7 @@ const SignUp = () => {
 
     formData.set("username", username);
 
-    const { error, message } = validateSchema(signUpSchema, {
+    const { error, message, fieldErrors: validationErrors } = validateSchema(signUpSchema, {
       nickname,
       username,
       password,
@@ -41,6 +43,7 @@ const SignUp = () => {
 
     if (error) {
       setSignUpMsg({ error: true, msg: message });
+      setFieldErrors(validationErrors);
     } else {
       await createAccount(formData, { username, password });
     }
@@ -105,6 +108,7 @@ const SignUp = () => {
         form={form}
         inputs={formInputs.forms["sign-up"]}
         submitMsg={signUpMsg}
+        fieldErrors={fieldErrors}
         onSubmit={onSubmit}
         loading={isSubmitting}
       >

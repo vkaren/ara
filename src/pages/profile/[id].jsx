@@ -32,7 +32,7 @@ export async function getServerSideProps({ req, res, query }) {
 
 const ProfilePage = ({ profile, previousRoute }) => {
   return (
-    <AppLayout>
+    <AppLayout title={`${profile.nickname || profile.username} | Ara`}>
       <NavBack prevRoute={previousRoute} />
 
       {profile && (

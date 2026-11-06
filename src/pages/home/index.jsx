@@ -49,7 +49,7 @@ const HomePage = ({ postsData }) => {
   }, [postDeleted]);
 
   return (
-    <AppLayout>
+    <AppLayout title="Home | Ara">
       <Home posts={posts} />
     </AppLayout>
   );
