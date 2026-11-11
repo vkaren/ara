@@ -42,17 +42,20 @@ function UserProvider({ children }) {
   }, [userId]);
 
   const getUserFollowingList = useCallback(async () => {
-    return await api({
+    const response = await api({
       method: "GET",
       route: `follow/following/${userId}`,
     });
+
+    return Array.isArray(response) ? response : response.data || [];
   }, [userId]);
 
   const haveNewNotifications = useCallback(async () => {
-    const notifications = await api({
+    const response = await api({
       method: "GET",
-      route: `notification/${userId}`,
+      route: `notification/${userId}?page=1&limit=100`,
     });
+    const notifications = Array.isArray(response) ? response : response.data || [];
 
     return notifications.some((notif) => !notif.seen);
   }, [userId]);

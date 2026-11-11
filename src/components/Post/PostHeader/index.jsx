@@ -19,9 +19,8 @@ const PostHeader = ({ id, author, createdAt, isAReply }) => {
     <Stack
       component="header"
       direction="row"
-      alignItems="center"
       spacing={1}
-      sx={{ minWidth: 0 }}
+      sx={{ minWidth: 0, alignItems: "center" }}
     >
       <ProfilePhoto photoUrl={author.profile_photo} />
 

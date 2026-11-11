@@ -21,7 +21,12 @@ const PostFooter = ({
   const [isLiking, setIsLiking] = useState(false);
 
   const getLikedPostFromUser = useCallback(async () => {
-    return await api({ method: "GET", route: `like/${userId}` });
+    const response = await api({
+      method: "GET",
+      route: `like/${userId}?page=1&limit=100`,
+    });
+
+    return Array.isArray(response) ? response : response.data || [];
   }, [userId]);
 
   const hasUserLiked = useCallback(async () => {
@@ -122,7 +127,12 @@ const PostFooter = ({
   };
 
   return (
-    <Stack component="footer" direction="row" justifyContent="flex-end" spacing={1}>
+    <Stack
+      component="footer"
+      direction="row"
+      spacing={1}
+      sx={{ justifyContent: "flex-end" }}
+    >
       {isHomeOrProfilePage ? (
         <FooterOption type={"comment"} text={numberReplies} />
       ) : (

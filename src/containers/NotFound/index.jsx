@@ -36,10 +36,14 @@ const NotFound = () => {
       >
         <Paper
           component={Stack}
-          alignItems="center"
-          justifyContent="center"
           spacing={2}
-          sx={{ width: "85%", maxWidth: 400, p: { xs: 4, sm: 8 } }}
+          sx={{
+            width: "85%",
+            maxWidth: 400,
+            p: { xs: 4, sm: 8 },
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <IconComponent
             name="notFound"

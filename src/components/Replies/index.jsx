@@ -6,7 +6,6 @@ const Replies = ({ replies = [], onDeleteReply }) => {
   return (
     <Stack
       component="section"
-      alignItems="flex-end"
       spacing={2}
       sx={{
         width: { xs: "calc(100% - 2rem)", sm: "75%" },
@@ -16,6 +15,7 @@ const Replies = ({ replies = [], onDeleteReply }) => {
         borderColor: "divider",
         pl: 2,
         mt: 2,
+        alignItems: "flex-end",
       }}
     >
       {replies.length > 0 ? (

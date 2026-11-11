@@ -29,9 +29,11 @@ const UserInfo = ({ id, nickname, username, profilePhoto, followers = [], bio })
     >
       <Stack
         direction={{ xs: "column", sm: "row" }}
-        alignItems={{ xs: "flex-start", sm: "center" }}
-        justifyContent="space-between"
         spacing={2}
+        sx={{
+          alignItems: { xs: "flex-start", sm: "center" },
+          justifyContent: "space-between",
+        }}
       >
         <ProfilePhoto photoUrl={profilePhoto} profilePage={true} />
 
@@ -44,7 +46,7 @@ const UserInfo = ({ id, nickname, username, profilePhoto, followers = [], bio })
           </Typography>
         </Box>
 
-        <Stack direction="row" alignItems="center" spacing={2}>
+        <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
           <Typography variant="body2">
             {`${numberFollowers} follower${numberFollowers === 1 ? "" : "s"}`}
           </Typography>

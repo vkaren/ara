@@ -2,8 +2,9 @@ import NotifInfo from "./NotifInfo";
 import List from "@mui/material/List";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
+import InfiniteScrollTrigger from "@components/InfiniteScrollTrigger";
 
-const Notifications = ({ notifications = [] }) => {
+const Notifications = ({ notifications = [], pagination, isLoading, onLoadMore }) => {
   return (
     <Paper
       component="section"
@@ -36,6 +37,11 @@ const Notifications = ({ notifications = [] }) => {
           </Typography>
         )}
       </List>
+      <InfiniteScrollTrigger
+        hasMore={pagination?.page < pagination?.totalPages}
+        isLoading={isLoading}
+        onLoadMore={onLoadMore}
+      />
     </Paper>
   );
 };

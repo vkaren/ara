@@ -16,7 +16,7 @@ const User = ({ id, nickname, username, profilePhoto, type }) => {
         borderRadius: 2,
       }}
     >
-      <Stack direction="row" alignItems="center" spacing={1.5}>
+      <Stack direction="row" spacing={1.5} sx={{ alignItems: "center" }}>
         <ProfilePhoto photoUrl={profilePhoto} />
         <Stack
           component={Link}

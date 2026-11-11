@@ -33,6 +33,7 @@ const SearchBox = () => {
     clearTimeout(timerRef.current);
     abortControllerRef.current?.abort();
     setErrorMessage("");
+    setSearchedUsers([]);
 
     if (!filterBy) {
       setSearchedUsers([]);
@@ -59,19 +60,21 @@ const SearchBox = () => {
   const getUserListBy = async (filterBy, signal) => {
     const userList = await api({
       method: "GET",
-      route: `user/?filter=${filterBy}`,
+      route: `user/?filter=${encodeURIComponent(filterBy)}`,
       signal,
     });
 
-    if (Array.isArray(userList)) {
-      return { users: userList, error: "" };
-    }
-
     if (userList.error && userList.status !== 0) {
-      return { users: [], error: userList.message || "Unable to search users." };
+      return {
+        users: [],
+        error: userList.message || "Unable to search users.",
+      };
     }
 
-    return { users: [], error: "" };
+    return {
+      users: Array.isArray(userList) ? userList : userList.data || [],
+      error: "",
+    };
   };
 
   return (
@@ -95,8 +98,8 @@ const SearchBox = () => {
         sx={{ width: "80%", maxWidth: 600, p: 0, display: "grid", gap: 1 }}
         aria-live="polite"
       >
-        {isLoading ? (
-          <Stack alignItems="center" component="li" sx={{ p: 2 }}>
+        {isLoading && searchedUsers.length === 0 ? (
+          <Stack component="li" sx={{ p: 2, alignItems: "center" }}>
             <CircularProgress size={24} aria-label="Searching users" />
           </Stack>
         ) : errorMessage ? (
