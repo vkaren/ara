@@ -1,23 +1,26 @@
 const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 20;
 const MAX_LIMIT = 100;
+import type { PaginatedResponse, Pagination } from "@app-types/api";
+
+export type { PaginatedResponse, Pagination } from "@app-types/api";
 
 const normalizePagination = (
-  pagination = {},
+  pagination: Partial<Pagination> = {},
   fallbackPage = DEFAULT_PAGE,
   fallbackLimit = DEFAULT_LIMIT
-) => ({
+): Pagination => ({
   page: Number(pagination.page) || fallbackPage,
   limit: Math.min(Number(pagination.limit) || fallbackLimit, MAX_LIMIT),
   total: Number(pagination.total) || 0,
   totalPages: Number(pagination.totalPages) || 0,
 });
 
-const normalizePaginatedResponse = (
-  response,
+export const normalizePaginatedResponse = <T>(
+  response: T[] | Partial<PaginatedResponse<T>> | null | undefined,
   fallbackPage = DEFAULT_PAGE,
   fallbackLimit = DEFAULT_LIMIT
-) => {
+): PaginatedResponse<T> => {
   if (Array.isArray(response)) {
     return {
       data: response,
@@ -40,12 +43,12 @@ const normalizePaginatedResponse = (
   };
 };
 
-const buildPaginatedRoute = (
-  route,
+export const buildPaginatedRoute = (
+  route: string,
   page = DEFAULT_PAGE,
   limit = DEFAULT_LIMIT,
-  params = {}
-) => {
+  params: Record<string, string> = {}
+): string => {
   const searchParams = new URLSearchParams({
     ...params,
     page: String(page),
@@ -55,10 +58,13 @@ const buildPaginatedRoute = (
   return `${route}${route.includes("?") ? "&" : "?"}${searchParams.toString()}`;
 };
 
-const getAllPages = async (request, { limit = MAX_LIMIT } = {}) => {
-  const allData = [];
+export const getAllPages = async <T>(
+  request: (page: number, limit: number) => Promise<T[] | PaginatedResponse<T>>,
+  { limit = MAX_LIMIT }: { limit?: number } = {}
+): Promise<T[]> => {
+  const allData: T[] = [];
   let page = DEFAULT_PAGE;
-  let response;
+  let response: PaginatedResponse<T>;
 
   do {
     response = normalizePaginatedResponse(await request(page, limit), page, limit);
@@ -69,10 +75,4 @@ const getAllPages = async (request, { limit = MAX_LIMIT } = {}) => {
   return allData;
 };
 
-export {
-  DEFAULT_LIMIT,
-  MAX_LIMIT,
-  buildPaginatedRoute,
-  getAllPages,
-  normalizePaginatedResponse,
-};
+export { DEFAULT_LIMIT, MAX_LIMIT };

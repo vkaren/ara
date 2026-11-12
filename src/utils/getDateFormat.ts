@@ -1,4 +1,4 @@
-const timeInSeconds = {
+const timeInSeconds: Record<string, number> = {
   year: 31536000,
   month: 2629800,
   week: 604800,
@@ -8,18 +8,14 @@ const timeInSeconds = {
   second: 1,
 };
 
-const getDateFormat = (createdAt) => {
+const getDateFormat = (createdAt: string | number | Date): string => {
   const startTime = new Date(createdAt);
-  const endTime = Date.now();
-  const currentDate = Math.floor((endTime - startTime.getTime()) / 1000);
+  const currentDate = Math.floor((Date.now() - startTime.getTime()) / 1000);
   let dateFormat = "now";
 
-  for (let key in timeInSeconds) {
-    const time = timeInSeconds[key];
-
+  for (const [key, time] of Object.entries(timeInSeconds)) {
     if (currentDate >= time) {
-      let newDate = Math.floor(currentDate / time);
-
+      const newDate = Math.floor(currentDate / time);
       dateFormat = `${newDate}  ${key}${newDate > 1 ? "s" : ""} ago`;
       break;
     }
