@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
 import IconComponent from "@components/Icon";
+import type { MouseEvent } from "react";
 
 const FooterOption = ({
   type,
@@ -7,6 +8,12 @@ const FooterOption = ({
   haveLike = false,
   onClick = undefined,
   disabled = false,
+}: {
+  type: "comment" | "reply" | "like";
+  text: string | number;
+  haveLike?: boolean;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 }) => {
   const iconStyle = {
     width: type === "comment" ? 20 : 24,

@@ -4,8 +4,9 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
+import type { ReplyContext } from "@app-types/ui";
 
-const ReplyBox = ({ replyingToPost, replyingToUser, closeModal }) => (
+const ReplyBox = ({ replyingToPost, replyingToUser, closeModal }: ReplyContext) => (
   <Dialog open fullWidth maxWidth="sm" onClose={closeModal}>
     <DialogTitle sx={{ pr: 6 }}>
       Reply

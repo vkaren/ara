@@ -3,8 +3,14 @@ import List from "@mui/material/List";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import InfiniteScrollTrigger from "@components/InfiniteScrollTrigger";
+import type { NotificationsProps } from "@app-types/ui";
 
-const Notifications = ({ notifications = [], pagination, isLoading, onLoadMore }) => {
+const Notifications = ({
+  notifications = [],
+  pagination,
+  isLoading,
+  onLoadMore,
+}: NotificationsProps) => {
   return (
     <Paper
       component="section"
@@ -38,7 +44,7 @@ const Notifications = ({ notifications = [], pagination, isLoading, onLoadMore }
         )}
       </List>
       <InfiniteScrollTrigger
-        hasMore={pagination?.page < pagination?.totalPages}
+        hasMore={(pagination.page || 0) < (pagination.totalPages || 0)}
         isLoading={isLoading}
         onLoadMore={onLoadMore}
       />

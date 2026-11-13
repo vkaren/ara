@@ -3,11 +3,16 @@ import Button from "@mui/material/Button";
 import { UserContext } from "@context/userContext";
 import api from "@utils/api";
 import type { ApiRequest } from "@app-types/api";
+import type { MouseEvent } from "react";
 
 const FollowButton = ({
   userIdToFollow,
   updateNumberFollowers = undefined,
   type = "profile",
+}: {
+  userIdToFollow: number;
+  updateNumberFollowers?: (type: "follow" | "unfollow") => void;
+  type?: "profile" | "people-tf" | "searched-user";
 }) => {
   const { userId, hasFollowedUser } = useContext(UserContext);
   const [isFollowing, setIsFollowing] = useState<boolean | undefined>();
@@ -25,10 +30,10 @@ const FollowButton = ({
     checkIsFollowing();
   }, [hasFollowedUser, type, userId, userIdToFollow]);
 
-  const onClickFollowBtn = async (e) => {
+  const onClickFollowBtn = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
-    let type = "";
+    let type: "follow" | "unfollow";
 
     if (isFollowing) {
       type = "unfollow";
@@ -49,7 +54,7 @@ const FollowButton = ({
     setIsFollowing(!isFollowing);
   };
 
-  const followOrUnfollowUser = async (type) => {
+  const followOrUnfollowUser = async (type: "follow" | "unfollow") => {
     const request: ApiRequest = {
       method: "POST",
       route: "follow",

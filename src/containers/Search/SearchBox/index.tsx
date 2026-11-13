@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import List from "@mui/material/List";
 import Paper from "@mui/material/Paper";
 import TextField from "@mui/material/TextField";
@@ -8,29 +8,30 @@ import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import api from "@utils/api";
 import User from "../User";
+import type { User as UserType } from "@app-types/domain";
 
 const SearchBox = () => {
-  const [searchedUsers, setSearchedUsers] = useState([]);
-  const timerRef = useRef(null);
+  const [searchedUsers, setSearchedUsers] = useState<UserType[]>([]);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const requestIdRef = useRef(0);
-  const abortControllerRef = useRef(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [hasSearched, setHasSearched] = useState(false);
 
   useEffect(() => {
     return () => {
-      clearTimeout(timerRef.current);
+      if (timerRef.current) clearTimeout(timerRef.current);
       abortControllerRef.current?.abort();
     };
   }, []);
 
-  const onSearchUser = (e) => {
+  const onSearchUser = (e: ChangeEvent<HTMLInputElement>) => {
     const filterBy = e.target.value.trim();
     requestIdRef.current += 1;
     const requestId = requestIdRef.current;
 
-    clearTimeout(timerRef.current);
+    if (timerRef.current) clearTimeout(timerRef.current);
     abortControllerRef.current?.abort();
     setErrorMessage("");
     setSearchedUsers([]);
@@ -57,7 +58,7 @@ const SearchBox = () => {
     }, 500);
   };
 
-  const getUserListBy = async (filterBy, signal) => {
+  const getUserListBy = async (filterBy: string, signal: AbortSignal) => {
     const userList = await api({
       method: "GET",
       route: `user/?filter=${encodeURIComponent(filterBy)}`,

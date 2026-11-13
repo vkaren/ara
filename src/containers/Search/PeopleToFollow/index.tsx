@@ -2,8 +2,9 @@ import User from "../User";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import type { User as UserType } from "@app-types/domain";
 
-const PeopleToFollow = ({ peopleToFollow = [] }) => {
+const PeopleToFollow = ({ peopleToFollow = [] }: { peopleToFollow?: UserType[] }) => {
   return (
     peopleToFollow.length > 0 && (
       <Stack

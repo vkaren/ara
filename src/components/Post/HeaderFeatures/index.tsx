@@ -9,22 +9,32 @@ import { AppContext } from "@context/appContext";
 import DeleteModal from "@components/DeleteModal";
 import api from "@utils/api";
 import type { ApiRequest } from "@app-types/api";
+import type { ReplyContext } from "@app-types/ui";
+import type { MouseEvent } from "react";
 
-const HeaderFeatures = ({ id, authorId, isAReply }) => {
+const HeaderFeatures = ({
+  id,
+  authorId,
+  isAReply,
+}: {
+  id: number;
+  authorId: number;
+  isAReply?: ReplyContext;
+}) => {
   const { savePostDeleted, saveReplyDeleted } = useContext(AppContext);
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [isDeletingPost, setIsDeletingPost] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const closeMenu = () => setAnchorEl(null);
 
-  const toggleDeleteModal = (event) => {
+  const toggleDeleteModal = (event?: MouseEvent<HTMLElement>) => {
     event?.stopPropagation();
     closeMenu();
     setIsDeletingPost((isOpen) => !isOpen);
   };
 
-  const onDeletePost = async (event) => {
+  const onDeletePost = async (event?: MouseEvent<HTMLElement>) => {
     event?.stopPropagation();
 
     const request: ApiRequest & { body: Record<string, unknown> } = {
@@ -50,9 +60,11 @@ const HeaderFeatures = ({ id, authorId, isAReply }) => {
     if ("error" in isDeleted) return;
 
     if (isDeleted) {
-      isAReply
-        ? saveReplyDeleted(isDeleted.replyDeleted)
-        : savePostDeleted(isDeleted.postDeleted);
+      if (isAReply && isDeleted.replyDeleted) {
+        saveReplyDeleted(isDeleted.replyDeleted);
+      } else if (!isAReply && isDeleted.postDeleted) {
+        savePostDeleted(isDeleted.postDeleted);
+      }
 
       setIsDeletingPost(false);
     }

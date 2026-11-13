@@ -3,10 +3,11 @@ import { UserContext } from "@context/userContext";
 import api from "@utils/api";
 import SearchBox from "./SearchBox";
 import PeopleToFollow from "./PeopleToFollow";
+import type { User } from "@app-types/domain";
 
 const Search = () => {
   const { userId, getUserFollowingList } = useContext(UserContext);
-  const [peopleToFollow, setPeopleToFollow] = useState([]);
+  const [peopleToFollow, setPeopleToFollow] = useState<User[]>([]);
 
   useEffect(() => {
     if (!userId) return;

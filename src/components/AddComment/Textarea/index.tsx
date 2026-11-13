@@ -1,6 +1,7 @@
 import TextField from "@mui/material/TextField";
+import type { ReplyContext } from "@app-types/ui";
 
-const Textarea = ({ isAReply }) => {
+const Textarea = ({ isAReply }: { isAReply?: ReplyContext }) => {
   return (
     <TextField
       name="content"

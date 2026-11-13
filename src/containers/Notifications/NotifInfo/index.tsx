@@ -3,8 +3,19 @@ import Avatar from "@mui/material/Avatar";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import IconComponent from "@components/Icon";
+import type { Notification } from "@app-types/domain";
 
-const NotifInfo = ({ notifFrom, postId, type, seen }) => {
+const NotifInfo = ({
+  notifFrom,
+  postId,
+  type,
+  seen,
+}: {
+  notifFrom: Notification["notif_from"];
+  postId?: Notification["post_id"];
+  type: Notification["type"];
+  seen: Notification["seen"];
+}) => {
   const getNotifMessage = () => {
     if (type === "like") return `${notifFrom.username} liked your post.`;
     if (type === "reply") return `${notifFrom.username} replied to your post.`;
@@ -23,7 +34,10 @@ const NotifInfo = ({ notifFrom, postId, type, seen }) => {
         gap: 1,
       }}
     >
-      <Avatar src={notifFrom.profile_photo} alt={`${notifFrom.username} profile photo`}>
+      <Avatar
+        src={notifFrom.profile_photo || undefined}
+        alt={`${notifFrom.username} profile photo`}
+      >
         <IconComponent name="profile" />
       </Avatar>
       <ListItemText primary={getNotifMessage()} />

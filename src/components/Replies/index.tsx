@@ -1,8 +1,15 @@
 import Post from "@components/Post";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import type { ReplyProps } from "@app-types/ui";
 
-const Replies = ({ replies = [], onDeleteReply = undefined }) => {
+const Replies = ({
+  replies = [],
+  onDeleteReply = undefined,
+}: {
+  replies?: ReplyProps[];
+  onDeleteReply?: (replyId: number) => void;
+}) => {
   return (
     <Stack
       component="section"

@@ -1,6 +1,13 @@
 import Button from "@mui/material/Button";
+import type { ReplyContext } from "@app-types/ui";
 
-const SubmitButton = ({ isAReply, disabled = false }) => {
+const SubmitButton = ({
+  isAReply,
+  disabled = false,
+}: {
+  isAReply?: ReplyContext;
+  disabled?: boolean;
+}) => {
   return (
     <Button
       type="submit"

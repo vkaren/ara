@@ -28,6 +28,7 @@ const SignUp = () => {
     setSignUpMsg({ error: false, msg: "" });
     setFieldErrors({});
 
+    if (!form.current) return;
     const formData = new FormData(form.current);
 
     const nickname = String(formData.get("nickname") || "");

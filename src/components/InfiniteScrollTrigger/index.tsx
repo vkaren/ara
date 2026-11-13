@@ -2,8 +2,16 @@ import { useEffect, useRef } from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Stack from "@mui/material/Stack";
 
-const InfiniteScrollTrigger = ({ hasMore, isLoading, onLoadMore }) => {
-  const triggerRef = useRef(null);
+const InfiniteScrollTrigger = ({
+  hasMore,
+  isLoading,
+  onLoadMore,
+}: {
+  hasMore: boolean;
+  isLoading: boolean;
+  onLoadMore: () => void;
+}) => {
+  const triggerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!hasMore || isLoading || !triggerRef.current) return undefined;

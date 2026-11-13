@@ -5,12 +5,23 @@ import Typography from "@mui/material/Typography";
 import { UserContext } from "@context/userContext";
 import ProfilePhoto from "@components/ProfilePhoto";
 import FollowButton from "@components/FollowButton";
+import type { ProfileProps } from "@app-types/ui";
 
-const UserInfo = ({ id, nickname, username, profilePhoto, followers = [], bio }) => {
+const UserInfo = ({
+  id,
+  nickname,
+  username,
+  profilePhoto,
+  followers = [],
+  bio,
+}: Pick<
+  ProfileProps,
+  "id" | "nickname" | "username" | "profilePhoto" | "followers" | "bio"
+>) => {
   const { userId } = useContext(UserContext);
   const [numberFollowers, setNumberFollowers] = useState(followers.length);
 
-  const updateNumberFollowers = (type) => {
+  const updateNumberFollowers = (type: "follow" | "unfollow") => {
     if (type === "follow") {
       setNumberFollowers((currentNumber) => currentNumber + 1);
     } else {

@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import type { FormProps } from "@app-types/ui";
 
 const Form = ({
   form,
@@ -15,7 +16,7 @@ const Form = ({
   loading = false,
   onSubmit,
   children = null,
-}) => {
+}: FormProps) => {
   return (
     <Box
       component="form"

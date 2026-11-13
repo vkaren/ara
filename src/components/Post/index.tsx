@@ -8,6 +8,7 @@ import PostContent from "./PostContent";
 import PostInsertedImage from "./PostInsertedImage";
 import PostFooter from "./PostFooter";
 import ReplyBox from "./ReplyBox";
+import type { PostProps } from "@app-types/ui";
 
 const Post = ({
   id,
@@ -15,11 +16,11 @@ const Post = ({
   createdAt,
   content,
   insertedImage,
-  likes = [],
-  replies = [],
+  likes = [] as PostProps["likes"],
+  replies = [] as PostProps["replies"],
   isAReply = undefined,
   onDeletePost = undefined,
-}) => {
+}: PostProps) => {
   const router = useRouter();
   const isHomeOrProfilePage =
     router.asPath.includes("home") || router.asPath.includes("profile");

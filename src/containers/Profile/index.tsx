@@ -3,6 +3,7 @@ import Post from "@components/Post";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import type { ProfileProps } from "@app-types/ui";
 
 const Profile = ({
   id,
@@ -12,7 +13,7 @@ const Profile = ({
   followers = [],
   bio,
   posts = [],
-}) => {
+}: ProfileProps) => {
   return (
     <>
       <Box component="header" sx={{ width: "100%", mt: -6 }}>

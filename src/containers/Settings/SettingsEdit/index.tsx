@@ -67,6 +67,7 @@ const SettingsEdit = ({ userInfo }) => {
     setEditMsg({ error: false, msg: "" });
     setFieldErrors({});
 
+    if (!formRef.current) return;
     const formData = new FormData(formRef.current);
 
     const nickname = String(formData.get("nickname") || "");

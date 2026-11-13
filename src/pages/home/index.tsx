@@ -6,11 +6,13 @@ import AppLayout from "@containers/AppLayout";
 import Home from "@containers/Home";
 import InfiniteScrollTrigger from "@components/InfiniteScrollTrigger";
 import { buildPaginatedRoute, normalizePaginatedResponse } from "@utils/pagination";
+import type { Post } from "@app-types/domain";
+import type { Pagination } from "@app-types/api";
 
 export async function getServerSideProps({ req, res }) {
-  const props = {
+  const props: { postsData: Post[]; pagination: Pagination } = {
     postsData: [],
-    pagination: {},
+    pagination: { page: 1, limit: 20, total: 0, totalPages: 0 },
   };
 
   const posts = await api({

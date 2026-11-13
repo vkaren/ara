@@ -6,14 +6,23 @@ import FooterOption from "../FooterOption";
 import api from "@utils/api";
 import type { ApiRequest } from "@app-types/api";
 import type { Like } from "@app-types/domain";
+import type { ReplyContext } from "@app-types/ui";
+import type { MouseEvent } from "react";
 
 const PostFooter = ({
   id,
-  likes = [],
-  replies = [],
+  likes = [] as Like[],
+  replies = [] as { replying_to_post: number }[],
   isAReply,
   isHomeOrProfilePage,
   onClickReply,
+}: {
+  id: number;
+  likes?: Like[];
+  replies?: { replying_to_post: number }[];
+  isAReply?: ReplyContext;
+  isHomeOrProfilePage: boolean;
+  onClickReply?: () => void;
 }) => {
   const { userId } = useContext(UserContext);
   const { socketData } = useContext(ListeningSocketContext);
@@ -53,7 +62,7 @@ const PostFooter = ({
   );
 
   const updateNumberLikes = useCallback(
-    (data, type) => {
+    (data: Like, type: "like" | "dislike") => {
       if (data.user_id !== userId) {
         if (
           (isAReply && data.type === "reply" && data.message_id === id) ||
@@ -90,7 +99,7 @@ const PostFooter = ({
     }
   }, [socketData, updateNumberLikes, updateNumberReplies]);
 
-  const onClickLikeBtn = async (e) => {
+  const onClickLikeBtn = async (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
 
     let newNumberLikes = numberLikes;

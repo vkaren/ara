@@ -4,8 +4,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import ProfilePhoto from "@components/ProfilePhoto";
 import FollowButton from "@components/FollowButton";
+import type { SearchUserProps } from "@app-types/ui";
 
-const User = ({ id, nickname, username, profilePhoto, type }) => {
+const User = ({ id, nickname, username, profilePhoto, type }: SearchUserProps) => {
   return (
     <Card
       variant="outlined"

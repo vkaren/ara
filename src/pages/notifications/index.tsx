@@ -6,15 +6,17 @@ import { getItem } from "@utils/cookies";
 import AppLayout from "@containers/AppLayout";
 import Notifications from "@containers/Notifications";
 import { buildPaginatedRoute, normalizePaginatedResponse } from "@utils/pagination";
+import type { Notification } from "@app-types/domain";
+import type { Pagination } from "@app-types/api";
 
 export async function getServerSideProps({ req, res }) {
   const ssr = {
     req,
     res,
   };
-  const props = {
+  const props: { notifications: Notification[]; pagination: Pagination } = {
     notifications: [],
-    pagination: {},
+    pagination: { page: 1, limit: 20, total: 0, totalPages: 0 },
   };
 
   const userId = getItem("user_id", ssr);

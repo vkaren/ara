@@ -1,4 +1,4 @@
-import { createRef, useContext, useEffect, useState } from "react";
+import { createRef, useContext, useEffect, useState, type FormEvent } from "react";
 import { UserContext } from "@context/userContext";
 import Alert from "@mui/material/Alert";
 import api from "@utils/api";
@@ -9,10 +9,11 @@ import InsertedImage from "./InsertedImage";
 import SubmitButton from "./SubmitButton";
 import Box from "@mui/material/Box";
 import type { ApiRequest } from "@app-types/api";
+import type { ReplyContext } from "@app-types/ui";
 
-const AddComment = ({ isAReply = undefined }) => {
+const AddComment = ({ isAReply = undefined }: { isAReply?: ReplyContext }) => {
   const { userId, getUserData } = useContext(UserContext);
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const form = createRef<HTMLFormElement>();
@@ -21,13 +22,14 @@ const AddComment = ({ isAReply = undefined }) => {
     if (!userId) return;
 
     getUserData().then((userData) => {
-      if ("profile_photo" in userData) setProfilePhoto(userData.profile_photo);
+      if ("profile_photo" in userData) setProfilePhoto(userData.profile_photo || null);
     });
   }, [getUserData, userId]);
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!form.current) return;
     const formData = new FormData(form.current);
     setErrorMessage("");
 
@@ -46,14 +48,16 @@ const AddComment = ({ isAReply = undefined }) => {
       }
 
       if (isAReply) {
-        isAReply.closeModal();
+        isAReply.closeModal?.();
       }
     }
   };
 
-  const validateForm = (formData) => {
+  const validateForm = (formData: FormData) => {
     const postContent = formData.get("content");
-    const insertedImage = formData.get("inserted_image");
+    const insertedImageEntry = formData.get("inserted_image");
+    const insertedImage =
+      insertedImageEntry instanceof File ? insertedImageEntry : null;
     const imageError = validateImageFile(insertedImage);
 
     if (imageError) {
@@ -69,12 +73,12 @@ const AddComment = ({ isAReply = undefined }) => {
       formData.set("content", " ");
     }
 
-    formData.set("author_id", userId);
+    formData.set("author_id", String(userId));
 
     return true;
   };
 
-  const sendComment = async (formData) => {
+  const sendComment = async (formData: FormData) => {
     const apiRequest: ApiRequest = {
       method: "POST",
       route: isAReply ? "reply" : "post",
@@ -85,8 +89,8 @@ const AddComment = ({ isAReply = undefined }) => {
     if (!isAReply) {
       apiRequest.route = "post";
     } else {
-      formData.append("replying_to_post", isAReply.replyingToPost);
-      formData.append("replying_to_user", isAReply.replyingToUser);
+      formData.append("replying_to_post", String(isAReply.replyingToPost));
+      formData.append("replying_to_user", String(isAReply.replyingToUser));
 
       apiRequest.route = "reply";
     }
