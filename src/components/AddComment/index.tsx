@@ -16,6 +16,7 @@ const AddComment = ({ isAReply = undefined }: { isAReply?: ReplyContext }) => {
   const [profilePhoto, setProfilePhoto] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imageResetKey, setImageResetKey] = useState(0);
   const form = createRef<HTMLFormElement>();
 
   useEffect(() => {
@@ -37,6 +38,7 @@ const AddComment = ({ isAReply = undefined }: { isAReply?: ReplyContext }) => {
 
     if (canAddComment) {
       form.current.reset();
+      setImageResetKey((currentKey) => currentKey + 1);
 
       setIsSubmitting(true);
       const response = await sendComment(formData);
@@ -123,7 +125,7 @@ const AddComment = ({ isAReply = undefined }: { isAReply?: ReplyContext }) => {
 
       <Textarea isAReply={isAReply} />
 
-      <InsertedImage />
+      <InsertedImage resetKey={imageResetKey} />
 
       {errorMessage && (
         <Alert severity="error" sx={{ gridColumn: "1 / -1" }}>
