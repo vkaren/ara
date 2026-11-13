@@ -33,9 +33,13 @@ const SignUp = () => {
 
     const nickname = String(formData.get("nickname") || "");
     const username = String(formData.get("username") || "").toLowerCase();
+    const email = String(formData.get("email") || "")
+      .trim()
+      .toLowerCase();
     const password = String(formData.get("password") || "");
 
     formData.set("username", username);
+    formData.set("email", email);
 
     const {
       error,
@@ -44,6 +48,7 @@ const SignUp = () => {
     } = validateSchema(signUpSchema, {
       nickname,
       username,
+      email,
       password,
     });
 
@@ -104,7 +109,7 @@ const SignUp = () => {
 
   return (
     <>
-      <Box sx={{ width: 96 }}>
+      <Box sx={{ width: 64 }}>
         <Image src={iconTitle} alt="Ara" style={{ width: "100%", height: "auto" }} />
       </Box>
 

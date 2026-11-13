@@ -37,6 +37,14 @@
         }
       },
       {
+        "title": "Email",
+        "props": {
+          "name": "email",
+          "type": "email",
+          "required": true
+        }
+      },
+      {
         "title": "Password",
         "props": {
           "name": "password",

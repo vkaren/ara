@@ -7,6 +7,7 @@ export interface LoginValues {
 
 export interface SignUpValues extends LoginValues {
   nickname: string;
+  email: string;
 }
 
 export interface ProfileUpdateValues {
@@ -29,6 +30,27 @@ const credentialsFields = {
 
 const loginSchema = Joi.object<LoginValues>(credentialsFields);
 
+const forgotPasswordSchema = Joi.object({
+  email: Joi.string().email({ tlds: false }).required().messages({
+    "string.email": "Enter a valid email address.",
+    "string.empty": "Email required.",
+    "any.required": "Email required.",
+  }),
+});
+
+const resetPasswordSchema = Joi.object({
+  token: Joi.string().length(64).required().messages({
+    "string.length": "This password reset link is invalid.",
+    "string.empty": "This password reset link is invalid.",
+    "any.required": "This password reset link is invalid.",
+  }),
+  password: Joi.string().min(8).required().messages({
+    "string.min": "Password must be at least 8 characters long.",
+    "string.empty": "Password required.",
+    "any.required": "Password required.",
+  }),
+});
+
 const signUpSchema = Joi.object<SignUpValues>({
   nickname: Joi.string().pattern(/^\S+$/).required().messages({
     "string.empty": "Nickname required.",
@@ -44,6 +66,11 @@ const signUpSchema = Joi.object<SignUpValues>({
       "string.pattern.base":
         "Username and password can only contain underscores and alphanumeric characters.",
     }),
+  email: Joi.string().email({ tlds: false }).required().messages({
+    "string.email": "Enter a valid email address.",
+    "string.empty": "Email required.",
+    "any.required": "Email required.",
+  }),
   password: Joi.string()
     .pattern(/^[a-z0-9_]+$/i)
     .min(5)
@@ -80,4 +107,10 @@ const profileUpdateSchema = Joi.object<ProfileUpdateValues>({
     }),
 });
 
-export { loginSchema, profileUpdateSchema, signUpSchema };
+export {
+  forgotPasswordSchema,
+  loginSchema,
+  profileUpdateSchema,
+  resetPasswordSchema,
+  signUpSchema,
+};

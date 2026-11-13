@@ -24,7 +24,7 @@ const SettingsEdit = ({ userInfo }) => {
       props: {
         name: "nickname",
         type: "text",
-        defaultValue: userInfo?.nickname || "",
+        placeholder: userInfo?.nickname || "",
       },
     },
     {
@@ -32,7 +32,7 @@ const SettingsEdit = ({ userInfo }) => {
       props: {
         name: "bio",
         type: "text",
-        defaultValue: userInfo?.bio || "",
+        placeholder: userInfo?.bio || "",
       },
     },
     {
@@ -52,7 +52,7 @@ const SettingsEdit = ({ userInfo }) => {
       props: {
         name: "username",
         type: "text",
-        defaultValue: userInfo?.username || "",
+        placeholder: userInfo?.username || "",
       },
     },
     {

@@ -1,7 +1,9 @@
 import { createRef, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import NextLink from "next/link";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import Typography from "@mui/material/Typography";
 import { UserContext } from "@context/userContext";
 import Form from "@components/Form";
@@ -80,7 +82,7 @@ const Login = () => {
 
   return (
     <>
-      <Box sx={{ width: 96 }}>
+      <Box sx={{ width: 64 }}>
         <Image src={iconTitle} alt="Ara" style={{ width: "100%", height: "auto" }} />
       </Box>
 
@@ -96,7 +98,33 @@ const Login = () => {
         fieldErrors={fieldErrors}
         onSubmit={onSubmit}
         loading={isSubmitting}
-      />
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 1.5,
+          }}
+        >
+          <Link
+            component={NextLink}
+            href="/forgot-password"
+            underline="hover"
+            sx={{ fontWeight: 600 }}
+          >
+            Forgot your password?
+          </Link>
+          <Link
+            component={NextLink}
+            href="/"
+            underline="hover"
+            sx={{ fontWeight: 600 }}
+          >
+            Not registered yet?
+          </Link>
+        </Box>
+      </Form>
     </>
   );
 };

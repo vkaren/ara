@@ -31,7 +31,7 @@ const Form = ({
         px: { xs: 0, sm: 1 },
       }}
     >
-      <Stack spacing={2.1} sx={{ width: "100%" }}>
+      <Stack sx={{ width: "100%" }}>
         {inputs.map((input) => {
           const {
             name,
@@ -119,7 +119,7 @@ const Form = ({
         )}
 
         {children && (
-          <Typography component="div" align="center">
+          <Typography component="div" align="center" sx={{ mt: 2 }}>
             {children}
           </Typography>
         )}
