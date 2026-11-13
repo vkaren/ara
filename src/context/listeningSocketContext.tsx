@@ -102,7 +102,9 @@ function ListeningSocketProvider({ children }: { children: ReactNode }) {
         break;
       case "notif":
         newSocketData.newNotif = data;
-        if (data.notificationFor === userIdRef.current) notifyUserRef.current();
+        if (data.notificationFor === userIdRef.current) {
+          notifyUserRef.current();
+        }
         break;
       default:
         return;

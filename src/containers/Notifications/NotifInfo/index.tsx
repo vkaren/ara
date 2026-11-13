@@ -38,7 +38,7 @@ const NotifInfo = ({
         src={notifFrom.profile_photo || undefined}
         alt={`${notifFrom.username} profile photo`}
       >
-        <IconComponent name="profile" />
+        <IconComponent name="profile" color="action" />
       </Avatar>
       <ListItemText primary={getNotifMessage()} />
     </ListItemButton>

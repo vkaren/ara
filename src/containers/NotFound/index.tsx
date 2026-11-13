@@ -47,7 +47,7 @@ const NotFound = () => {
         >
           <IconComponent
             name="notFound"
-            style={{ width: 150, height: 150, fill: "#2d66f9" }}
+            sx={{ fontSize: 150, color: "primary.main" }}
           />
 
           <Typography variant="h6" component="p" align="center">

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import Link from "next/link";
+import Box from "@mui/material/Box";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -28,17 +29,17 @@ const Option = ({ type }) => {
       }}
     >
       <ListItemIcon sx={{ minWidth: 40 }}>
-        <IconComponent name={type} style={{ width: 26, height: 26 }} />
+        <IconComponent name={type} sx={{ fontSize: 26 }} />
       </ListItemIcon>
       <ListItemText primary={label} />
       {type === "notifications" && haveNotifications && (
-        <span
+        <Box
           aria-label="New notifications"
-          style={{
+          sx={{
             width: 9,
             height: 9,
             borderRadius: "50%",
-            backgroundColor: "#e43d3d",
+            bgcolor: "error.main",
           }}
         />
       )}

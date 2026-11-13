@@ -15,14 +15,6 @@ const FooterOption = ({
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
 }) => {
-  const iconStyle = {
-    width: type === "comment" ? 20 : 24,
-    height: type === "comment" ? 20 : 24,
-    fill: haveLike ? "#2d66f9" : type === "like" ? "transparent" : "#2d66f9",
-    stroke: type === "like" ? "#2d66f9" : "none",
-    strokeWidth: type === "like" ? 1.5 : 0,
-  };
-
   return (
     <Button
       onClick={(event) => {
@@ -31,7 +23,13 @@ const FooterOption = ({
       }}
       disabled={disabled}
       size="small"
-      startIcon={<IconComponent name={type} style={iconStyle} />}
+      startIcon={
+        <IconComponent
+          name={type}
+          active={type === "like" && haveLike}
+          sx={{ fontSize: type === "comment" ? 20 : 24 }}
+        />
+      }
       sx={{ minWidth: 0, textTransform: "none", color: "primary.main" }}
     >
       {text}

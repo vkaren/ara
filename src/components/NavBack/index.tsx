@@ -27,7 +27,7 @@ const NavBack = ({ prevRoute }) => {
         <IconButton onClick={onClickBack} aria-label="Go back">
           <IconComponent
             name="arrow"
-            style={{ width: 24, height: 24, transform: "rotate(180deg)" }}
+            sx={{ fontSize: 24, transform: "rotate(180deg)" }}
           />
         </IconButton>
       </Toolbar>

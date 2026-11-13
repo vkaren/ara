@@ -21,7 +21,7 @@ const ProfilePhoto = ({
         bgcolor: "background.paper",
       }}
     >
-      <IconComponent name="profile" style={{ fill: "currentColor" }} />
+      <IconComponent name="profile" sx={{ color: "text.secondary" }} />
     </Avatar>
   );
 };

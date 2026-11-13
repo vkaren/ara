@@ -17,7 +17,7 @@ const FileUploaded = ({ file }) => {
         justifyContent: "center",
       }}
     >
-      <IconComponent name="upload" style={{ width: 48, height: 48 }} />
+      <IconComponent name="upload" sx={{ fontSize: 48, color: "primary.main" }} />
       <Typography variant="body2" align="center">
         {file || "No file selected"}
       </Typography>

@@ -1,41 +1,67 @@
-import HomeIcon from "@icons/icon-home.svg";
-import SearchIcon from "@icons/icon-search.svg";
-import NotifIcon from "@icons/icon-heart.svg";
-import ProfileIcon from "@icons/icon-profile.svg";
-import ConfigIcon from "@icons/icon-config.svg";
-import CommentIcon from "@icons/icon-comnt.svg";
-import ReplyIcon from "@icons/icon-reply.svg";
-import LikeIcon from "@icons/icon-like.svg";
-import InsertedImageIcon from "@icons/icon-image.svg";
-import CancelIcon from "@icons/icon-cancel.svg";
-import FeaturesIcon from "@icons/icon-dots.svg";
-import DeleteIcon from "@icons/icon-delete.svg";
-import ArrowIcon from "@icons/icon-arrow.svg";
-import UploadIcon from "@icons/icon-upload.svg";
-import LogoutIcon from "@icons/icon-logout.svg";
-import NotFoundIcon from "@icons/icon-404.svg";
+import type { ComponentType } from "react";
+import type { SvgIconProps } from "@mui/material/SvgIcon";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import SearchIcon from "@mui/icons-material/Search";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import PersonOutlineIcon from "@mui/icons-material/PersonOutlineOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+import ReplyOutlinedIcon from "@mui/icons-material/ReplyOutlined";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CloudUploadOutlinedIcon from "@mui/icons-material/CloudUploadOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ErrorOutlineIcon from "@mui/icons-material/ErrorOutlineOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
-const iconTypes = {
-  home: HomeIcon,
-  search: SearchIcon,
-  notifications: NotifIcon,
-  profile: ProfileIcon,
-  settings: ConfigIcon,
-  comment: CommentIcon,
-  reply: ReplyIcon,
-  like: LikeIcon,
-  insertedImage: InsertedImageIcon,
-  cancel: CancelIcon,
-  features: FeaturesIcon,
-  delete: DeleteIcon,
-  arrow: ArrowIcon,
-  upload: UploadIcon,
-  logout: LogoutIcon,
-  notFound: NotFoundIcon,
+export type IconName =
+  | "home"
+  | "search"
+  | "notifications"
+  | "profile"
+  | "settings"
+  | "comment"
+  | "reply"
+  | "like"
+  | "insertedImage"
+  | "cancel"
+  | "features"
+  | "delete"
+  | "arrow"
+  | "upload"
+  | "logout"
+  | "notFound";
+
+type IconProps = SvgIconProps & {
+  name: IconName;
+  active?: boolean;
 };
 
-const IconComponent = ({ name, ...props }) => {
-  let Icon = iconTypes[name];
+const iconTypes: Record<IconName, ComponentType<SvgIconProps>> = {
+  home: HomeOutlinedIcon,
+  search: SearchIcon,
+  notifications: NotificationsNoneOutlinedIcon,
+  profile: PersonOutlineIcon,
+  settings: SettingsOutlinedIcon,
+  comment: ChatBubbleOutlineIcon,
+  reply: ReplyOutlinedIcon,
+  like: FavoriteBorderIcon,
+  insertedImage: ImageOutlinedIcon,
+  cancel: CancelOutlinedIcon,
+  features: MoreHorizIcon,
+  delete: DeleteOutlineIcon,
+  arrow: ArrowForwardIcon,
+  upload: CloudUploadOutlinedIcon,
+  logout: LogoutIcon,
+  notFound: ErrorOutlineIcon,
+};
+
+const IconComponent = ({ name, active = false, ...props }: IconProps) => {
+  const Icon = name === "like" && active ? FavoriteIcon : iconTypes[name];
 
   return <Icon {...props} />;
 };

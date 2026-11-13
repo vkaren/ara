@@ -8,7 +8,7 @@ const DeleteOption = ({ onDelete }) => {
     <ListItemButton onClick={onDelete} sx={{ borderRadius: 2, color: "error.main" }}>
       <ListItemText primary="Delete account" />
       <ListItemIcon sx={{ minWidth: 0, color: "error.main" }}>
-        <IconComponent name="delete" style={{ width: 24, height: 24 }} />
+        <IconComponent name="delete" sx={{ fontSize: 24 }} />
       </ListItemIcon>
     </ListItemButton>
   );
