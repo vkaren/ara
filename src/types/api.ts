@@ -17,3 +17,18 @@ export interface ApiError {
 }
 
 export type ApiResponse<T> = T | PaginatedResponse<T> | ApiError;
+
+export interface ApiRequest {
+  method: string;
+  route: string;
+  type?: "application/json" | "multipart/form-data";
+  body?: BodyInit | Record<string, unknown> | null;
+  headers?: Record<string, string>;
+  signal?: AbortSignal;
+  ssr?: Record<string, unknown>;
+  token?: string;
+}
+
+export type ApiResult<
+  T extends Record<string, unknown> | unknown[] = Record<string, unknown> | unknown[],
+> = T | ApiError;

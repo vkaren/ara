@@ -1,5 +1,21 @@
 import Joi from "joi";
 
+export interface LoginValues {
+  username: string;
+  password: string;
+}
+
+export interface SignUpValues extends LoginValues {
+  nickname: string;
+}
+
+export interface ProfileUpdateValues {
+  nickname?: string;
+  bio?: string;
+  username?: string;
+  password?: string;
+}
+
 const credentialsFields = {
   username: Joi.string().required().messages({
     "string.empty": "Username required.",
@@ -11,9 +27,9 @@ const credentialsFields = {
   }),
 };
 
-const loginSchema = Joi.object(credentialsFields);
+const loginSchema = Joi.object<LoginValues>(credentialsFields);
 
-const signUpSchema = Joi.object({
+const signUpSchema = Joi.object<SignUpValues>({
   nickname: Joi.string().pattern(/^\S+$/).required().messages({
     "string.empty": "Nickname required.",
     "any.required": "Nickname required.",
@@ -41,7 +57,7 @@ const signUpSchema = Joi.object({
     }),
 });
 
-const profileUpdateSchema = Joi.object({
+const profileUpdateSchema = Joi.object<ProfileUpdateValues>({
   nickname: Joi.string().pattern(/^\S+$/).allow("").messages({
     "string.pattern.base": "Nickname cannot contain spaces.",
   }),
