@@ -1,7 +1,13 @@
 import Button from "@mui/material/Button";
 import IconComponent from "@components/Icon";
 
-const FooterOption = ({ type, text, haveLike, onClick, disabled }) => {
+const FooterOption = ({
+  type,
+  text,
+  haveLike = false,
+  onClick = undefined,
+  disabled = false,
+}) => {
   const iconStyle = {
     width: type === "comment" ? 20 : 24,
     height: type === "comment" ? 20 : 24,

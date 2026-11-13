@@ -8,6 +8,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import { AppContext } from "@context/appContext";
 import DeleteModal from "@components/DeleteModal";
 import api from "@utils/api";
+import type { ApiRequest } from "@app-types/api";
 
 const HeaderFeatures = ({ id, authorId, isAReply }) => {
   const { savePostDeleted, saveReplyDeleted } = useContext(AppContext);
@@ -26,7 +27,7 @@ const HeaderFeatures = ({ id, authorId, isAReply }) => {
   const onDeletePost = async (event) => {
     event?.stopPropagation();
 
-    const request = {
+    const request: ApiRequest & { body: Record<string, unknown> } = {
       method: "DELETE",
       type: "application/json",
       body: { author_id: authorId },
@@ -40,10 +41,15 @@ const HeaderFeatures = ({ id, authorId, isAReply }) => {
     }
 
     setIsDeleting(true);
-    const isDeleted = await api(request);
+    const isDeleted = await api<{
+      postDeleted?: number;
+      replyDeleted?: number;
+    }>(request);
     setIsDeleting(false);
 
-    if (isDeleted && !isDeleted.error) {
+    if ("error" in isDeleted) return;
+
+    if (isDeleted) {
       isAReply
         ? saveReplyDeleted(isDeleted.replyDeleted)
         : savePostDeleted(isDeleted.postDeleted);

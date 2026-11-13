@@ -29,6 +29,4 @@ export interface ApiRequest {
   token?: string;
 }
 
-export type ApiResult<
-  T extends Record<string, unknown> | unknown[] = Record<string, unknown> | unknown[],
-> = T | ApiError;
+export type ApiResult<T = Record<string, any>> = T | ApiError;

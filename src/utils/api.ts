@@ -5,9 +5,7 @@ import type { ApiRequest, ApiResult } from "@app-types/api";
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === "object" && value !== null && !Array.isArray(value);
 
-const api = async <
-  T extends Record<string, unknown> | unknown[] = Record<string, unknown> | unknown[],
->({
+const api = async <T = Record<string, any>>({
   method,
   type,
   body,

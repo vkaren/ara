@@ -15,10 +15,10 @@ const Post = ({
   createdAt,
   content,
   insertedImage,
-  likes,
-  replies,
+  likes = [],
+  replies = [],
   isAReply,
-  onDeletePost,
+  onDeletePost = undefined,
 }) => {
   const router = useRouter();
   const isHomeOrProfilePage =

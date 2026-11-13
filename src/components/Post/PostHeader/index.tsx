@@ -7,7 +7,7 @@ import { UserContext } from "@context/userContext";
 import ProfilePhoto from "@components/ProfilePhoto";
 import HeaderFeatures from "../HeaderFeatures";
 
-const PostHeader = ({ id, author, createdAt, isAReply }) => {
+const PostHeader = ({ id, author, createdAt, isAReply, onDeletePost }) => {
   const { userId } = useContext(UserContext);
   const dateFormat = getDateFormat(createdAt);
 
@@ -24,7 +24,7 @@ const PostHeader = ({ id, author, createdAt, isAReply }) => {
     >
       <ProfilePhoto photoUrl={author.profile_photo} />
 
-      <Typography variant="body2" fontWeight={700} noWrap>
+      <Typography variant="body2" sx={{ fontWeight: 700 }} noWrap>
         {author.nickname}
       </Typography>
 

@@ -8,7 +8,7 @@ const Textarea = ({ isAReply }) => {
       minRows={3}
       placeholder={isAReply ? "Reply" : "What's happenning?"}
       fullWidth
-      maxLength={250}
+      slotProps={{ htmlInput: { maxLength: 250 } }}
       sx={{
         gridColumn: "1 / -1",
         mb: 1.5,

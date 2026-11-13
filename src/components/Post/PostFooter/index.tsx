@@ -4,6 +4,8 @@ import { UserContext } from "@context/userContext";
 import { ListeningSocketContext } from "@context/listeningSocketContext";
 import FooterOption from "../FooterOption";
 import api from "@utils/api";
+import type { ApiRequest } from "@app-types/api";
+import type { Like } from "@app-types/domain";
 
 const PostFooter = ({
   id,
@@ -21,12 +23,12 @@ const PostFooter = ({
   const [isLiking, setIsLiking] = useState(false);
 
   const getLikedPostFromUser = useCallback(async () => {
-    const response = await api({
+    const response = await api<Like[] | { data: Like[] }>({
       method: "GET",
       route: `like/${userId}?page=1&limit=100`,
     });
 
-    return Array.isArray(response) ? response : response.data || [];
+    return Array.isArray(response) ? response : "data" in response ? response.data : [];
   }, [userId]);
 
   const hasUserLiked = useCallback(async () => {
@@ -93,7 +95,8 @@ const PostFooter = ({
 
     let newNumberLikes = numberLikes;
 
-    const request = {
+    const request: ApiRequest & { body: Record<string, unknown> } = {
+      method: "POST",
       route: "like",
       body: {
         user_id: userId,
@@ -102,10 +105,12 @@ const PostFooter = ({
       type: "application/json",
     };
 
+    const requestBody = request.body as Record<string, unknown>;
+
     if (!!isAReply) {
-      request.body.type = "reply";
+      requestBody.type = "reply";
     } else {
-      request.body.type = "post";
+      requestBody.type = "post";
     }
 
     if (haveLike) {

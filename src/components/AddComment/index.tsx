@@ -8,18 +8,21 @@ import Textarea from "./Textarea";
 import InsertedImage from "./InsertedImage";
 import SubmitButton from "./SubmitButton";
 import Box from "@mui/material/Box";
+import type { ApiRequest } from "@app-types/api";
 
 const AddComment = ({ isAReply }) => {
   const { userId, getUserData } = useContext(UserContext);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const form = createRef();
+  const form = createRef<HTMLFormElement>();
 
   useEffect(() => {
     if (!userId) return;
 
-    getUserData().then((userData) => setProfilePhoto(userData.profile_photo));
+    getUserData().then((userData) => {
+      if ("profile_photo" in userData) setProfilePhoto(userData.profile_photo);
+    });
   }, [getUserData, userId]);
 
   const onSubmit = async (e) => {
@@ -72,8 +75,9 @@ const AddComment = ({ isAReply }) => {
   };
 
   const sendComment = async (formData) => {
-    const apiRequest = {
+    const apiRequest: ApiRequest = {
       method: "POST",
+      route: isAReply ? "reply" : "post",
       type: "multipart/form-data",
       body: formData,
     };

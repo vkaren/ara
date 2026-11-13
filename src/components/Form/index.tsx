@@ -10,7 +10,7 @@ const Form = ({
   inputs = [],
   type,
   fileUploaded,
-  submitMsg = {},
+  submitMsg = { error: false, msg: "" },
   fieldErrors = {},
   loading = false,
   onSubmit,
@@ -80,7 +80,7 @@ const Form = ({
               defaultValue={defaultValue}
               error={Boolean(fieldErrors[name])}
               helperText={fieldErrors[name] || " "}
-              minLength={minLength}
+              slotProps={{ htmlInput: { minLength } }}
               onChange={onChange}
               disabled={loading}
               variant="outlined"

@@ -1,7 +1,7 @@
 import Avatar from "@mui/material/Avatar";
 import IconComponent from "@components/Icon";
 
-const ProfilePhoto = ({ photoUrl, profilePage }) => {
+const ProfilePhoto = ({ photoUrl, profilePage = false }) => {
   return (
     <Avatar
       src={photoUrl || undefined}

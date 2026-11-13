@@ -23,7 +23,7 @@ const PostContent = ({ id, content, replyingToUser, isHomeOrProfilePage }) => {
   return (
     <Box sx={{ mx: 1, my: 1, fontSize: "1rem", wordBreak: "break-word" }}>
       {replyingToUser && (
-        <Typography component="span" color="primary" fontWeight={600}>
+        <Typography component="span" color="primary" sx={{ fontWeight: 600 }}>
           {`@${replyingToUser} `}
         </Typography>
       )}

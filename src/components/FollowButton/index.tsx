@@ -2,10 +2,11 @@ import { useState, useContext, useEffect } from "react";
 import Button from "@mui/material/Button";
 import { UserContext } from "@context/userContext";
 import api from "@utils/api";
+import type { ApiRequest } from "@app-types/api";
 
 const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   const { userId, hasFollowedUser } = useContext(UserContext);
-  const [isFollowing, setIsFollowing] = useState();
+  const [isFollowing, setIsFollowing] = useState<boolean | undefined>();
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -45,7 +46,8 @@ const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
   };
 
   const followOrUnfollowUser = async (type) => {
-    const request = {
+    const request: ApiRequest = {
+      method: "POST",
       route: "follow",
       body: {
         follow_from: userId,
