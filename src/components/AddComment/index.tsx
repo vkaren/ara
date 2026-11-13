@@ -10,7 +10,7 @@ import SubmitButton from "./SubmitButton";
 import Box from "@mui/material/Box";
 import type { ApiRequest } from "@app-types/api";
 
-const AddComment = ({ isAReply }) => {
+const AddComment = ({ isAReply = undefined }) => {
   const { userId, getUserData } = useContext(UserContext);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");

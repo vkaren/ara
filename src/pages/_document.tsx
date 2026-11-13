@@ -7,7 +7,10 @@ import {
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    const emotionCache = createEmotionCache({ enableCssLayer: true });
+    const emotionCache = createEmotionCache({
+      enableCssLayer: true,
+      key: "css",
+    } as never);
     const initialProps = await documentGetInitialProps(ctx, {
       emotionCache,
     });
@@ -19,7 +22,7 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <DocumentHeadTags {...this.props} />
+          <DocumentHeadTags {...(this.props as any)} />
           <meta charSet="UTF-8" />
           <meta
             name="description"

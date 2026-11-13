@@ -2,7 +2,7 @@ import Post from "@components/Post";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 
-const Replies = ({ replies = [], onDeleteReply }) => {
+const Replies = ({ replies = [], onDeleteReply = undefined }) => {
   return (
     <Stack
       component="section"

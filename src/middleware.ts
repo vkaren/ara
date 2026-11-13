@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { getItem } from "@utils/cookies";
 
-export async function middleware(req) {
+export async function middleware(req: NextRequest) {
   const accessToken = getItem("token", { req });
 
   if (accessToken) {

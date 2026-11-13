@@ -38,7 +38,7 @@ const UserInfo = ({ id, nickname, username, profilePhoto, followers = [], bio })
         <ProfilePhoto photoUrl={profilePhoto} profilePage={true} />
 
         <Box sx={{ flex: 1 }}>
-          <Typography variant="h6" fontWeight={600}>
+          <Typography variant="h6" sx={{ fontWeight: 600 }}>
             {nickname}
           </Typography>
           <Typography variant="body1" color="text.secondary">

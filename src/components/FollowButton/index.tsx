@@ -4,7 +4,11 @@ import { UserContext } from "@context/userContext";
 import api from "@utils/api";
 import type { ApiRequest } from "@app-types/api";
 
-const FollowButton = ({ userIdToFollow, updateNumberFollowers, type }) => {
+const FollowButton = ({
+  userIdToFollow,
+  updateNumberFollowers = undefined,
+  type = "profile",
+}) => {
   const { userId, hasFollowedUser } = useContext(UserContext);
   const [isFollowing, setIsFollowing] = useState<boolean | undefined>();
   const [isLoading, setIsLoading] = useState(false);

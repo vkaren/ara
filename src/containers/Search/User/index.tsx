@@ -23,7 +23,7 @@ const User = ({ id, nickname, username, profilePhoto, type }) => {
           href={`/profile/${id}`}
           sx={{ minWidth: 0, flex: 1, color: "inherit", textDecoration: "none" }}
         >
-          <Typography fontWeight={600} noWrap>
+          <Typography sx={{ fontWeight: 600 }} noWrap>
             {nickname}
           </Typography>
           <Typography variant="body2" color="text.secondary" noWrap>

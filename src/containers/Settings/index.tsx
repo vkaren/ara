@@ -27,7 +27,7 @@ const Settings = () => {
 
     setIsDeleting(false);
 
-    if (response.userDeleted) {
+    if (!response.error && "userDeleted" in response && response.userDeleted) {
       removeUserInfo();
       router.push("/");
     }
@@ -45,7 +45,7 @@ const Settings = () => {
           borderColor: "primary.main",
         }}
       >
-        <Typography variant="h5" component="h2" fontWeight={600}>
+        <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
           Settings
         </Typography>
 

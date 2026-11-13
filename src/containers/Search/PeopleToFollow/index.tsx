@@ -11,7 +11,7 @@ const PeopleToFollow = ({ peopleToFollow = [] }) => {
         spacing={1}
         sx={{ width: "75%", maxWidth: 600, mt: "auto" }}
       >
-        <Typography variant="h6" component="h2" fontWeight={600}>
+        <Typography variant="h6" component="h2" sx={{ fontWeight: 600 }}>
           People to follow
         </Typography>
 

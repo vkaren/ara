@@ -72,7 +72,11 @@ const SearchBox = () => {
     }
 
     return {
-      users: Array.isArray(userList) ? userList : userList.data || [],
+      users: Array.isArray(userList)
+        ? userList
+        : "data" in userList && Array.isArray(userList.data)
+          ? userList.data
+          : [],
       error: "",
     };
   };

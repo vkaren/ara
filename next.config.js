@@ -1,4 +1,5 @@
 const config = require("./config");
+
 const apiUrl = config.api ? new URL(config.api) : null;
 
 module.exports = {

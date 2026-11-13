@@ -17,7 +17,7 @@ const SettingsEdit = ({ userInfo }) => {
   const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const formRef = useRef();
+  const formRef = useRef<HTMLFormElement>(null);
   const formInputs = [
     {
       title: "Nickname",
@@ -69,12 +69,14 @@ const SettingsEdit = ({ userInfo }) => {
 
     const formData = new FormData(formRef.current);
 
-    const nickname = formData.get("nickname");
-    const bio = formData.get("bio");
-    const profilePictureFile = formData.get("profile_photo");
+    const nickname = String(formData.get("nickname") || "");
+    const bio = String(formData.get("bio") || "");
+    const profilePictureEntry = formData.get("profile_photo");
+    const profilePictureFile =
+      profilePictureEntry instanceof File ? profilePictureEntry : null;
     const profilePicture = profilePictureFile?.name || "";
-    const username = formData.get("username");
-    const password = formData.get("password");
+    const username = String(formData.get("username") || "");
+    const password = String(formData.get("password") || "");
 
     const values = {
       nickname,
@@ -145,11 +147,11 @@ const SettingsEdit = ({ userInfo }) => {
       }}
     >
       <Stack spacing={3}>
-        <Typography variant="h5" component="h2" fontWeight={600}>
+        <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
           Settings
         </Typography>
 
-        <Typography variant="h6" component="h3" fontWeight={500}>
+        <Typography variant="h6" component="h3" sx={{ fontWeight: 500 }}>
           Edit Profile
         </Typography>
 

@@ -17,7 +17,7 @@ const Post = ({
   insertedImage,
   likes = [],
   replies = [],
-  isAReply,
+  isAReply = undefined,
   onDeletePost = undefined,
 }) => {
   const router = useRouter();

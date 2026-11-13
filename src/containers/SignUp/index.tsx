@@ -12,6 +12,7 @@ import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
 import { signUpSchema } from "@validation/authSchemas";
 import validateSchema from "@validation/validateSchema";
+import type { AuthResponse } from "@app-types/domain";
 
 const SignUp = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const SignUp = () => {
   const [signUpMsg, setSignUpMsg] = useState({ error: false, msg: "" });
   const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const form = createRef();
+  const form = createRef<HTMLFormElement>();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -29,9 +30,9 @@ const SignUp = () => {
 
     const formData = new FormData(form.current);
 
-    const nickname = formData.get("nickname");
-    const username = formData.get("username").toLowerCase();
-    const password = formData.get("password");
+    const nickname = String(formData.get("nickname") || "");
+    const username = String(formData.get("username") || "").toLowerCase();
+    const password = String(formData.get("password") || "");
 
     formData.set("username", username);
 
@@ -94,7 +95,7 @@ const SignUp = () => {
     } else {
       setSignUpMsg({ error: false, msg: "" });
 
-      saveLoginResponse(response);
+      saveLoginResponse(response as AuthResponse);
 
       router.push("/home");
     }
@@ -106,7 +107,7 @@ const SignUp = () => {
         <Image src={iconTitle} alt="Ara" style={{ width: "100%", height: "auto" }} />
       </Box>
 
-      <Typography variant="h4" component="h1" fontWeight={600}>
+      <Typography variant="h4" component="h1" sx={{ fontWeight: 600 }}>
         Sign up
       </Typography>
 
@@ -119,7 +120,12 @@ const SignUp = () => {
         onSubmit={onSubmit}
         loading={isSubmitting}
       >
-        <Link component={NextLink} href="/login" underline="hover" fontWeight={600}>
+        <Link
+          component={NextLink}
+          href="/login"
+          underline="hover"
+          sx={{ fontWeight: 600 }}
+        >
           Do you already have an account?
         </Link>
       </Form>

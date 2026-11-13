@@ -1,7 +1,7 @@
 const DEFAULT_PAGE = 1;
 const DEFAULT_LIMIT = 20;
 const MAX_LIMIT = 100;
-import type { PaginatedResponse, Pagination } from "@app-types/api";
+import type { ApiError, PaginatedResponse, Pagination } from "@app-types/api";
 
 export type { PaginatedResponse, Pagination } from "@app-types/api";
 
@@ -17,7 +17,7 @@ const normalizePagination = (
 });
 
 export const normalizePaginatedResponse = <T>(
-  response: T[] | Partial<PaginatedResponse<T>> | null | undefined,
+  response: T[] | Partial<PaginatedResponse<T>> | ApiError | null | undefined,
   fallbackPage = DEFAULT_PAGE,
   fallbackLimit = DEFAULT_LIMIT
 ): PaginatedResponse<T> => {
@@ -37,9 +37,22 @@ export const normalizePaginatedResponse = <T>(
     };
   }
 
+  if (response && "error" in response) {
+    return {
+      data: [],
+      pagination: normalizePagination({}, fallbackPage, fallbackLimit),
+    };
+  }
+
+  const paginatedResponse = response && "data" in response ? response : undefined;
+
   return {
-    data: Array.isArray(response?.data) ? response.data : [],
-    pagination: normalizePagination(response?.pagination, fallbackPage, fallbackLimit),
+    data: Array.isArray(paginatedResponse?.data) ? paginatedResponse.data : [],
+    pagination: normalizePagination(
+      paginatedResponse?.pagination,
+      fallbackPage,
+      fallbackLimit
+    ),
   };
 };
 

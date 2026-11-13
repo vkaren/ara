@@ -16,7 +16,7 @@ const Notifications = ({ notifications = [], pagination, isLoading, onLoadMore }
         borderColor: "primary.main",
       }}
     >
-      <Typography variant="h5" component="h2" fontWeight={600}>
+      <Typography variant="h5" component="h2" sx={{ fontWeight: 600 }}>
         Notifications
       </Typography>
 

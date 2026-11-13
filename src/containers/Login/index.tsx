@@ -10,6 +10,7 @@ import api from "@utils/api";
 import iconTitle from "@icons/icon-title.png";
 import { loginSchema } from "@validation/authSchemas";
 import validateSchema from "@validation/validateSchema";
+import type { AuthResponse } from "@app-types/domain";
 
 const Login = () => {
   const router = useRouter();
@@ -17,7 +18,7 @@ const Login = () => {
   const [loginMsg, setLoginMsg] = useState({ error: false, msg: "" });
   const [fieldErrors, setFieldErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const form = createRef();
+  const form = createRef<HTMLFormElement>();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -27,8 +28,8 @@ const Login = () => {
 
     const formData = new FormData(form.current);
 
-    const username = formData.get("username").toLowerCase();
-    const password = formData.get("password");
+    const username = String(formData.get("username") || "").toLowerCase();
+    const password = String(formData.get("password") || "");
 
     const {
       error,
@@ -67,7 +68,7 @@ const Login = () => {
       } else {
         setLoginMsg({ error: false, msg: "" });
 
-        saveLoginResponse(response);
+        saveLoginResponse(response as AuthResponse);
 
         router.push("/home");
       }
@@ -82,7 +83,7 @@ const Login = () => {
         <Image src={iconTitle} alt="Ara" style={{ width: "100%", height: "auto" }} />
       </Box>
 
-      <Typography variant="h4" component="h1" fontWeight={600}>
+      <Typography variant="h4" component="h1" sx={{ fontWeight: 600 }}>
         Welcome back!
       </Typography>
 

@@ -9,12 +9,12 @@ const Form = ({
   form,
   inputs = [],
   type,
-  fileUploaded,
+  fileUploaded = "",
   submitMsg = { error: false, msg: "" },
   fieldErrors = {},
   loading = false,
   onSubmit,
-  children,
+  children = null,
 }) => {
   return (
     <Box
